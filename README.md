@@ -10,11 +10,11 @@ Nesta disciplina, você escreve pedidos, especificações e instruções que out
 2. Siga o [guia do Claude Code](guia-claude-code.md) até a primeira resposta.
 3. Leia as regras do [caso Fila Clara](caso/regras.md): três regras e seis chamados fictícios.
 
-## Uma atividade por encontro
+## Uma prática por encontro
 
-Cada atividade começa com uma demonstração do professor e uma tentativa acompanhada. O enunciado diz o que entregar, como saber que terminou e o que fazer se algo falhar.
+Cada prática começa com uma demonstração do professor e uma tentativa acompanhada. O enunciado diz o que entregar, como saber que terminou e o que fazer se algo falhar.
 
-| Encontro | Atividade | O que você guarda |
+| Encontro | Prática | O que você guarda |
 |---|---|---|
 | 1 | [Um pedido que o colega consegue usar](exercicios/aula-1/README.md) | Pedido v1 e v2 e registro |
 | 2 | [Três formas de pedir](exercicios/aula-2/README.md) | Respostas da dupla, tabela do grupo e registro |

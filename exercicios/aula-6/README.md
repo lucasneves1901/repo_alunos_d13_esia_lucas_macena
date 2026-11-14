@@ -1,4 +1,4 @@
-# Atividade 6: Um CLAUDE.md que o colega segue e confere
+# Prática da aula 6: Um CLAUDE.md que o colega segue e confere
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 14/11/2026, 14h · Professor: Victor Hugo Wanderley Freire
 
@@ -69,8 +69,8 @@ Siga as instruções deste projeto. Proponha três casos de teste para a regra d
 
 ## Pré-requisitos
 
-- atividade 3: critério de aceite que outra pessoa confere;
-- atividade 5: separar informação duradoura de informação da tarefa.
+- prática da aula 3: critério de aceite que outra pessoa confere;
+- prática da aula 5: separar informação duradoura de informação da tarefa.
 
 ## Entrega
 

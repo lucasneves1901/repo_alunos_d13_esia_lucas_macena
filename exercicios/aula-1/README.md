@@ -1,4 +1,4 @@
-# Atividade 1: Um pedido que o colega consegue usar
+# Prática da aula 1: Um pedido que o colega consegue usar
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 06/11/2026, 19h · Professor: Victor Hugo Wanderley Freire
 

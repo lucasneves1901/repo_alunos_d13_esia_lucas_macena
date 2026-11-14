@@ -1,4 +1,4 @@
-# Atividade 2: Três formas de pedir a mesma classificação
+# Prática da aula 2: Três formas de pedir a mesma classificação
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 07/11/2026, 9h · Professor: Victor Hugo Wanderley Freire
 
@@ -61,7 +61,7 @@ Na pasta `entregas/seu-nome/aula-2/`:
 
 ## Pré-requisitos
 
-- atividade 1: pedido com tarefa, informações e formato;
+- prática da aula 1: pedido com tarefa, informações e formato;
 - trocar de modelo com `/model` e abrir conversa nova com `/clear`.
 
 ## Entrega

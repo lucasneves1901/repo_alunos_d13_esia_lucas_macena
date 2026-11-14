@@ -1,4 +1,4 @@
-# Atividade 3: Uma especificação que o colega executa sem perguntar
+# Prática da aula 3: Uma especificação que o colega executa sem perguntar
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 07/11/2026, 14h · Professor: Victor Hugo Wanderley Freire
 
@@ -69,7 +69,7 @@ Leia caso/regras.md e a demanda escolhida de caso/demandas.md. Proponha uma hist
 
 ## Pré-requisitos
 
-- atividade 1: pedido com os cinco campos.
+- prática da aula 1: pedido com os cinco campos.
 
 ## Entrega
 

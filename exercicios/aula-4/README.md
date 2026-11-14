@@ -1,4 +1,4 @@
-# Atividade 4: Dividir a demanda D e testar o corte
+# Prática da aula 4: Dividir a demanda D e testar o corte
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 13/11/2026, 19h · Professor: Victor Hugo Wanderley Freire
 
@@ -69,7 +69,7 @@ Execute apenas a unidade que forneci, com suas entradas e critérios. Não ampli
 
 ## Pré-requisitos
 
-- atividade 3: especificação com critérios de aceite;
+- prática da aula 3: especificação com critérios de aceite;
 - ler a tabela de prioridade e estados em `caso/regras.md`.
 
 ## Entrega

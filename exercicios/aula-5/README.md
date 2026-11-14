@@ -1,4 +1,4 @@
-# Atividade 5: Quatro contextos para a mesma pergunta
+# Prática da aula 5: Quatro contextos para a mesma pergunta
 
 Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Encontro: 14/11/2026, 9h · Professor: Victor Hugo Wanderley Freire
 
@@ -61,7 +61,7 @@ Na pasta `entregas/seu-nome/aula-5/`:
 
 ## Pré-requisitos
 
-- atividade 2: conversa nova a cada tentativa e troca de modelo com `/model`;
+- prática da aula 2: conversa nova a cada tentativa e troca de modelo com `/model`;
 - copiar uma pasta e abrir o terminal dentro dela.
 
 ## Entrega

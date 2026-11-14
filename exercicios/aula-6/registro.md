@@ -1,4 +1,4 @@
-# Registro da atividade 6
+# Registro da prática da aula 6
 
 - Nome:
 - Dupla ou grupo:

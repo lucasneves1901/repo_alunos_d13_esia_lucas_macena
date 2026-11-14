@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade 2: conjunto final de artefatos · D1.3</title><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Atividade 2: conjunto final de artefatos</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><p>Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Individual · Peso 60% · Prazo: 19/11/2026, 23h59 · Professor: Victor Hugo Wanderley Freire</p>
+<h2 id="objetivo">Objetivo</h2>
+<p>Reunir, revisar e conferir os artefatos das aulas 2 a 6 numa pasta versionada que outra pessoa consegue ler e conferir.</p>
+<h2 id="vinculo-com-a-aula">Vínculo com a aula</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Aula</th>
+<th>Onde apareceu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Técnica escolhida</td>
+<td>2</td>
+<td>slides 3 a 11 e <a href="../exercicios/aula-2/README.html">prática da aula 2</a></td>
+</tr>
+<tr>
+<td>Especificação</td>
+<td>3</td>
+<td>slides 3 a 14, <a href="../exercicios/aula-3/README.html">prática da aula 3</a> e <a href="atividade-1.html">Atividade 1</a></td>
+</tr>
+<tr>
+<td>Decomposição</td>
+<td>4</td>
+<td>slides 3 a 14, demonstração dos slides 21 e 22 e <a href="../exercicios/aula-4/README.html">prática da aula 4</a></td>
+</tr>
+<tr>
+<td>Decisão de contexto</td>
+<td>5</td>
+<td>slides 3 a 14, demonstração dos slides 21 e 22 e <a href="../exercicios/aula-5/README.html">prática da aula 5</a></td>
+</tr>
+<tr>
+<td>CLAUDE.md, versões e regressão</td>
+<td>6</td>
+<td>slides 3 a 17, demonstração dos slides 21 e 22, <a href="../exercicios/aula-6/README.html">prática da aula 6</a> e <a href="../apoio/versionamento.html">versionamento</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="ponto-de-partida">Ponto de partida</h2>
+<ul>
+<li>suas pastas <code>entregas/seu-nome/aula-2/</code> a <code>aula-6/</code> e <code>atividade-1/</code>;</li>
+<li>modelos de <a href="../modelos/especificacao.html">especificação</a>, <a href="../modelos/decomposicao.html">decomposição</a>, <a href="../modelos/contexto.html">contexto</a>, <a href="../modelos/CLAUDE-modelo.html">CLAUDE.md</a>, <a href="../modelos/historico.html">histórico</a> e <a href="../modelos/verificacao.html">verificação</a>;</li>
+<li>um recorte compartilhável de projeto real, sem segredo nem dado de cliente, ou o caso Fila Clara;</li>
+<li>o que você escreve: a revisão de cada artefato, a v3 e a nova conferência de três casos.</li>
+</ul>
+<h2 id="entrada">Entrada</h2>
+<p>Os arquivos que você guardou nas práticas e na Atividade 1. A Atividade 2 não pede produto novo nem aplicação implementada.</p>
+<h2 id="saida-esperada">Saída esperada</h2>
+<p>Na pasta <code>entregas/seu-nome/atividade-2/</code>:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Arquivo</th>
+<th>O que contém</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>especificacao.md</code></td>
+<td>a v2 da Atividade 1, ou uma nova se você mudou de tarefa, com a técnica escolhida e o motivo</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>decomposicao.md</code></td>
+<td>2 a 4 partes com entrada, saída, responsável e conferência</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>contexto.md</code></td>
+<td>o que entrou, o que saiu e em que ordem, com a evidência de 2 condições ou mais</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>CLAUDE.md</code></td>
+<td>as instruções persistentes do projeto</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>historico.md</code>, <code>v1/</code>, <code>v2/</code> e <code>v3/</code></td>
+<td>três versões recuperáveis e o motivo de cada revisão</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>verificacao.md</code></td>
+<td>três casos conhecidos conferidos de novo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Os itens 1 a 4 somam até quatro páginas de texto principal; histórico e evidências curtas ficam fora da conta. Arquivos Markdown bastam, sem apresentação. A regressão é uma conferência de três casos, sem framework de avaliação.</p>
+<h2 id="criterio-de-pronto">Critério de pronto</h2>
+<ul>
+<li>[ ] <code>especificacao.md</code> tem critérios de caso normal, de fronteira e de exclusão, cada um com a forma de conferir;</li>
+<li>[ ] <code>especificacao.md</code> nomeia a técnica (pedido direto, exemplos ou revisão), o resultado que motivou a escolha e 1 situação em que ela não ajuda;</li>
+<li>[ ] <code>decomposicao.md</code> tem de 2 a 4 partes, e a saída de uma parte aparece como entrada de outra;</li>
+<li>[ ] cada parte tem entrada, saída, critério, dependência e quem confere;</li>
+<li>[ ] <code>contexto.md</code> compara 2 condições ou mais na mesma tarefa, com qualidade, tempo e consumo, ou N/D com motivo;</li>
+<li>[ ] <code>CLAUDE.md</code> tem a fonte das regras, 1 forma de conferir e 1 limite, sem prazo nem tarefa do dia;</li>
+<li>[ ] <code>historico.md</code> tem as linhas v1, v2 e v3, cada uma com o que mudou, o motivo, quem revisou e o que foi conferido depois;</li>
+<li>[ ] <code>v2/</code> e <code>v3/</code> mudam o conteúdo da versão anterior, porque renomear arquivo não conta;</li>
+<li>[ ] <code>verificacao.md</code> tem os casos normal, fronteira e exclusão, com o resultado antes e depois da mudança;</li>
+<li>[ ] <code>verificacao.md</code> informa pedido, saída, modelo, data, origem do resultado, contribuição da IA e limite;</li>
+<li>[ ] nenhuma medida ausente aparece como número.</li>
+</ul>
+<h2 id="tempo-estimado">Tempo estimado</h2>
+<p>2h de finalização, a carga de estudo autônomo prevista no plano de ensino. A divisão por passo é planejada e não foi cronometrada.</p>
+<h2 id="passos">Passos</h2>
+<ol>
+<li>Reúna na pasta da entrega os arquivos das práticas e da Atividade 1 (20min).</li>
+<li>Corrija as lacunas que as devolutivas apontaram na especificação, na decomposição e no contexto (30min).</li>
+<li>Escreva a v3 e confira de novo três casos: normal, fronteira e exclusão (30min).</li>
+<li>Escreva a técnica escolhida em <code>especificacao.md</code> e a decisão de contexto em <code>contexto.md</code> (25min).</li>
+<li>Organize a pasta, marque a lista do critério de pronto e envie (15min).</li>
+</ol>
+<p>O caminho mais curto versiona o <code>CLAUDE.md</code>: a v1 e a v2 vêm da prática da aula 6, e a v3 sai aqui. Versionar a especificação também vale: v1 da aula 3, v2 da Atividade 1 e v3 aqui. Cada revisão tem um motivo registrado, que vem do colega, do professor ou de um caso conferido.</p>
+<h2 id="plano-b">Plano B</h2>
+<ul>
+<li>sem Claude Code depois de 14/11: use as execuções guardadas até a aula 6, confira por inspeção manual e marque essa origem em <code>verificacao.md</code>;</li>
+<li>sem projeto compartilhável: use o caso Fila Clara e os arquivos das práticas;</li>
+<li>sem medida de tempo ou de consumo: escreva N/D e o motivo.</li>
+</ul>
+<h2 id="extensao-opcional">Extensão opcional</h2>
+<ul>
+<li>guarde as versões com Git, numa pasta só da atividade, e anexe a saída de <code>git log --oneline</code>;</li>
+<li>liste o que conferir ao levar o <code>CLAUDE.md</code> para outra ferramenta, como <code>AGENTS.md</code>.</li>
+</ul>
+<p>Nenhuma extensão vale ponto extra.</p>
+<h2 id="pre-requisitos">Pré-requisitos</h2>
+<ul>
+<li>práticas das aulas 2 a 6, com os arquivos guardados;</li>
+<li>Atividade 1, que fornece a especificação v2.</li>
+</ul>
+<h2 id="criterios-da-nota">Critérios da nota</h2>
+<p>Cada critério recebe nível 0, 1 ou 2. O <a href="../avaliacao.html">cálculo</a> transforma os níveis em nota de 0 a 10.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th style="text-align: right;">Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Especificação e critérios permitem conferir; partes se conectam</td>
+<td style="text-align: right;">25%</td>
+</tr>
+<tr>
+<td>Técnica é escolhida por necessidade, com limite reconhecido</td>
+<td style="text-align: right;">15%</td>
+</tr>
+<tr>
+<td>Decisão de contexto usa efeito observado e esforço/consumo</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr>
+<td>Instruções persistentes são úteis, específicas e conferíveis</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr>
+<td>Duas revisões e nova conferência mostram o que mudou</td>
+<td style="text-align: right;">20%</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="entrega">Entrega</h2>
+<p>Envie a pasta <code>atividade-2/</code> pelo canal de entrega da disciplina indicado pelo professor, até 19/11/2026, 23h59.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

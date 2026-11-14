@@ -1,4 +1,4 @@
-# Registro da atividade 3
+# Registro da prática da aula 3
 
 - Nome:
 - Dupla ou grupo:

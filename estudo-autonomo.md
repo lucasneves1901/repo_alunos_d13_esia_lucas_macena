@@ -22,8 +22,8 @@ Para cada referência: título; seção ou página consultada; uma ideia em suas
 
 ## Atividade 1: reescrever e conferir · 2h
 
-Prazo: **11/11/2026, 23h59**. 20min para reler v1 e devolutiva; 40min para reescrever; 25min para explicitar duas partes e sua passagem; 25min para conferir casos; 10min para registrar mudanças. [Enunciado e critérios](avaliacao.md).
+Prazo: 11/11/2026, 23h59. Passos, tempo de cada um e critérios no [enunciado da Atividade 1](avaliacao/atividade-1.md).
 
 ## Atividade 2: revisar o conjunto construído em aula · 2h
 
-Prazo: **19/11/2026, 23h59**. 20min para reunir arquivos; 30min para corrigir lacunas; 30min para a terceira versão e conferir três casos; 25min para explicitar contexto e técnica; 15min para organizar a entrega. As execuções necessárias devem ser coletadas até o bloco 6; depois é possível conferir e organizar o material sem Claude Code ativo. [Enunciado e critérios](avaliacao.md).
+Prazo: 19/11/2026, 23h59. Colete as execuções até o bloco 6; depois, a conferência e a organização dispensam o Claude Code. Passos, tempo de cada um e critérios no [enunciado da Atividade 2](avaliacao/atividade-2.md).
