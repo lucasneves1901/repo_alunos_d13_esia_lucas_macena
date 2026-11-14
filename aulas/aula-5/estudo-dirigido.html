@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Estudo dirigido · Aula 5</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap"><style>
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}
+
+:root{
+  --papel:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --aviso:#8A5A00; --aviso-suave:#FEF4E1; --certo:#1F7A45; --certo-suave:#E7F6EE;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:16px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--tinta);line-height:1.18;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3.4vw,1.6rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--marca-tx);overflow-wrap:anywhere}
+code{font-family:var(--f-codigo);font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);border-radius:4px;padding:0 .3em;color:var(--tinta);overflow-wrap:anywhere}
+.sobre{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.capa{display:flex;flex-direction:column;gap:12px;padding-bottom:18px;border-bottom:3px solid var(--marca);margin-bottom:22px}
+.lide{font-size:1.1rem;color:var(--tinta-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--superficie-2);border:1px solid var(--linha);border-radius:999px;padding:2px 11px;font-size:.84rem;color:var(--tinta-2)}
+section{display:flex;flex-direction:column;gap:12px;margin:0 0 30px}
+.quadro{border:1px solid var(--linha);border-radius:var(--raio);padding:12px 14px;background:var(--superficie-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+.quadro.marca{background:var(--marca-suave);border-color:#FFD2B8}
+.quadro.certo{background:var(--certo-suave);border-color:#BFE3CD}
+.quadro.aviso{background:var(--aviso-suave);border-color:#F3D9A4}
+.rot{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3)}
+.quadro.marca .rot{color:var(--marca-forte)}.quadro.certo .rot{color:var(--certo)}.quadro.aviso .rot{color:var(--aviso)}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.num{font-family:var(--f-codigo);font-size:.84rem;color:var(--marca-tx);font-weight:700}
+.termo{color:var(--tinta-3);font-size:.95rem}
+.definicao{font-size:1.06rem;font-weight:600;color:var(--tinta);border-left:4px solid var(--marca);padding:2px 0 2px 12px}
+figure.ilustra{margin:2px 0;break-inside:avoid;background:#fff;border:1px solid var(--linha);border-radius:10px;padding:10px;min-width:0;
+  --line:var(--linha-forte);--panel:#fff;--panel-2:var(--marca-suave);--accent-soft:var(--marca-tx);--ink:var(--tinta);--muted:var(--tinta-3)}
+figure.ilustra figcaption{font-size:.8rem;color:var(--tinta-3);margin-top:6px}
+.ilustra .diagrama{margin:2px 0}
+.ilustra .diagrama .no{min-height:0!important;padding:9px 10px;gap:4px;border-radius:9px}
+.ilustra .diagrama .no strong{font-size:.92rem}
+.ilustra .diagrama .no span{font-size:.8rem;line-height:1.35}
+.ilustra .diagrama .trilha{gap:16px}
+.ilustra .diagrama .trilha .no:not(:last-child)::after{font-size:16px;right:-14px}
+.ilustra .mapa-num{font-size:.74rem}
+.ilustra .rede{min-height:0;gap:12px 0}
+.ilustra .forma-decisao .rede{min-height:170px}
+.ilustra .forma-decisao .no-1{min-height:150px!important;padding:22px 16px}
+.ilustra .seta-rede{font-size:16px}
+.ilustra .retorno{height:auto}
+.ilustra .retorno span{font-size:.8rem}
+.passos-caso{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}
+.passos-caso dt{font-weight:700;color:var(--tinta);font-size:.9rem}
+.passos-caso dd{margin:0;min-width:0}
+.lado{display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid}
+.rolagem{overflow-x:auto;border:1px solid var(--linha);border-radius:var(--raio)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3);background:var(--superficie-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--tinta)}
+.cab-pratica{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;border-bottom:2px solid var(--marca);padding-bottom:6px}
+ol.passos{list-style:none;padding:0;counter-reset:p;gap:12px}
+ol.passos>li{counter-increment:p;display:grid;grid-template-columns:26px 1fr;gap:8px;break-inside:avoid}
+ol.passos>li::before{content:counter(p);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:.8rem}
+ol.passos>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+pre{margin:0;font-family:var(--f-codigo);font-size:.82rem;line-height:1.5;background:#1E1C1A;color:#F4F2EF;border-radius:8px;padding:9px 11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pedido small{display:block;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
+.obs{font-size:.88rem;color:var(--tinta-3)}
+.checklist{list-style:none;padding:0}
+.checklist li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.checklist li::before{content:"";width:11px;height:11px;border:1.5px solid var(--linha-forte);border-radius:2px;margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:8px}
+.resp p{break-inside:avoid}
+.quadro,.definicao,pre,.pedido,.passos-caso,.cabeca{break-inside:avoid}
+.cabeca{display:flex;flex-direction:column;gap:8px;break-after:avoid}
+@media (max-width:560px){
+  body{font-size:15px}
+  .lado{grid-template-columns:1fr}
+  .passos-caso{grid-template-columns:1fr;gap:2px}
+  .passos-caso dd{margin-bottom:6px}
+  .ilustra .diagrama .trilha{flex-direction:column;gap:18px}
+  .ilustra .diagrama .trilha .no:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-20px}
+}
+@media print{
+  body{font-size:12.2pt}
+  main{max-width:none;padding:0}
+  .pratica,.secao{break-before:page}
+  .conceito{padding-top:16px;border-top:2px solid var(--linha)}
+  h1{font-size:28pt}h2{font-size:19pt}
+}
+</style></head><body><main><header class="capa">
+<p class="sobre">Estudo dirigido · Aula 5 de 6 · D1.3 Prompting Técnico, Especificação e Contexto</p>
+<h1>Quais informações a IA precisa receber?</h1>
+<p class="lide">Ao fim deste estudo você compara montagens de contexto para a mesma pergunta, registra só o que mediu e justifica o menor conjunto de informações suficiente.</p>
+<div class="meta"><span>Aula de 14/11/2026</span><span>Caso Fila Clara</span><span>Revisão sem entrega</span></div>
+</header>
+<section><h2>Como usar este estudo</h2>
+<p>Leia os seis conceitos na ordem da aula: cada um prepara o seguinte. Depois faça as três práticas no Claude Code, com o caso Fila Clara do kit. As práticas 1 e 2 refazem os dois atos da demonstração; a prática 3 leva a ideia para uma tarefa do seu trabalho. No fim, marque a autoavaliação e confira as respostas das perguntas.</p><p>Este estudo é material de revisão. Ele não substitui a atividade feita em aula e não tem entrega.</p><p>As execuções registradas citadas nas práticas são do guia interativo da aula: modelo claude-opus-5-5, em 06/11/2026, numa conversa sem ferramentas, com os arquivos colados no pedido. No Claude Code, que lê os arquivos da pasta, a sua resposta pode ter outra redação. Confira pelos critérios, não pela semelhança de texto.</p>
+<div class="quadro"><span class="rot">Antes de começar</span><ul class="checklist"><li><span>Claude Code instalado e com login. Teste no terminal: <code>claude -p &quot;responda apenas: ok&quot;</code> precisa responder <code>ok</code>.</span></li><li><span>O kit da turma no seu computador, do ZIP ou do repositório <a href="https://github.com/victorhwfreire/repo_alunos_d13_esia">github.com/victorhwfreire/repo_alunos_d13_esia</a>. Os caminhos citados partem da pasta do kit.</span></li><li><span>Sem acesso ao Claude Code: acompanhe a execução de um colega ou use as execuções registradas de cada prática, como diz a seção &quot;Sem acesso&quot; de <code>guia-claude-code.md</code>. Anote no seu texto que não executou.</span></li></ul></div>
+</section>
+<section><h2>O mapa da aula</h2>
+<p>Pergunta da aula: <b>Qual informação é suficiente, atual e útil para esta tarefa?</b></p>
+<figure class="ilustra"><figure class="diagrama forma-mapa" aria-label="Caminho numerado: 1. Seleção → 2. Ruído → 3. Ordem → 4. Orçamento → 5. Duração → 6. Histórico."><div class="trilha"><div class="no no-0" data-node="0"><b class="mapa-num">01</b><strong>Seleção</strong><span>Parto da pergunta.</span></div><div class="no no-1" data-node="1"><b class="mapa-num">02</b><strong>Ruído</strong><span>Retiro o que não ajuda.</span></div><div class="no no-2" data-node="2"><b class="mapa-num">03</b><strong>Ordem</strong><span>Comparo a organização.</span></div><div class="no no-3" data-node="3"><b class="mapa-num">04</b><strong>Orçamento</strong><span>Considero espaço e uso.</span></div><div class="no no-4" data-node="4"><b class="mapa-num">05</b><strong>Duração</strong><span>Separo o duradouro do atual.</span></div><div class="no no-5" data-node="5"><b class="mapa-num">06</b><strong>Histórico</strong><span>Revejo decisões acumuladas.</span></div></div></figure><figcaption>Fluxograma do slide 2.</figcaption></figure>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 1 de 6</p>
+<h2>Selecionar começa pela pergunta</h2>
+<p class="termo">Engenharia de contexto e suficiência da informação</p>
+<p class="definicao">Engenharia de contexto é selecionar, organizar e manter as informações disponibilizadas para uma tarefa. Um contexto suficiente contém as regras e os dados necessários para responder sem preencher lacunas por adivinhação.</p></div>
+<p>Preparar contexto começa por decompor a pergunta em informações necessárias, e não por anexar tudo que está disponível. O modelo recebe também instruções e resultados de ações do produto, além do arquivo escolhido. Por isso, o contexto do arquivo e o contexto efetivo da sessão não são idênticos. Na aula, controlamos o material fornecido e registramos influências que não puderem ser removidas. A condição mínima é deliberadamente insuficiente para a pergunta completa; compará-la com a completa examina o efeito de acrescentar uma regra necessária, não apenas o efeito de aumentar tamanho.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Pergunta → Necessidades → Seleção."><div class="trilha"><div class="no no-0" data-node="0"><strong>Pergunta</strong><span>Definir o que a resposta precisa resolver.</span></div><div class="no no-1" data-node="1"><strong>Necessidades</strong><span>Identificar dados, regras e decisões indispensáveis.</span></div><div class="no no-2" data-node="2"><strong>Seleção</strong><span>Fornecer o material relevante e registrar lacunas.</span></div></div></figure><figcaption>Fluxograma do slide 3.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma regra ausente impede uma parte da resposta</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Pergunta: quais ativos a pessoa da Oficina pode visualizar? Material: dados, prioridade R1 e estados R2. A regra R3 foi omitida.</dd><dt>O que fazer</dt><dd>R1 permite calcular prioridade; R2 permite reconhecer ativos. Sem R3, o material não confirma a regra de visibilidade.</dd>
+<dt>Resultado</dt><dd>A resposta deve identificar a lacuna. Pode mostrar o que é conferível, mas não apresentar uma política de acesso suposta como regra confirmada.</dd></dl><p>Suficiência depende da pergunta: o mesmo material pode servir para uma tarefa e faltar para outra.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Conhecer o domínio não substitui a regra do projeto</span><p>“Todo sistema de chamados funciona assim; posso completar a informação que falta.”</p><p>Padrões conhecidos podem inspirar perguntas. O comportamento específico precisa vir de fonte confirmada ou decisão explícita.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Antes de cada pedido no Claude Code, listar as regras necessárias e indicar o arquivo que contém cada uma.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se quero somente calcular prioridades, preciso necessariamente de R3?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 2 de 6</p>
+<h2>Retirar ruído pode reduzir trabalho</h2>
+<p class="termo">Relevância, ruído e informação contraditória</p>
+<p class="definicao">Informação relevante ajuda a resolver a pergunta. Ruído é material sem utilidade para esse recorte. Contradição é diferente: duas afirmações incompatíveis exigem conferir origem, versão e autoridade.</p></div>
+<p>A relevância depende da tarefa. Uma informação de reunião pode ser irrelevante para classificar chamados e necessária para preparar um convite. Ruído, redundância e conflito também não são sinônimos. Repetição pode ocupar espaço sem acrescentar conteúdo; conflito cria uma decisão sobre qual fonte seguir. No experimento, o ruído é inofensivo e não contém ordens maliciosas. Isso evita misturar seleção de contexto com uma prática de ataque. A aula observa qualidade, tamanho e esforço; não presume que todo material adicional necessariamente piora a resposta.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Examinar material → Separar → Resolver conflitos."><div class="trilha"><div class="no no-0" data-node="0"><strong>Examinar material</strong><span>Perguntar como cada trecho contribui para a tarefa.</span></div><div class="no no-1" data-node="1"><strong>Separar</strong><span>Manter regra e dado; retirar material sem função.</span></div><div class="no no-2" data-node="2"><strong>Resolver conflitos</strong><span>Conferir versão e autoridade quando duas regras divergem.</span></div></div></figure><figcaption>Fluxograma do slide 6.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Um fato verdadeiro pode ser irrelevante</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>A pasta contém R1 a R3, chamados e notas sobre café, cartazes e decoração da reunião fictícia.</dd><dt>O que fazer</dt><dd>Para listar ativos da Oficina, manter regras e chamados. As notas da reunião não alteram estado, prioridade ou departamento.</dd>
+<dt>Resultado</dt><dd>O material fica menor sem retirar informação necessária. Se a resposta já era correta, registrar isso; não afirmar melhoria não observada.</dd></dl><p>Retirar ruído busca reduzir trabalho desnecessário; o efeito no resultado precisa ser observado.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Descartar sem critério também pode causar erro</span><p>“Quanto menos contexto, melhor; posso remover qualquer trecho para encurtar.”</p><p>Encurtar pode retirar uma exceção ou regra necessária. A seleção precisa preservar a suficiência para a pergunta.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Justificar um item mantido e um retirado, ligando a decisão à pergunta e aos critérios da tarefa.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Uma regra antiga que contradiz R2 é apenas ruído inofensivo?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 3 de 6</p>
+<h2>A ordem é uma variável do experimento</h2>
+<p class="termo">Ordenação do contexto e comparação controlada</p>
+<p class="definicao">Ordenar contexto é decidir onde cada bloco de informação aparece. Para investigar o efeito da posição, é preciso manter conteúdo, pergunta e critérios e mudar apenas a ordem do material comparado.</p></div>
+<p>Liu et al. estudaram o uso de informação em contextos longos e encontraram efeitos de posição nas tarefas e modelos examinados. A disciplina usa esse resultado para formular uma pergunta experimental, sem transformá-lo em lei sobre modelos atuais. Nosso material é pequeno e há fatores como histórico, memória, configuração, cache e carga do serviço. Manter e registrar condições melhora a interpretação, mas não elimina todos os limites. No relatório, a afirmação apropriada é “nestas tentativas, observei...” e não “a posição X sempre funciona melhor”.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Fixar conteúdo → Mudar posição → Comparar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Fixar conteúdo</strong><span>Usar exatamente regras R1, R2, R3 e os mesmos dados.</span></div><div class="no no-1" data-node="1"><strong>Mudar posição</strong><span>Inverter os blocos sem editar suas palavras.</span></div><div class="no no-2" data-node="2"><strong>Comparar</strong><span>Aplicar a mesma pergunta e os mesmos critérios.</span></div></div></figure><figcaption>Fluxograma do slide 9.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Inverter a ordem preserva o conteúdo</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Completa: R1 → R2 → R3 → dados. Invertida: dados → R3 → R2 → R1. Os quatro blocos têm o mesmo texto.</dd><dt>O que fazer</dt><dd>Iniciar novas conversas com configurações registradas. Executar a mesma pergunta, sem acrescentar dicas na segunda condição.</dd>
+<dt>Resultado</dt><dd>As respostas podem diferir ou empatar. Registrar qualidade e tempo observados; não alterar o critério para produzir o efeito esperado.</dd></dl><p>O experimento examina uma variável do arquivo; não controla perfeitamente todos os fatores do serviço.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Uma tendência de pesquisa não é uma regra universal</span><p>“A informação no meio sempre será ignorada, em qualquer modelo e tarefa.”</p><p>Estudos observaram efeitos de posição em condições específicas. A atividade curta pode não reproduzir esse efeito; empate é um resultado válido.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Usar as pastas completa e invertida preparadas no kit, sem reescrever os arquivos durante a comparação.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se eu inverter a ordem e também resumir as regras, isolei o efeito da posição?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 4 de 6</p>
+<h2>A janela tem limite e o uso tem custo</h2>
+<p class="termo">Token, janela, orçamento, consumo e tempo</p>
+<p class="definicao">Token é uma unidade de texto processada pelo modelo. A janela limita a informação considerada. Orçamento é uma divisão planejada desse espaço; consumo e tempo descrevem recursos efetivamente usados na execução.</p></div>
+<p>Token não equivale necessariamente a palavra nem a caractere; a divisão depende do processamento usado pelo modelo. A capacidade de contexto e os limites de geração dependem de modelo e configuração. O orçamento didático é uma forma de planejar a distribuição, não uma descrição do limite real de um fornecedor. A sessão pode incluir instruções, histórico e resultados de ferramentas além do arquivo medido. O tempo cronometrado de uma atividade pode incluir fila, ações e interação humana. Consumo informado pelo produto e cobrança da assinatura também não são a mesma coisa.</p><p>A comparação deve indicar unidade e origem de cada medida. Quando o contexto cresce, custo e tempo crescem com ele, e o uso da informação pode piorar antes de a janela encher: avaliações como RULER (2024) mostraram queda de desempenho de vários modelos bem antes do limite anunciado. No Claude Code, o próprio produto ocupa parte da janela com instruções e definições de ferramentas; o comando /context, quando a versão instalada o oferece, mostra essa divisão.</p>
+<figure class="ilustra"><figure class="diagrama forma-orcamento" aria-label="Orçamento hipotético: 1500 tokens de instruções, 3000 de histórico, 3500 de dados e 2000 reservados à saída. Soma de 10000; não representa a janela de um modelo específico nem uso medido."><div class="trilha"><div class="no no-0" data-node="0"><strong>Instruções</strong><span>1.500 tokens</span></div><div class="no no-1" data-node="1"><strong>Histórico</strong><span>3.000 tokens</span></div><div class="no no-2" data-node="2"><strong>Dados</strong><span>3.500 tokens</span></div><div class="no no-3" data-node="3"><strong>Reserva de saída</strong><span>2.000 tokens</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 10 5 V 25 H 990 V 5"/></svg><span>Exemplo hipotético: 10.000 tokens no total</span></div></figure><figcaption>Fluxograma do slide 12.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Um orçamento é uma decisão explícita</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Exemplo hipotético: orçamento de 10.000 tokens. Não é a janela de um modelo específico nem uma medição da turma.</dd><dt>O que fazer</dt><dd>Reservar 1.500 para instruções, 3.000 para histórico, 3.500 para documentos e 2.000 para geração/margem: total 10.000.</dd>
+<dt>Resultado</dt><dd>Se os documentos ultrapassarem a parcela prevista, selecionar ou resumir com conferência. Não converter caracteres em tokens exatos para “fechar” a conta.</dd></dl><p>Planejamento de espaço e medição de uso são informações diferentes.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Caber na janela não garante usar tudo corretamente</span><p>“O arquivo coube; portanto, toda a informação foi entendida e aplicada sem custo relevante.”</p><p>Capacidade não garante uso correto. Também há tempo de resposta, consumo, revisão e retrabalho; medir apenas tamanho é insuficiente.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>No registro, separar tamanho em caracteres, consumo mostrado pelo produto, tempo de resposta e tempo de conferência.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se só conheço o número de caracteres, posso registrar esse valor como tokens?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 5 de 6</p>
+<h2>Uma parte do contexto dura; outra muda</h2>
+<p class="termo">Contexto estático e contexto por tarefa</p>
+<p class="definicao">Contexto estático reúne orientações relativamente duradouras do projeto. Contexto por tarefa reúne dados, decisões e recortes necessários agora. Estático significa reutilizável, não imutável.</p></div>
+<p>A separação ajuda a organizar, mas não é uma classificação rígida de todo arquivo. Uma especificação pode durar várias semanas e ainda pertencer a uma funcionalidade específica; uma convenção pode precisar mudar amanhã. A pergunta é se a informação orienta múltiplas tarefas e qual é sua fonte de manutenção. Evitar copiar a mesma regra em vários lugares reduz divergências futuras. Em vez disso, uma orientação pode apontar para o contrato e explicar quando consultá-lo. A aula 6 transforma esse princípio em um documento persistente pequeno, específico e conferível.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Base do projeto → Recorte atual → Combinação."><div class="trilha"><div class="no no-0" data-node="0"><strong>Base do projeto</strong><span>Convenções, fonte das regras e forma de conferir.</span></div><div class="no no-1" data-node="1"><strong>Recorte atual</strong><span>Dados e objetivo específicos desta tarefa.</span></div><div class="no no-2" data-node="2"><strong>Combinação</strong><span>Reunir apenas o que a execução precisa receber.</span></div></div></figure><figcaption>Fluxograma do slide 15.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · A regra dura mais que a lista de hoje</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Convenção: escrever media sem acento na saída. Dado temporário: hoje analisar apenas T6.</dd><dt>O que fazer</dt><dd>Guardar a convenção em uma orientação do projeto. Colocar o recorte T6 no pedido atual, sem convertê-lo em regra permanente.</dd>
+<dt>Resultado</dt><dd>Na próxima tarefa, a convenção continua útil e o ID pode mudar. O documento duradouro não fica preso ao chamado de ontem.</dd></dl><p>Separar duração e finalidade reduz o risco de carregar instruções vencidas.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Uma orientação duradoura também precisa de manutenção</span><p>“Se coloquei uma informação no contexto estático, nunca mais preciso revisá-la.”</p><p>Regras, comandos e convenções podem mudar. A referência persistente precisa de responsável e revisão quando o projeto muda.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Marcar cada informação candidata como orientação recorrente ou dado da tarefa, explicando o motivo da escolha.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Uma decisão confirmada durante a tarefa deve sempre ir para CLAUDE.md?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 6 de 6</p>
+<h2>Uma conversa longa carrega decisões antigas</h2>
+<p class="termo">Histórico, poluição de contexto, resumo e nova sessão</p>
+<p class="definicao">O histórico acumula decisões, tentativas e resultados. Quando carrega hipóteses antigas ou informação sem função, pode atrapalhar a tarefa. Recomeçar exige preservar o que está confirmado e registrar o que ainda falta.</p></div>
+<p>Uma sessão longa pode ser útil quando as etapas dependem de resultados anteriores, mas também acumula contexto que deixou de ser relevante. O momento de recomeçar depende da tarefa: mudança de objetivo, muitas tentativas rejeitadas ou dificuldade de localizar o combinado são sinais para rever a organização. Antes disso, preservar arquivos e decisões importantes. No Claude Code, instruções e memória são mecanismos distintos do histórico da conversa; a configuração precisa ser observada no ambiente usado.</p><p>No experimento, o professor controla o que puder e registra os limites restantes, sem afirmar isolamento perfeito. Fora do experimento, há duas saídas para uma sessão longa: /clear recomeça a conversa e /compact a substitui por um resumo. O resumo também é conteúdo gerado e precisa ser conferido antes de servir de passagem.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Revisar histórico → Preparar passagem → Recomeçar e conferir."><div class="trilha"><div class="no no-0" data-node="0"><strong>Revisar histórico</strong><span>Identificar fatos, decisões rejeitadas e lacunas.</span></div><div class="no no-1" data-node="1"><strong>Preparar passagem</strong><span>Resumir objetivo, regras vigentes e próximo passo.</span></div><div class="no no-2" data-node="2"><strong>Recomeçar e conferir</strong><span>Iniciar nova conversa e verificar influências que permanecem.</span></div></div></figure><figcaption>Fluxograma do slide 18.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma hipótese antiga não pode voltar como requisito</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>No início da conversa, surgiu a sugestão de atender chamados altos em duas horas. Depois ela foi rejeitada por não constar do contrato.</dd><dt>O que fazer</dt><dd>Na passagem, registrar: regras vigentes R1 a R3; prazo não definido; sugestão anterior não aprovada; tarefa atual delimitada.</dd>
+<dt>Resultado</dt><dd>A nova conversa recebe um resumo conferido. O histórico antigo não precisa ser transportado integralmente para explicar a decisão.</dd></dl><p>Recomeçar deve preservar decisões, não apenas apagar mensagens.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Nova conversa não significa contexto totalmente vazio</span><p>“Usei /clear; logo, não existe nenhuma influência de instruções ou memória anteriores.”</p><p>Arquivos persistentes, configurações e memória podem continuar influenciando o trabalho. Conferir essas fontes e registrar o que não foi controlado.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Criar uma passagem curta com objetivo, fontes vigentes, decisões, dúvidas e próximo passo; conferir antes de abrir outra conversa.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Um resumo gerado pela IA pode ser aceito sem revisão?</p></div>
+</section>
+<section class="secao"><h2>Glossário da aula</h2><div class="rolagem"><table><thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody><tr><td>Contexto</td><td>Informações que a IA recebe para fazer a tarefa</td><td>Regra R2 e lista de chamados</td></tr><tr><td>Token</td><td>Pequena unidade de texto processada pelo modelo</td><td>Pode ser parte de uma palavra; não é sinônimo de caractere</td></tr><tr><td>Janela de contexto</td><td>Limite de informação que cabe em uma interação</td><td>Conversa e arquivos ocupam esse espaço</td></tr><tr><td>Orçamento de contexto</td><td>Planejamento do espaço destinado a instruções, histórico, documentos e geração</td><td>Reservar espaço sem tratar caracteres como tokens exatos</td></tr><tr><td>Latência</td><td>Tempo de espera definido para a medição</td><td>Segundos do envio até a resposta final</td></tr><tr><td>Sessão</td><td>Uma conversa e suas informações disponíveis</td><td>Nova conversa para uma tentativa</td></tr></tbody></table></div></section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 1 · O contexto mínimo</h2></div>
+<p><b>Objetivo.</b> Ver o que acontece quando falta uma regra necessária, na tarefa do ato 1 da demonstração.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>experimentos/contexto/minima</code> para fora do kit. Abra o terminal dentro da cópia e inicie o Claude Code.</p><pre>claude</pre><p class="obs">Fora do kit, o <code>CLAUDE.md</code> do kit não entra na conversa.</p></div></li><li><div><p>Abra <code>entrada.md</code> e confira quais regras ele traz.</p></div></li><li><div><p>Envie a pergunta fixa, sem mudar nenhuma palavra:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Use somente entrada.md. Para uma pessoa da Oficina, liste os chamados ativos que ela pode visualizar, com ID e prioridade, na ordem de entrada. Se faltar regra necessária, diga qual falta. Não invente regra, não leia outros arquivos e não altere arquivos.</pre></div></div></li><li><div><p>Anote modelo, tempo até a resposta final e a nota de 0 a 4 pelos critérios de <code>apoio/protocolo-contexto.md</code>. Marque à parte se a tarefa foi concluída.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>A pasta mínima não traz a R3: o certo é dizer que falta a regra de visibilidade.</span></li><li><span>Uma lista só com T1, T4 e T6 aqui seria uma regra inventada.</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções disseram que falta a regra de visibilidade por departamento. Listaram os ativos com prioridade, sem filtro, T1, T2, T4, T5 e T6, e não supuseram a R3.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>A linha da condição mínima está no seu registro, com a lacuna anotada e a tarefa marcada como incompleta.</p></div>
+
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 2 · Completa, invertida e com ruído</h2></div>
+<p><b>Objetivo.</b> Mudar só o contexto, mantendo a pergunta, e comparar as condições pelos mesmos critérios.</p>
+<ol class="passos"><li><div><p>Repita a prática 1 com a pasta <code>experimentos/contexto/completa</code>, numa cópia fora do kit e em conversa nova. Envie a mesma pergunta fixa:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Use somente entrada.md. Para uma pessoa da Oficina, liste os chamados ativos que ela pode visualizar, com ID e prioridade, na ordem de entrada. Se faltar regra necessária, diga qual falta. Não invente regra, não leia outros arquivos e não altere arquivos.</pre></div></div></li><li><div><p>Repita com <code>invertida</code> e com <code>ruido</code>, sem acrescentar instrução corretiva entre as condições.</p></div></li><li><div><p>Anote o tamanho de cada <code>entrada.md</code> em caracteres, de <code>experimentos/tamanhos.md</code>.</p></div></li><li><div><p>Abra <code>apoio/comparar-contextos.html</code> e preencha só os valores que você observou.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Completa e invertida têm os mesmos blocos em outra ordem.</span></li><li><span>Esperado nas três condições com R3: T1 <code>alta</code>, T4 <code>baixa</code> e T6 <code>alta</code>.</span></li><li><span>Sem número de consumo na tela, escreva N/D. Zero só vale para o que foi medido.</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>Completa, invertida e ruído deram a mesma lista nas duas execuções de cada: T1 alta, T4 baixa e T6 alta. Na condição com ruído, as respostas disseram que as notas extras não tinham relação com os chamados.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>As quatro condições estão no gráfico, só com valores observados, e você escreveu qual foi o menor contexto suficiente.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Repita uma condição para observar a variação. O tamanho em caracteres mede o arquivo; não é a janela real do modelo nem o número de tokens.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 3 · O contexto de uma tarefa sua</h2></div>
+<p><b>Objetivo.</b> Escolher o contexto de uma tarefa do seu trabalho e escrever a passagem para uma conversa nova.</p>
+<ol class="passos"><li><div><p>Escolha uma tarefa do seu trabalho, sem dado sigiloso. Copie <code>modelos/contexto.md</code> e liste as informações candidatas, com o arquivo que contém cada uma.</p></div></li><li><div><p>Marque cada item como orientação recorrente ou dado só desta tarefa.</p></div></li><li><div><p>Abra o Claude Code numa pasta sua, fora do kit, e peça a análise abaixo:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia a pergunta e a lista de contexto abaixo. Para cada item, diga se ele é necessário para responder, se é ruído ou se contradiz outro item. Diga que informação falta. Não responda à pergunta.
+
+Pergunta: (escreva a pergunta)
+
+Contexto: (cole aqui a lista)</pre></div></div></li><li><div><p>Escreva a passagem para uma conversa nova: objetivo, fontes vigentes, decisões, dúvidas e próximo passo.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Cada item mantido responde a uma parte da pergunta?</span></li><li><span>A passagem cabe em cinco linhas e dispensa a conversa antiga?</span></li></ul></div>
+
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>A lista diz o motivo de cada item mantido ou retirado, e a passagem tem os cinco campos.</p></div>
+
+</section>
+<section class="secao"><h2>Autoavaliação</h2>
+<p>Marque o que você já consegue fazer sem consultar o material. O que ficar em branco indica o conceito para reler.</p>
+<ul class="checklist"><li><span>Consigo listar, para uma pergunta, as regras necessárias e o arquivo de cada uma.</span></li><li><span>Consigo justificar um item mantido e um retirado pela pergunta da tarefa.</span></li><li><span>Consigo comparar condições mudando uma só variável, como a ordem.</span></li><li><span>Consigo separar tamanho em caracteres, consumo mostrado, tempo de resposta e tempo de conferência.</span></li><li><span>Consigo separar orientação recorrente de dado que vale só para a tarefa.</span></li><li><span>Consigo escrever uma passagem curta para continuar o trabalho numa conversa nova.</span></li></ul>
+<h2>Respostas das perguntas</h2><div class="resp"><p><b>1. Se quero somente calcular prioridades, preciso necessariamente de R3?</b><br>Não. R1 e os dados válidos de impacto/urgência são suficientes para esse recorte. R3 é necessária para decidir visibilidade.</p><p><b>2. Uma regra antiga que contradiz R2 é apenas ruído inofensivo?</b><br>Não. É um conflito de referência. É preciso identificar qual versão vale, em vez de tratar ambas como verdade ou escolher silenciosamente.</p><p><b>3. Se eu inverter a ordem e também resumir as regras, isolei o efeito da posição?</b><br>Não. Mudei posição e conteúdo. Uma diferença de resultado não pode ser atribuída somente à ordem.</p><p><b>4. Se só conheço o número de caracteres, posso registrar esse valor como tokens?</b><br>Não. Registrar caracteres como tamanho do material e tokens como N/D quando não houver medida disponível.</p><p><b>5. Uma decisão confirmada durante a tarefa deve sempre ir para CLAUDE.md?</b><br>Não. Só se orientar trabalho recorrente do projeto. Decisões específicas podem ficar na especificação ou no registro da tarefa.</p><p><b>6. Um resumo gerado pela IA pode ser aceito sem revisão?</b><br>Não. Ele pode omitir uma restrição ou promover uma hipótese a fato. Conferir o resumo antes de usá-lo como passagem.</p></div>
+<h2>Para ler depois</h2><ul><li>Mei et al., “A Survey of Context Engineering for Large Language Models” (2025): como selecionar, organizar e limitar o que o modelo recebe. <a href="https://arxiv.org/abs/2507.13334">https://arxiv.org/abs/2507.13334</a></li><li>Liu et al., “Lost in the Middle” (2023): efeito da posição da informação nos modelos e tarefas estudados em 2023; não vale para todo modelo atual. <a href="https://arxiv.org/abs/2307.03172">https://arxiv.org/abs/2307.03172</a></li><li>Claude Code, uso e custos: onde ver o consumo mostrado pela ferramenta; estimativa não é fatura da assinatura. <a href="https://code.claude.com/docs/en/costs">https://code.claude.com/docs/en/costs</a></li></ul>
+</section></main></body></html>

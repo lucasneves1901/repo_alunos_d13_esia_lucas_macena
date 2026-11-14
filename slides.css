@@ -1,0 +1,77 @@
+html,body{height:100%;scroll-behavior:auto}body.deck{overflow:hidden}body.deck main{max-width:none;padding:0;margin:0;height:100%}
+.deck-nav{position:fixed;right:22px;top:16px;z-index:20;display:flex;align-items:center;gap:10px}.deck-nav button{padding:5px 13px;font-size:15px}.counter{font-size:14px;color:var(--muted);min-width:60px;text-align:center}
+.slide{display:none;min-height:100vh;padding:70px 6vw 58px;flex-direction:column;justify-content:center;position:relative;max-width:1600px;margin:auto}
+.slide.active{display:flex}.slide .kicker{color:var(--accent-soft);font-size:16px;font-weight:700;letter-spacing:.06em;margin-bottom:12px}
+.slide h1{font-size:clamp(30px,3.2vw,48px);line-height:1.14;margin:0 0 22px;max-width:1120px;font-weight:750;letter-spacing:-.02em}
+.slide .lede{font-size:clamp(22px,2vw,29px);line-height:1.4;max-width:1080px;margin:0 0 10px}
+.slide .flow{max-width:1100px;margin:28px 0;gap:12px}.slide .flow li{font-size:clamp(18px,1.7vw,24px);padding:22px 14px;min-height:108px}
+.slide .example{font-size:clamp(19px,1.6vw,23px);color:var(--muted);max-width:1000px;margin:8px 0}
+.slide .foot{position:absolute;bottom:20px;left:6vw;max-width:68%;font-size:13px;color:var(--muted)}
+.slide .step{font-size:17px;color:var(--accent-soft);margin-top:6px}.slide .flow li:last-child{background:var(--panel-2)}
+.slide.conceitual{padding-top:64px;padding-bottom:55px}
+.slide.conceitual h1{font-size:clamp(30px,3.05vw,43px);margin-bottom:18px}
+.slide.conceitual .kicker{font-size:14px;margin-bottom:10px}
+.slide.conceitual .lede{font-size:24px;line-height:1.38;margin:0 0 8px;max-width:1120px}
+.slide.conceitual .flow{margin:22px 0;max-width:1120px;gap:14px}
+.flow.explicada li{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;padding:20px;gap:14px}
+.flow.explicada li strong{font-size:23px;line-height:1.2}
+.flow.explicada li span{font-size:22px;line-height:1.42;font-weight:400;overflow-wrap:anywhere}
+.flow.explicada li:not(:last-child)::after{top:45%;right:-15px;font-size:26px}
+.slide.mecanismo .flow.explicada li{min-height:158px}
+.slide.caso .flow.explicada li{min-height:248px}
+.slide.limite .flow.explicada li{min-height:180px}
+.slide.conceitual .example{font-size:20px;line-height:1.4;max-width:1100px}
+.entendimento{border-left:4px solid var(--accent-soft);padding:10px 17px;background:var(--panel);max-width:1120px;border-radius:0 10px 10px 0}
+.entendimento p{font-size:21px;line-height:1.38;margin:6px 0}.entendimento p:last-child{color:var(--muted)}
+.conceito-estudo{margin:22px 0}.conceito-estudo h3{font-size:20px}
+body.deck .slide .resposta:not(.revelada){visibility:hidden}
+@media print{body.deck .slide .resposta{visibility:visible}}
+@media(max-width:700px){body.deck{overflow:auto}.slide{padding:86px 22px 65px;min-height:100svh}.slide h1{font-size:30px}.slide .lede{font-size:21px}.slide .flow{margin:20px 0;gap:8px}.slide .flow li{font-size:18px;min-height:45px;padding:12px}.slide .example{font-size:18px}.slide .foot{position:static;max-width:100%;margin-top:20px}.deck-nav{right:12px;top:10px}}
+@media(max-width:700px){.slide.conceitual{padding:76px 20px 32px}.slide.conceitual h1{font-size:29px}.slide.conceitual .lede{font-size:21px}.slide.conceitual .flow{gap:12px}.slide.conceitual .flow.explicada li{min-height:0;padding:16px;gap:10px}.flow.explicada li strong{font-size:21px}.flow.explicada li span{font-size:19px}.flow.explicada li:not(:last-child)::after{top:auto;bottom:-20px;right:50%;font-size:22px}.entendimento p{font-size:19px}}
+@media print{html,body{height:auto}body.deck{overflow:visible}.deck-nav{display:none}.slide,.slide.active{display:flex;width:1280px;height:720px;min-height:0;max-width:none;margin:0;padding:65px 76px 60px;break-after:page;page-break-after:always;color:#111;background:white}.slide:last-child{break-after:auto;page-break-after:auto}.slide h1{font-size:42px;color:#111}.slide .lede{font-size:27px}.slide .flow li{font-size:23px;min-height:100px;background:#f6f6f6;color:#111}.slide .example{font-size:22px;color:#444}.slide .kicker,.slide .step{color:#9b2019}.slide .foot{left:76px;bottom:20px;color:#555}.slide .flow{margin:28px 0}}
+@media print{.slide.conceitual{padding:64px 76px 55px}.slide.conceitual h1{font-size:39px}.slide.conceitual .lede{font-size:24px}.slide.conceitual .flow{margin:22px 0}.slide.conceitual .flow li{background:#f6f6f6}.slide.conceitual .example{font-size:20px}.entendimento{background:#f6f6f6;border-color:#9b2019}.entendimento p,.entendimento p:last-child{color:#222}.flow.explicada li span{color:#111}}
+
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}

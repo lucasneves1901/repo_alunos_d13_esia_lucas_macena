@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Estudo dirigido · Aula 3</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap"><style>
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}
+
+:root{
+  --papel:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --aviso:#8A5A00; --aviso-suave:#FEF4E1; --certo:#1F7A45; --certo-suave:#E7F6EE;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:16px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--tinta);line-height:1.18;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3.4vw,1.6rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--marca-tx);overflow-wrap:anywhere}
+code{font-family:var(--f-codigo);font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);border-radius:4px;padding:0 .3em;color:var(--tinta);overflow-wrap:anywhere}
+.sobre{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.capa{display:flex;flex-direction:column;gap:12px;padding-bottom:18px;border-bottom:3px solid var(--marca);margin-bottom:22px}
+.lide{font-size:1.1rem;color:var(--tinta-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--superficie-2);border:1px solid var(--linha);border-radius:999px;padding:2px 11px;font-size:.84rem;color:var(--tinta-2)}
+section{display:flex;flex-direction:column;gap:12px;margin:0 0 30px}
+.quadro{border:1px solid var(--linha);border-radius:var(--raio);padding:12px 14px;background:var(--superficie-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+.quadro.marca{background:var(--marca-suave);border-color:#FFD2B8}
+.quadro.certo{background:var(--certo-suave);border-color:#BFE3CD}
+.quadro.aviso{background:var(--aviso-suave);border-color:#F3D9A4}
+.rot{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3)}
+.quadro.marca .rot{color:var(--marca-forte)}.quadro.certo .rot{color:var(--certo)}.quadro.aviso .rot{color:var(--aviso)}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.num{font-family:var(--f-codigo);font-size:.84rem;color:var(--marca-tx);font-weight:700}
+.termo{color:var(--tinta-3);font-size:.95rem}
+.definicao{font-size:1.06rem;font-weight:600;color:var(--tinta);border-left:4px solid var(--marca);padding:2px 0 2px 12px}
+figure.ilustra{margin:2px 0;break-inside:avoid;background:#fff;border:1px solid var(--linha);border-radius:10px;padding:10px;min-width:0;
+  --line:var(--linha-forte);--panel:#fff;--panel-2:var(--marca-suave);--accent-soft:var(--marca-tx);--ink:var(--tinta);--muted:var(--tinta-3)}
+figure.ilustra figcaption{font-size:.8rem;color:var(--tinta-3);margin-top:6px}
+.ilustra .diagrama{margin:2px 0}
+.ilustra .diagrama .no{min-height:0!important;padding:9px 10px;gap:4px;border-radius:9px}
+.ilustra .diagrama .no strong{font-size:.92rem}
+.ilustra .diagrama .no span{font-size:.8rem;line-height:1.35}
+.ilustra .diagrama .trilha{gap:16px}
+.ilustra .diagrama .trilha .no:not(:last-child)::after{font-size:16px;right:-14px}
+.ilustra .mapa-num{font-size:.74rem}
+.ilustra .rede{min-height:0;gap:12px 0}
+.ilustra .forma-decisao .rede{min-height:170px}
+.ilustra .forma-decisao .no-1{min-height:150px!important;padding:22px 16px}
+.ilustra .seta-rede{font-size:16px}
+.ilustra .retorno{height:auto}
+.ilustra .retorno span{font-size:.8rem}
+.passos-caso{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}
+.passos-caso dt{font-weight:700;color:var(--tinta);font-size:.9rem}
+.passos-caso dd{margin:0;min-width:0}
+.lado{display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid}
+.rolagem{overflow-x:auto;border:1px solid var(--linha);border-radius:var(--raio)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3);background:var(--superficie-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--tinta)}
+.cab-pratica{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;border-bottom:2px solid var(--marca);padding-bottom:6px}
+ol.passos{list-style:none;padding:0;counter-reset:p;gap:12px}
+ol.passos>li{counter-increment:p;display:grid;grid-template-columns:26px 1fr;gap:8px;break-inside:avoid}
+ol.passos>li::before{content:counter(p);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:.8rem}
+ol.passos>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+pre{margin:0;font-family:var(--f-codigo);font-size:.82rem;line-height:1.5;background:#1E1C1A;color:#F4F2EF;border-radius:8px;padding:9px 11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pedido small{display:block;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
+.obs{font-size:.88rem;color:var(--tinta-3)}
+.checklist{list-style:none;padding:0}
+.checklist li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.checklist li::before{content:"";width:11px;height:11px;border:1.5px solid var(--linha-forte);border-radius:2px;margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:8px}
+.resp p{break-inside:avoid}
+.quadro,.definicao,pre,.pedido,.passos-caso,.cabeca{break-inside:avoid}
+.cabeca{display:flex;flex-direction:column;gap:8px;break-after:avoid}
+@media (max-width:560px){
+  body{font-size:15px}
+  .lado{grid-template-columns:1fr}
+  .passos-caso{grid-template-columns:1fr;gap:2px}
+  .passos-caso dd{margin-bottom:6px}
+  .ilustra .diagrama .trilha{flex-direction:column;gap:18px}
+  .ilustra .diagrama .trilha .no:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-20px}
+}
+@media print{
+  body{font-size:12.2pt}
+  main{max-width:none;padding:0}
+  .pratica,.secao{break-before:page}
+  .conceito{padding-top:16px;border-top:2px solid var(--linha)}
+  h1{font-size:28pt}h2{font-size:19pt}
+}
+</style></head><body><main><header class="capa">
+<p class="sobre">Estudo dirigido · Aula 3 de 6 · D1.3 Prompting Técnico, Especificação e Contexto</p>
+<h1>Como saber se a resposta atende?</h1>
+<p class="lide">Ao fim deste estudo você transforma uma demanda vaga numa especificação curta, com critérios e casos que outra pessoa confere, e separa o que é requisito do que é sugestão da IA.</p>
+<div class="meta"><span>Aula de 07/11/2026</span><span>Caso Fila Clara</span><span>Revisão sem entrega</span></div>
+</header>
+<section><h2>Como usar este estudo</h2>
+<p>Leia os seis conceitos na ordem da aula: cada um prepara o seguinte. Depois faça as três práticas no Claude Code, com o caso Fila Clara do kit. As práticas 1 e 2 refazem os dois atos da demonstração; a prática 3 leva a ideia para uma tarefa do seu trabalho. No fim, marque a autoavaliação e confira as respostas das perguntas.</p><p>Este estudo é material de revisão. Ele não substitui a atividade feita em aula e não tem entrega.</p><p>As execuções registradas citadas nas práticas são do guia interativo da aula: modelo claude-opus-5-5, em 06/11/2026, numa conversa sem ferramentas, com os arquivos colados no pedido. No Claude Code, que lê os arquivos da pasta, a sua resposta pode ter outra redação. Confira pelos critérios, não pela semelhança de texto.</p>
+<div class="quadro"><span class="rot">Antes de começar</span><ul class="checklist"><li><span>Claude Code instalado e com login. Teste no terminal: <code>claude -p &quot;responda apenas: ok&quot;</code> precisa responder <code>ok</code>.</span></li><li><span>O kit da turma no seu computador, do ZIP ou do repositório <a href="https://github.com/victorhwfreire/repo_alunos_d13_esia">github.com/victorhwfreire/repo_alunos_d13_esia</a>. Os caminhos citados partem da pasta do kit.</span></li><li><span>Sem acesso ao Claude Code: acompanhe a execução de um colega ou use as execuções registradas de cada prática, como diz a seção &quot;Sem acesso&quot; de <code>guia-claude-code.md</code>. Anote no seu texto que não executou.</span></li></ul></div>
+</section>
+<section><h2>O mapa da aula</h2>
+<p>Pergunta da aula: <b>O que permite a dois revisores conferir a mesma entrega?</b></p>
+<figure class="ilustra"><figure class="diagrama forma-mapa" aria-label="Caminho numerado: 1. Necessidade → 2. Origem → 3. Especificação → 4. Casos → 5. Estrutura → 6. Fluxo."><div class="trilha"><div class="no no-0" data-node="0"><b class="mapa-num">01</b><strong>Necessidade</strong><span>Esclareço o que é necessário.</span></div><div class="no no-1" data-node="1"><b class="mapa-num">02</b><strong>Origem</strong><span>Confirmo de onde veio a regra.</span></div><div class="no no-2" data-node="2"><b class="mapa-num">03</b><strong>Especificação</strong><span>Reúno o combinado.</span></div><div class="no no-3" data-node="3"><b class="mapa-num">04</b><strong>Casos</strong><span>Defino entradas e resultados.</span></div><div class="no no-4" data-node="4"><b class="mapa-num">05</b><strong>Estrutura</strong><span>Combino os campos da saída.</span></div><div class="no no-5" data-node="5"><b class="mapa-num">06</b><strong>Fluxo</strong><span>Produzo e reviso pelo documento.</span></div></div></figure><figcaption>Fluxograma do slide 2.</figcaption></figure>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 1 de 6</p>
+<h2>Uma necessidade ainda deixa decisões abertas</h2>
+<p class="termo">Necessidade, requisito e história de usuário</p>
+<p class="definicao">Necessidade é o problema de uma pessoa. Requisito descreve o comportamento que deve atendê-la. História de usuário apresenta quem precisa de quê e para quê, mas ainda precisa de detalhes e critérios.</p></div>
+<p>Elicitar requisitos significa descobrir e esclarecer necessidades com as fontes e pessoas responsáveis. Refinar significa torná-las mais precisas e consistentes. A IA pode ajudar a identificar ambiguidades, formular perguntas e propor uma redação. Ela não conhece automaticamente a decisão do responsável pelo produto. Uma história de usuário é uma forma de comunicar necessidade, não uma garantia de completude. No Fila Clara, as respostas para a prática estão nos documentos do caso. Em outro projeto, o documento deve distinguir o que já foi confirmado daquilo que depende de nova conversa.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Necessidade → Requisito → História."><div class="trilha"><div class="no no-0" data-node="0"><strong>Necessidade</strong><span>A pessoa do suporte quer saber quais chamados acompanhar.</span></div><div class="no no-1" data-node="1"><strong>Requisito</strong><span>Listar os ativos que ela pode visualizar, na ordem recebida.</span></div><div class="no no-2" data-node="2"><strong>História</strong><span>Relacionar pessoa, resultado desejado e motivo do uso.</span></div></div></figure><figcaption>Fluxograma do slide 3.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · A história começa uma conversa sobre o requisito</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Demanda: “Quero ver os chamados que precisam de atenção”. Atenção pode significar prioridade alta, atraso ou estado ativo.</dd><dt>O que fazer</dt><dd>Consultar o recorte confirmado: ativos do departamento de quem consulta, na ordem de entrada, com ID e prioridade.</dd>
+<dt>Resultado</dt><dd>História: “Como pessoa do suporte, quero listar os chamados ativos do meu departamento para acompanhar o trabalho pendente”.</dd></dl><p>A história comunica a necessidade; regras de estado, prioridade e ordem completam o comportamento.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · A história não contém automaticamente todas as regras</span><p>“Escrevi quem, o quê e para quê; então qualquer implementação dessa história está correta.”</p><p>A história precisa ser ligada a regras e critérios. Termos como ativo, urgente e autorizado exigem definição no projeto.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Pedir uma história, perguntas e critérios em seções separadas, usando somente as regras confirmadas do caso.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>A IA pode decidir sozinha que “atenção” significa prioridade alta?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 2 de 6</p>
+<h2>A IA pode sugerir um requisito que ninguém pediu</h2>
+<p class="termo">Rastreabilidade, hipótese e requisito inventado</p>
+<p class="definicao">Rastreabilidade liga uma afirmação à sua origem. Um requisito está confirmado por uma fonte autorizada; hipótese é uma possibilidade a verificar; sugestão é uma proposta que ainda depende de decisão.</p></div>
+<p>Uma afirmação pode estar confirmada, contradita ou não sustentada pelo material disponível. Essas situações pedem respostas diferentes: manter a primeira, corrigir a segunda e esclarecer a terceira. Não é suficiente pedir “não invente”; a conferência precisa localizar a fonte de cada regra relevante. O registro de uma sugestão também não significa que ela foi rejeitada para sempre: apenas deixa claro que ainda não foi aprovada para esta tarefa. Preservar essa distinção evita que um texto gerado amplie prazo, custo ou responsabilidade sem uma decisão visível.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Localizar → Rastrear → Classificar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Localizar</strong><span>Destacar cada regra afirmada pela resposta.</span></div><div class="no no-1" data-node="1"><strong>Rastrear</strong><span>Encontrar a fonte que a confirma ou notar sua ausência.</span></div><div class="no no-2" data-node="2"><strong>Classificar</strong><span>Separar confirmado, sugestão e dúvida.</span></div></div></figure><figcaption>Fluxograma do slide 6.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma frase profissional pode acrescentar escopo</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Rascunho: “O administrador vê todas as áreas e os chamados altos serão atendidos em duas horas”.</dd><dt>O que fazer</dt><dd>Comparar com R3: visibilidade é do próprio departamento. Procurar uma regra de prazo: ela não existe no contrato.</dd>
+<dt>Resultado</dt><dd>Acesso geral contradiz a regra vigente. O prazo é uma proposta sem confirmação. Nenhum dos dois entra silenciosamente na especificação.</dd></dl><p>A origem e a autoridade da afirmação importam mais que sua aparência de plausibilidade.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Uma ideia útil ainda precisa ser decidida</span><p>“A sugestão faz sentido para um sistema de chamados; portanto, deve ser aceita como requisito.”</p><p>Coerência com outros sistemas não comprova necessidade neste projeto. Avaliar impacto, responsável e decisão antes de ampliar o combinado.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Anotar ao lado de cada critério: regra de origem, sugestão ou pergunta. Guardar a decisão tomada na revisão.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se não encontrei uma regra no documento, posso afirmar o contrário dela?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 3 de 6</p>
+<h2>A especificação reúne o combinado</h2>
+<p class="termo">Especificação técnica e contrato de tarefa</p>
+<p class="definicao">Especificação é o combinado escrito sobre o resultado esperado. Ela reúne objetivo, entradas, restrições, formato de saída e critérios de aceite, permitindo executar e conferir sem depender de explicação informal.</p></div>
+<p>Restrições dizem quais limites devem ser respeitados, como não alterar o contrato ou não acrescentar prazo. Critérios de aceite dizem o que será observado para aceitar a saída. Eles podem se relacionar: uma restrição de não incluir dados de outra área vira um critério de conferência da lista. A especificação também registra dúvidas e pressupostos; escondê-los produz uma falsa impressão de completude. Versão e responsável permitem saber qual combinado está vigente. O texto pode orientar uma pessoa ou o Claude Code, mas a forma de escrita não elimina a necessidade de revisão.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Delimitar → Contratar → Executar e revisar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Delimitar</strong><span>Dizer o objetivo, as entradas e o que fica fora.</span></div><div class="no no-1" data-node="1"><strong>Contratar</strong><span>Definir a saída e os critérios de aceite.</span></div><div class="no no-2" data-node="2"><strong>Executar e revisar</strong><span>Produzir, conferir e corrigir lacunas do combinado.</span></div></div></figure><figcaption>Fluxograma do slide 9.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma especificação curta pode ser suficiente</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Objetivo: listar trabalho pendente da Oficina. Entradas: chamados.json e R1 a R3. Limite: não inventar prazo nem acesso geral.</dd><dt>O que fazer</dt><dd>Saída: tabela ID | prioridade, na ordem de entrada. Critérios: apenas ativos da Oficina; prioridade correta; nenhum ID extra.</dd>
+<dt>Resultado</dt><dd>Esperado no caso: T1 alta, T4 baixa, T6 alta. Outra pessoa consegue localizar a regra e conferir a lista.</dd></dl><p>O documento é curto, mas contém as decisões necessárias para este recorte.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Mais páginas não significam mais precisão</span><p>“Uma especificação completa precisa antecipar todo detalhe de qualquer projeto.”</p><p>A completude depende do escopo. Para esta tarefa, registrar as decisões necessárias e as lacunas conhecidas, sem inventar exigências externas.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Preencher os cinco campos do modelo e entregar ao colega sem acrescentar instruções por voz.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Qual diferença há entre “gere um relatório” e uma tarefa especificada?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 4 de 6</p>
+<h2>Um critério mostra entrada e resultado esperado</h2>
+<p class="termo">Critério verificável, caso de teste e fronteira</p>
+<p class="definicao">Critério de aceite define a condição de sucesso. Caso de teste escolhe uma entrada e um resultado esperado para examiná-la. Uma fronteira é o ponto em que a regra muda de comportamento.</p></div>
+<p>Uma forma útil de escrever um critério é: dada uma situação, quando a tarefa for realizada, deve aparecer um resultado observável. Essa estrutura ajuda, mas não substitui a qualidade do conteúdo. O resultado esperado deve vir da regra, de cálculo conferido ou de uma fonte aceita, e não apenas da própria implementação testada. Essa referência às vezes é chamada de oráculo de teste. Um caso normal, uma fronteira e uma exclusão formam uma pequena base de conferência para o curso. Avaliação sistemática e cobertura ampla pertencem ao aprofundamento posterior.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Regra → Casos → Conferência."><div class="trilha"><div class="no no-0" data-node="0"><strong>Regra</strong><span>Prioridade é alta quando a soma é maior ou igual a 5.</span></div><div class="no no-1" data-node="1"><strong>Casos</strong><span>Escolher entradas que produzam soma 4 e soma 5.</span></div><div class="no no-2" data-node="2"><strong>Conferência</strong><span>Esperar media para 4 e alta para 5.</span></div></div></figure><figcaption>Fluxograma do slide 12.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Os dois lados da fronteira revelam a regra</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Caso A: impacto 2, urgência 2. Caso B: impacto 2, urgência 3. As entradas são válidas.</dd><dt>O que fazer</dt><dd>Calcular A: 2 + 2 = 4. Calcular B: 2 + 3 = 5. Aplicar R1 sem alterar o limite.</dd>
+<dt>Resultado</dt><dd>A → media. B → alta. Uma implementação que use “maior que 5” erra B e pode acertar A.</dd></dl><p>Uma entrada perto da mudança de faixa pode revelar um erro que um caso distante não mostra.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Testar uma fronteira não cobre todos os casos</span><p>“Dois testes passaram; não há mais nada para verificar.”</p><p>Os casos mostram um recorte. Ainda podem faltar outras faixas, exclusões, ordem e combinações relevantes para a especificação.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Pedir à IA casos de teste, calcular os resultados esperados e conferir se os casos realmente exercitam o critério.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>“O sistema deve ser rápido” já é um critério verificável?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 5 de 6</p>
+<h2>O formato também faz parte do contrato</h2>
+<p class="termo">Saída estruturada, campos, tipos e significado</p>
+<p class="definicao">Saída estruturada organiza a resposta em campos combinados. O contrato define quais campos existem, quais valores são permitidos e como interpretar cada um, além da forma de escrever.</p></div>
+<p>Campos são os nomes das informações; tipos dizem se um valor é texto, número, lista ou outra estrutura. Um esquema formal pode descrever essas exigências, mas não é obrigatório para a prática introdutória. Uma tabela já permite combinar campos, ordem e valores. Ao pedir JSON em texto livre, ainda pode ser necessário remover comentários ou verificar se a resposta é interpretável; recursos específicos de uma API para restringir a forma não serão implementados aqui. A ideia central é separar a conferência estrutural da conferência semântica, que examina o significado.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Estrutura → Valores → Verificação."><div class="trilha"><div class="no no-0" data-node="0"><strong>Estrutura</strong><span>Definir ID e prioridade, com uma linha por chamado.</span></div><div class="no no-1" data-node="1"><strong>Valores</strong><span>Usar alta, media ou baixa conforme R1.</span></div><div class="no no-2" data-node="2"><strong>Verificação</strong><span>Conferir formato, valores e correspondência com os dados.</span></div></div></figure><figcaption>Fluxograma do slide 15.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · JSON válido pode conter um resultado errado</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>P3 tem impacto 2 e urgência 3. Saída: {&quot;id&quot;:&quot;P3&quot;,&quot;prioridade&quot;:&quot;media&quot;}. O texto tem uma estrutura JSON válida.</dd><dt>O que fazer</dt><dd>Conferir o formato e depois calcular a regra: 2 + 3 = 5. A validade do formato não verifica a classificação.</dd>
+<dt>Resultado</dt><dd>Conteúdo correto: {&quot;id&quot;:&quot;P3&quot;,&quot;prioridade&quot;:&quot;alta&quot;}. Para a prática básica, a mesma informação pode ser uma tabela.</dd></dl><p>Estrutura facilita o consumo; significado correto depende da regra e dos dados.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Campo presente não significa campo correto</span><p>“Todos os campos existem; então a resposta pode ser usada automaticamente.”</p><p>Também é preciso conferir tipo, valores permitidos, IDs, ordem e regra do conteúdo. Uma sintaxe aceita não substitui esses critérios.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Usar tabela na atividade principal e JSON como extensão; escrever um critério de forma e outro de conteúdo.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>A prioridade “urgente” atende ao contrato que permite alta, media e baixa?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 6 de 6</p>
+<h2>A especificação orienta a produção e a revisão</h2>
+<p class="termo">Desenvolvimento orientado a especificação (SDD)</p>
+<p class="definicao">Desenvolvimento orientado a especificação usa o combinado escrito para guiar produção, revisão e conferência. O trabalho pode gerar código, testes, documentação ou uma decisão, e a especificação evolui quando surgem lacunas.</p></div>
+<p>A sigla SDD pode variar de significado conforme a literatura; aqui ela designa desenvolvimento orientado a especificação. Não estamos exigindo um documento extenso ou um processo rígido. Em requisitos, o combinado descreve comportamento e aceite. Em testes, define casos e resultados esperados. Em documentação, define público, conteúdo e limites. Em revisão de código, delimita o que examinar e como registrar achados. Em arquitetura, pode pedir contexto, opções, decisão e consequências. O nível de detalhe depende da tarefa, mas a possibilidade de conferir permanece central.</p><p>No trabalho com agentes de codificação, ferramentas de mercado organizam esse fluxo em etapas: especificação, plano técnico, lista de tarefas e implementação, cada uma revisada antes da seguinte. O que muda no fluxo é a ordem: a conversa sobre o que construir acontece no documento, antes do código, e a revisão compara o resultado com o documento, não com a memória da conversa. A lista de tarefas desse fluxo é a decomposição da aula 4.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Especificar → Produzir → Revisar. Retorno: A devolutiva volta ao combinado."><div class="trilha"><div class="no no-0" data-node="0"><strong>Especificar</strong><span>Combinar o que deve ser produzido e como conferir.</span></div><div class="no no-1" data-node="1"><strong>Produzir</strong><span>Criar o artefato dentro desse recorte.</span></div><div class="no no-2" data-node="2"><strong>Revisar</strong><span>Comparar com os critérios e ajustar o artefato ou o combinado.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>A devolutiva volta ao combinado</span></div></figure><figcaption>Fluxograma do slide 18.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · O mesmo combinado orienta artefatos diferentes</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Regra R2: aberto e em_andamento são ativos; fechado fica fora. O objetivo é permitir que outra pessoa compreenda e confira isso.</dd><dt>O que fazer</dt><dd>Documentação explica a regra. Teste escolhe entradas e saídas. Revisão de código procura divergências. Cada tarefa recebe seu próprio formato.</dd>
+<dt>Resultado</dt><dd>Os três artefatos se referem à mesma regra. Uma correção em um deles pode ser conferida sem inventar comportamento novo.</dd></dl><p>A especificação conecta o que se pede, o que se produz e o que se aceita.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Especificar não elimina conversa nem julgamento</span><p>“Depois de escrever a especificação, basta gerar qualquer solução e aprovar.”</p><p>A especificação pode estar ambígua, incompleta ou errada. A execução e a revisão ajudam a revelar essas lacunas.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Usar o mesmo modelo de cinco campos para especificar uma documentação e um roteiro curto de revisão de código.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>SDD exige uma ferramenta específica ou gerar um sistema inteiro?</p></div>
+</section>
+<section class="secao"><h2>Glossário da aula</h2><div class="rolagem"><table><thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody><tr><td>Requisito</td><td>Necessidade ou comportamento esperado</td><td>“Listar chamados ativos”</td></tr><tr><td>História de usuário</td><td>Forma curta de descrever quem precisa de quê e por quê</td><td>“Como suporte, quero ver os chamados ativos...”</td></tr><tr><td>Especificação</td><td>Combinado escrito sobre o que fazer e como conferir</td><td>Objetivo, entrada, limites, saída e critérios</td></tr><tr><td>Rastreabilidade</td><td>Ligação de uma afirmação ou mudança à sua origem</td><td>Um critério identifica a regra R2 que o sustenta</td></tr><tr><td>Fronteira</td><td>Ponto em que uma regra muda de comportamento</td><td>Soma 4 é media; soma 5 é alta</td></tr><tr><td>Saída estruturada</td><td>Resposta em campos combinados</td><td>Tabela com ID, prioridade e regra</td></tr><tr><td>JSON</td><td>Formato de texto com chaves e valores</td><td><code>{&quot;id&quot;:&quot;T1&quot;,&quot;prioridade&quot;:&quot;alta&quot;}</code></td></tr><tr><td>Conferência semântica</td><td>Conferência do significado, além do formato</td><td>JSON válido pode trazer a prioridade errada</td></tr><tr><td>SDD</td><td>Desenvolvimento orientado a especificação</td><td>Escrever o combinado antes de produzir e conferir</td></tr></tbody></table></div></section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 1 · A especificação vaga</h2></div>
+<p><b>Objetivo.</b> Ver as lacunas que uma especificação vaga deixa, na tarefa do ato 1 da demonstração.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>aulas/aula-3/demonstracao/ato-1</code> para fora do kit. Ela tem <code>especificacao.md</code> e <code>caso/regras.md</code>. Abra o terminal dentro da cópia e inicie o Claude Code.</p><pre>claude</pre><p class="obs">Fora do kit, o <code>CLAUDE.md</code> do kit não entra na conversa.</p></div></li><li><div><p>Leia <code>especificacao.md</code>: são duas frases, sem critério nem caso.</p></div></li><li><div><p>Envie o pedido do ato 1:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia especificacao.md e caso/regras.md. Produza somente a entrega descrita na especificação. Se faltar uma decisão necessária, identifique a lacuna sem inventar regra. Não altere arquivos.</pre></div></div></li><li><div><p>Liste cada lacuna que a resposta apontou e a regra que ela toca: R1, R2 ou R3.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>A resposta fecha uma lista ou registra lacunas?</span></li><li><span>Se fechou uma lista, qual sentido de “atenção” e qual departamento ela supôs?</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções não fecharam a lista. Apontaram três lacunas: o sentido de “precisa de atenção”, quem consulta a lista (R3) e o que é “boa para o trabalho”. Mostraram também como cada decisão mudaria o resultado.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você listou as lacunas da v1, cada uma ligada a uma regra ou a uma decisão que falta.</p></div>
+
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 2 · A especificação com critérios</h2></div>
+<p><b>Objetivo.</b> Ver como critérios e casos permitem revisar a entrega, com o mesmo pedido.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>aulas/aula-3/demonstracao/ato-2</code> para fora do kit, abra o terminal na cópia e inicie uma conversa nova.</p><pre>claude</pre></div></li><li><div><p>Compare a v2 de <code>especificacao.md</code> com a v1: objetivo, entrada, limites, saída, critérios e casos para conferir.</p></div></li><li><div><p>Envie o mesmo pedido do ato 1. Só a especificação mudou:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia especificacao.md e caso/regras.md. Produza somente a entrega descrita na especificação. Se faltar uma decisão necessária, identifique a lacuna sem inventar regra. Não altere arquivos.</pre></div></div></li><li><div><p>Confira os três casos que a v2 cita: T1 entra com <code>alta</code>, T3 fica fora por <code>fechado</code>, T4 entra com <code>baixa</code>.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>A ausência de uma linha também é evidência: T3 fora confere o critério de exclusão.</span></li><li><span>A tabela tem só as duas colunas e a ordem de entrada, como a saída da v2 pede?</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções devolveram só a tabela: T1 alta, T4 baixa e T6 alta.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Cada critério da v2 tem uma linha, ou a ausência de uma linha, que o confere.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Escreva a mesma saída em JSON e acrescente um critério de forma e outro de conteúdo. Não é preciso implementar API.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 3 · Especificar uma tarefa sua</h2></div>
+<p><b>Objetivo.</b> Escrever uma especificação curta para uma tarefa do seu trabalho e testar se ela deixa dúvidas.</p>
+<ol class="passos"><li><div><p>Escolha uma tarefa pequena do seu trabalho, sem dado sigiloso. Copie <code>modelos/especificacao.md</code> e preencha os campos.</p></div></li><li><div><p>Escreva três casos: um que entra, um de fronteira e um que fica fora, com o resultado esperado calculado por você.</p></div></li><li><div><p>Abra o Claude Code numa pasta sua, fora do kit, e peça a separação abaixo:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia a especificação abaixo. Separe em três listas: o que está confirmado no texto, o que você sugeriria acrescentar e as dúvidas que impedem a execução. Não transforme sugestão em requisito. Não altere arquivos.
+
+(cole aqui a sua especificação)</pre></div></div></li><li><div><p>Decida cada dúvida ou anote a quem perguntar. Marque as sugestões que você não aceitou.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>A IA acrescentou requisito que ninguém pediu? Ele fica como sugestão até alguém decidir.</span></li><li><span>Cada critério tem um caso que o exercita?</span></li></ul></div>
+
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>A especificação tem três casos com resultado esperado, e cada dúvida tem uma decisão ou um responsável.</p></div>
+
+</section>
+<section class="secao"><h2>Autoavaliação</h2>
+<p>Marque o que você já consegue fazer sem consultar o material. O que ficar em branco indica o conceito para reler.</p>
+<ul class="checklist"><li><span>Consigo separar a necessidade de quem pede das decisões que ela ainda deixa abertas.</span></li><li><span>Consigo marcar, ao lado de cada critério, a regra de origem, a sugestão ou a pergunta.</span></li><li><span>Consigo preencher uma especificação curta que o colega executa sem explicação oral.</span></li><li><span>Consigo escrever casos de inclusão, exclusão e fronteira com o resultado esperado.</span></li><li><span>Consigo escrever um critério de forma e outro de conteúdo para a mesma saída.</span></li><li><span>Consigo usar a mesma especificação para produzir e para revisar uma entrega.</span></li></ul>
+<h2>Respostas das perguntas</h2><div class="resp"><p><b>1. A IA pode decidir sozinha que “atenção” significa prioridade alta?</b><br>Pode sugerir essa interpretação, mas não tratá-la como requisito confirmado. É preciso consultar a fonte ou registrar a pergunta.</p><p><b>2. Se não encontrei uma regra no documento, posso afirmar o contrário dela?</b><br>Não. Ausência de informação pode ser uma dúvida. Neste caso, só há proibição explícita quando ela aparece no contrato ou no escopo.</p><p><b>3. Qual diferença há entre “gere um relatório” e uma tarefa especificada?</b><br>A especificação define propósito, dados, limites, estrutura e critérios que permitem decidir se o relatório atende.</p><p><b>4. “O sistema deve ser rápido” já é um critério verificável?</b><br>Não. Faltam medida, condição e limite acordados. Nesta disciplina, não inventamos um tempo máximo que ninguém confirmou.</p><p><b>5. A prioridade “urgente” atende ao contrato que permite alta, media e baixa?</b><br>Não, mesmo que pareça equivalente. Os valores combinados precisam ser preservados, ou a mudança deve ser discutida e versionada.</p><p><b>6. SDD exige uma ferramenta específica ou gerar um sistema inteiro?</b><br>Não. A ideia pode ser aplicada a uma tarefa pequena, com um documento e critérios que orientem a produção e a revisão.</p></div>
+<h2>Para ler depois</h2><ul><li>Stoica et al., “Specifications: The missing link…” (2024): a especificação como elo entre o que se pede ao modelo e o que se confere depois. <a href="https://arxiv.org/abs/2412.05299">https://arxiv.org/abs/2412.05299</a></li><li>Ronanki, Arvidsson e Axell, “Prompt Engineering Guidelines…in Requirements Engineering” (2025): orientações para usar pedidos à IA no trabalho com requisitos. <a href="https://arxiv.org/abs/2507.03405">https://arxiv.org/abs/2507.03405</a></li></ul>
+</section></main></body></html>

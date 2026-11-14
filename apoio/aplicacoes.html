@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O mesmo combinado em cinco tipos de trabalho · D1.3</title><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>O mesmo combinado em cinco tipos de trabalho</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><p>A estrutura é sempre a mesma: tarefa, informações, limites, saída e conferência. Muda só o artefato.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Aplicação</th>
+<th>Pedido pequeno no Claude Code</th>
+<th>Saída</th>
+<th>Como conferir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requisitos</td>
+<td>Transformar a demanda A em história e critérios, separando sugestões</td>
+<td>História e três critérios</td>
+<td>Cada afirmação tem origem nas regras ou está marcada como dúvida</td>
+</tr>
+<tr>
+<td>Testes</td>
+<td>Propor casos de prioridade nos limites de soma 4 e 5</td>
+<td>Tabela entrada e esperado</td>
+<td>Calcular a soma à mão e conferir R1</td>
+</tr>
+<tr>
+<td>Documentação</td>
+<td>Explicar R2 para uma pessoa nova em até 80 palavras</td>
+<td>Parágrafo com exemplo</td>
+<td>Inclui aberto e em_andamento, exclui fechado, preserva a ordem</td>
+</tr>
+<tr>
+<td>Revisão de código</td>
+<td>Confrontar <code>caso/trecho-para-revisao.py</code> com R2</td>
+<td>Achado, linha, motivo e caso que revela o problema</td>
+<td>Rastrear aberto, fechado e em_andamento</td>
+</tr>
+<tr>
+<td>Arquitetura</td>
+<td>Registrar a decisão de manter a regra numa função separada</td>
+<td>Contexto, duas opções, decisão e consequência</td>
+<td>A decisão diz o que evita e o que custa</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="exemplo-resolvido-de-teste">Exemplo resolvido de teste</h2>
+<p>Tarefa: um caso que separe as faixas media e alta. Impacto 2 e urgência 2 dão soma 4, media. Impacto 2 e urgência 3 dão soma 5, alta. Os dois casos conferem a fronteira de R1; não cobrem o sistema inteiro.</p>
+<h2 id="pedido-de-revisao-do-codigo">Pedido de revisão do código</h2>
+<pre><code class="language-text">Leia caso/trecho-para-revisao.py e somente a regra R2 de caso/regras.md.
+Faça uma revisão sem alterar arquivos. Responda em tabela:
+achado | evidência no código | caso que revela o problema | correção sugerida.
+Não acrescente requisito de banco, login ou tratamento de entrada inválida.
+</code></pre>
+<p>O código tem uma divergência de propósito. O esperado vem de R2, não da saída do código. Quem não executa Python rastreia a lista linha a linha e registra "inspeção manual".</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

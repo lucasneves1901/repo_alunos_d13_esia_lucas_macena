@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palavras da disciplina, em linguagem direta · D1.3</title><link rel="stylesheet" href="estilo.css"><link rel="stylesheet" href="material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Palavras da disciplina, em linguagem direta</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Palavra</th>
+<th>Significado nesta disciplina</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt</td>
+<td>Pedido enviado à IA</td>
+<td>“Explique R2 em duas frases”</td>
+</tr>
+<tr>
+<td>Contexto</td>
+<td>Informações que a IA recebe para fazer a tarefa</td>
+<td>Regra R2 e lista de chamados</td>
+</tr>
+<tr>
+<td>Modelo</td>
+<td>O componente que produz a resposta</td>
+<td>Nome exibido pelo Claude Code</td>
+</tr>
+<tr>
+<td>Sessão</td>
+<td>Uma conversa e suas informações disponíveis</td>
+<td>Nova conversa para uma tentativa</td>
+</tr>
+<tr>
+<td>Artefato</td>
+<td>Resultado de trabalho que pode ser guardado e revisto</td>
+<td>Um pedido salvo em arquivo</td>
+</tr>
+<tr>
+<td>Especificação</td>
+<td>Combinado escrito sobre o que fazer e como conferir</td>
+<td>Objetivo, entrada, limites, saída e critérios</td>
+</tr>
+<tr>
+<td>Restrição</td>
+<td>Um limite que precisa ser respeitado</td>
+<td>“Não inventar uma regra nova”</td>
+</tr>
+<tr>
+<td>Critério de aceite</td>
+<td>Condição observável para aceitar o resultado</td>
+<td>“Excluir o estado fechado”</td>
+</tr>
+<tr>
+<td>Requisito</td>
+<td>Necessidade ou comportamento esperado</td>
+<td>“Listar chamados ativos”</td>
+</tr>
+<tr>
+<td>História de usuário</td>
+<td>Forma curta de descrever quem precisa de quê e por quê</td>
+<td>“Como suporte, quero ver os chamados ativos...”</td>
+</tr>
+<tr>
+<td>Zero-shot</td>
+<td>Pedido sem exemplo de resposta</td>
+<td>Informar tarefa, dados e formato</td>
+</tr>
+<tr>
+<td>Few-shot</td>
+<td>Pedido com exemplos de entrada e saída</td>
+<td>Mostrar dois casos antes do novo caso</td>
+</tr>
+<tr>
+<td>Decomposição</td>
+<td>Dividir uma tarefa em partes conferíveis</td>
+<td>Definir regra, listar testes, escrever documento</td>
+</tr>
+<tr>
+<td>Crítica e revisão</td>
+<td>Conferir um rascunho por critérios e corrigir o que falhou</td>
+<td>Procurar um estado incluído indevidamente</td>
+</tr>
+<tr>
+<td>Raciocínio explicitado</td>
+<td>Explicação verificável da solução apresentada</td>
+<td>Mostrar a soma e citar a regra; não exigir pensamentos internos</td>
+</tr>
+<tr>
+<td>Autoconsistência</td>
+<td>Gerar soluções diversas e agregar suas respostas para escolher a mais consistente</td>
+<td>A maioria também pode errar; a prática de duas repetições apenas observa variação</td>
+</tr>
+<tr>
+<td>Fronteira</td>
+<td>Ponto em que uma regra muda de comportamento</td>
+<td>Soma 4 é media; soma 5 é alta</td>
+</tr>
+<tr>
+<td>Rastreabilidade</td>
+<td>Ligação de uma afirmação ou mudança à sua origem</td>
+<td>Um critério identifica a regra R2 que o sustenta</td>
+</tr>
+<tr>
+<td>Tipo de dado</td>
+<td>Forma de representar um valor, como texto ou número</td>
+<td>ID em texto; soma como número</td>
+</tr>
+<tr>
+<td>Conferência semântica</td>
+<td>Conferência do significado, além do formato</td>
+<td>JSON válido pode trazer a prioridade errada</td>
+</tr>
+<tr>
+<td>Dependência</td>
+<td>Informação ou decisão de outra parte necessária para trabalhar</td>
+<td>Testes recebem uma especificação confirmada</td>
+</tr>
+<tr>
+<td>Acoplamento</td>
+<td>Quanto mudanças numa parte afetam as demais</td>
+<td>Mudar uma regra exige rever os casos que dependem dela</td>
+</tr>
+<tr>
+<td>Granularidade</td>
+<td>Tamanho escolhido para as unidades de trabalho</td>
+<td>Uma tarefa única ou três unidades com contratos próprios</td>
+</tr>
+<tr>
+<td>Oráculo de teste</td>
+<td>Referência usada para saber o resultado esperado</td>
+<td>R1 e a soma conferida determinam a prioridade correta</td>
+</tr>
+<tr>
+<td>Orçamento de contexto</td>
+<td>Planejamento do espaço destinado a instruções, histórico, documentos e geração</td>
+<td>Reservar espaço sem tratar caracteres como tokens exatos</td>
+</tr>
+<tr>
+<td>Ferramenta</td>
+<td>Recurso que lê, escreve ou executa uma ação</td>
+<td>Claude Code ler um arquivo</td>
+</tr>
+<tr>
+<td>Saída estruturada</td>
+<td>Resposta em campos combinados</td>
+<td>Tabela com ID, prioridade e regra</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td>Formato de texto com chaves e valores</td>
+<td><code>{"id":"T1","prioridade":"alta"}</code></td>
+</tr>
+<tr>
+<td>SDD</td>
+<td>Desenvolvimento orientado a especificação</td>
+<td>Escrever o combinado antes de produzir e conferir</td>
+</tr>
+<tr>
+<td>Documento de especificação</td>
+<td>Registro do comportamento esperado e seus limites</td>
+<td><code>especificacao.md</code>; a sigla SDD varia entre textos</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>Pequena unidade de texto processada pelo modelo</td>
+<td>Pode ser parte de uma palavra; não é sinônimo de caractere</td>
+</tr>
+<tr>
+<td>Janela de contexto</td>
+<td>Limite de informação que cabe em uma interação</td>
+<td>Conversa e arquivos ocupam esse espaço</td>
+</tr>
+<tr>
+<td>Latência</td>
+<td>Tempo de espera definido para a medição</td>
+<td>Segundos do envio até a resposta final</td>
+</tr>
+<tr>
+<td>Variância/dispersão</td>
+<td>Quanto os resultados variam</td>
+<td>Notas 3 e 4 para a mesma condição</td>
+</tr>
+<tr>
+<td>Instrução persistente</td>
+<td>Orientação do projeto reutilizada entre tarefas</td>
+<td>Convenção escrita no <code>CLAUDE.md</code></td>
+</tr>
+<tr>
+<td>Versionamento</td>
+<td>Guardar versões e explicar mudanças</td>
+<td>v1, v2 e v3 com histórico</td>
+</tr>
+<tr>
+<td>Diff</td>
+<td>Diferença entre duas versões</td>
+<td>Um limite corrigido no texto</td>
+</tr>
+<tr>
+<td>Regressão</td>
+<td>Algo que funcionava deixar de funcionar após uma mudança</td>
+<td>O prompt novo passar a incluir chamados fechados</td>
+</tr>
+<tr>
+<td>Pull request</td>
+<td>Pedido de revisão de uma mudança em repositório</td>
+<td>Colega comenta o texto antes da integração</td>
+</tr>
+</tbody>
+</table></div>
+<p>As definições são apoio de leitura e de interpretação. Não propõem sinais em Libras. Sempre que um termo voltar, o professor o liga a um arquivo ou a um exemplo conhecido.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

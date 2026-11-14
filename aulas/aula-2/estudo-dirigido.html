@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Estudo dirigido · Aula 2</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap"><style>
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}
+
+:root{
+  --papel:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --aviso:#8A5A00; --aviso-suave:#FEF4E1; --certo:#1F7A45; --certo-suave:#E7F6EE;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:16px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--tinta);line-height:1.18;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3.4vw,1.6rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--marca-tx);overflow-wrap:anywhere}
+code{font-family:var(--f-codigo);font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);border-radius:4px;padding:0 .3em;color:var(--tinta);overflow-wrap:anywhere}
+.sobre{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.capa{display:flex;flex-direction:column;gap:12px;padding-bottom:18px;border-bottom:3px solid var(--marca);margin-bottom:22px}
+.lide{font-size:1.1rem;color:var(--tinta-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--superficie-2);border:1px solid var(--linha);border-radius:999px;padding:2px 11px;font-size:.84rem;color:var(--tinta-2)}
+section{display:flex;flex-direction:column;gap:12px;margin:0 0 30px}
+.quadro{border:1px solid var(--linha);border-radius:var(--raio);padding:12px 14px;background:var(--superficie-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+.quadro.marca{background:var(--marca-suave);border-color:#FFD2B8}
+.quadro.certo{background:var(--certo-suave);border-color:#BFE3CD}
+.quadro.aviso{background:var(--aviso-suave);border-color:#F3D9A4}
+.rot{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3)}
+.quadro.marca .rot{color:var(--marca-forte)}.quadro.certo .rot{color:var(--certo)}.quadro.aviso .rot{color:var(--aviso)}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.num{font-family:var(--f-codigo);font-size:.84rem;color:var(--marca-tx);font-weight:700}
+.termo{color:var(--tinta-3);font-size:.95rem}
+.definicao{font-size:1.06rem;font-weight:600;color:var(--tinta);border-left:4px solid var(--marca);padding:2px 0 2px 12px}
+figure.ilustra{margin:2px 0;break-inside:avoid;background:#fff;border:1px solid var(--linha);border-radius:10px;padding:10px;min-width:0;
+  --line:var(--linha-forte);--panel:#fff;--panel-2:var(--marca-suave);--accent-soft:var(--marca-tx);--ink:var(--tinta);--muted:var(--tinta-3)}
+figure.ilustra figcaption{font-size:.8rem;color:var(--tinta-3);margin-top:6px}
+.ilustra .diagrama{margin:2px 0}
+.ilustra .diagrama .no{min-height:0!important;padding:9px 10px;gap:4px;border-radius:9px}
+.ilustra .diagrama .no strong{font-size:.92rem}
+.ilustra .diagrama .no span{font-size:.8rem;line-height:1.35}
+.ilustra .diagrama .trilha{gap:16px}
+.ilustra .diagrama .trilha .no:not(:last-child)::after{font-size:16px;right:-14px}
+.ilustra .mapa-num{font-size:.74rem}
+.ilustra .rede{min-height:0;gap:12px 0}
+.ilustra .forma-decisao .rede{min-height:170px}
+.ilustra .forma-decisao .no-1{min-height:150px!important;padding:22px 16px}
+.ilustra .seta-rede{font-size:16px}
+.ilustra .retorno{height:auto}
+.ilustra .retorno span{font-size:.8rem}
+.passos-caso{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}
+.passos-caso dt{font-weight:700;color:var(--tinta);font-size:.9rem}
+.passos-caso dd{margin:0;min-width:0}
+.lado{display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid}
+.rolagem{overflow-x:auto;border:1px solid var(--linha);border-radius:var(--raio)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3);background:var(--superficie-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--tinta)}
+.cab-pratica{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;border-bottom:2px solid var(--marca);padding-bottom:6px}
+ol.passos{list-style:none;padding:0;counter-reset:p;gap:12px}
+ol.passos>li{counter-increment:p;display:grid;grid-template-columns:26px 1fr;gap:8px;break-inside:avoid}
+ol.passos>li::before{content:counter(p);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:.8rem}
+ol.passos>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+pre{margin:0;font-family:var(--f-codigo);font-size:.82rem;line-height:1.5;background:#1E1C1A;color:#F4F2EF;border-radius:8px;padding:9px 11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pedido small{display:block;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
+.obs{font-size:.88rem;color:var(--tinta-3)}
+.checklist{list-style:none;padding:0}
+.checklist li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.checklist li::before{content:"";width:11px;height:11px;border:1.5px solid var(--linha-forte);border-radius:2px;margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:8px}
+.resp p{break-inside:avoid}
+.quadro,.definicao,pre,.pedido,.passos-caso,.cabeca{break-inside:avoid}
+.cabeca{display:flex;flex-direction:column;gap:8px;break-after:avoid}
+@media (max-width:560px){
+  body{font-size:15px}
+  .lado{grid-template-columns:1fr}
+  .passos-caso{grid-template-columns:1fr;gap:2px}
+  .passos-caso dd{margin-bottom:6px}
+  .ilustra .diagrama .trilha{flex-direction:column;gap:18px}
+  .ilustra .diagrama .trilha .no:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-20px}
+}
+@media print{
+  body{font-size:12.2pt}
+  main{max-width:none;padding:0}
+  .pratica,.secao{break-before:page}
+  .conceito{padding-top:16px;border-top:2px solid var(--linha)}
+  h1{font-size:28pt}h2{font-size:19pt}
+}
+</style></head><body><main><header class="capa">
+<p class="sobre">Estudo dirigido · Aula 2 de 6 · D1.3 Prompting Técnico, Especificação e Contexto</p>
+<h1>Quando vale mudar a forma de pedir?</h1>
+<p class="lide">Ao fim deste estudo você compara duas formas de pedir a mesma tarefa pelos mesmos critérios e decide se a técnica mais trabalhosa paga o esforço.</p>
+<div class="meta"><span>Aula de 07/11/2026</span><span>Caso Fila Clara</span><span>Revisão sem entrega</span></div>
+</header>
+<section><h2>Como usar este estudo</h2>
+<p>Leia os seis conceitos na ordem da aula: cada um prepara o seguinte. Depois faça as três práticas no Claude Code, com o caso Fila Clara do kit. As práticas 1 e 2 refazem os dois atos da demonstração; a prática 3 leva a ideia para uma tarefa do seu trabalho. No fim, marque a autoavaliação e confira as respostas das perguntas.</p><p>Este estudo é material de revisão. Ele não substitui a atividade feita em aula e não tem entrega.</p><p>As execuções registradas citadas nas práticas são do guia interativo da aula: modelo claude-opus-5-5, em 06/11/2026, numa conversa sem ferramentas, com os arquivos colados no pedido. No Claude Code, que lê os arquivos da pasta, a sua resposta pode ter outra redação. Confira pelos critérios, não pela semelhança de texto.</p>
+<div class="quadro"><span class="rot">Antes de começar</span><ul class="checklist"><li><span>Claude Code instalado e com login. Teste no terminal: <code>claude -p &quot;responda apenas: ok&quot;</code> precisa responder <code>ok</code>.</span></li><li><span>O kit da turma no seu computador, do ZIP ou do repositório <a href="https://github.com/victorhwfreire/repo_alunos_d13_esia">github.com/victorhwfreire/repo_alunos_d13_esia</a>. Os caminhos citados partem da pasta do kit.</span></li><li><span>Sem acesso ao Claude Code: acompanhe a execução de um colega ou use as execuções registradas de cada prática, como diz a seção &quot;Sem acesso&quot; de <code>guia-claude-code.md</code>. Anote no seu texto que não executou.</span></li></ul></div>
+</section>
+<section><h2>O mapa da aula</h2>
+<p>Pergunta da aula: <b>Qual recurso ajuda nesta dificuldade e compensa seu custo?</b></p>
+<figure class="ilustra"><figure class="diagrama forma-mapa" aria-label="Caminho numerado: 1. Pedido direto → 2. Exemplos → 3. Revisão → 4. Etapas → 5. Alternativas → 6. Ferramentas."><div class="trilha"><div class="no no-0" data-node="0"><b class="mapa-num">01</b><strong>Pedido direto</strong><span>Começo com uma referência simples.</span></div><div class="no no-1" data-node="1"><b class="mapa-num">02</b><strong>Exemplos</strong><span>Mostro o padrão quando ajuda.</span></div><div class="no no-2" data-node="2"><b class="mapa-num">03</b><strong>Revisão</strong><span>Corrijo com um critério.</span></div><div class="no no-3" data-node="3"><b class="mapa-num">04</b><strong>Etapas</strong><span>Separo passos conferíveis.</span></div><div class="no no-4" data-node="4"><b class="mapa-num">05</b><strong>Alternativas</strong><span>Comparo respostas com a regra.</span></div><div class="no no-5" data-node="5"><b class="mapa-num">06</b><strong>Ferramentas</strong><span>Confiro a ação realizada.</span></div></div></figure><figcaption>Fluxograma do slide 2.</figcaption></figure>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 1 de 6</p>
+<h2>O pedido direto pode ser suficiente</h2>
+<p class="termo">Pedido direto e zero-shot</p>
+<p class="definicao">Zero-shot é solicitar uma tarefa sem fornecer exemplos de entrada e resposta. O pedido ainda pode conter regras, dados, limites e formato de saída.</p></div>
+<p>O pedido direto serve como uma referência simples para a comparação. Se já atende aos critérios, uma técnica mais elaborada precisa justificar seu esforço adicional. Quando falha, convém diagnosticar: faltou informação, o formato era ambíguo, a tarefa juntou coisas demais ou o modelo aplicou mal uma regra? A resposta “melhore o prompt” não identifica a causa. Acrescentar adjetivos ou um papel como “seja especialista” não repara automaticamente uma regra ausente.</p><p>O objetivo do ensaio é escolher a técnica pelo problema observado, usando condições registradas. Os padrões reutilizáveis de prompt, como os catalogados por White et al. (modelo de saída, persona, interação invertida, refinamento da pergunta), são formas nomeadas de organizar um pedido. Servem quando resolvem uma dificuldade observada, não como enfeite.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Instruir → Fornecer dados → Conferir."><div class="trilha"><div class="no no-0" data-node="0"><strong>Instruir</strong><span>Definir tarefa, regra e formato.</span></div><div class="no no-1" data-node="1"><strong>Fornecer dados</strong><span>Entregar os casos que devem ser resolvidos.</span></div><div class="no no-2" data-node="2"><strong>Conferir</strong><span>Comparar a resposta com os critérios definidos.</span></div></div></figure><figcaption>Fluxograma do slide 3.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Classificar pela regra, sem exemplos adicionais</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Regra: somar impacto e urgência; soma ≥ 5 é alta. Dados novos: P3 tem impacto 2 e urgência 3.</dd><dt>O que fazer</dt><dd>Pedido: “Classifique os IDs usando a regra fornecida. Responda somente com ID e prioridade, na ordem recebida”.</dd>
+<dt>Resultado</dt><dd>Para P3, o esperado é alta: 2 + 3 = 5. A regra fornecida é suficiente para conferir essa classificação.</dd></dl><p>Não houve exemplo resolvido no pedido; houve informação para realizar a tarefa.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Zero-shot não significa ausência de contexto</span><p>“Para testar zero-shot, preciso retirar as regras e deixar a IA descobrir tudo.”</p><p>O que se retira são exemplos resolvidos, não os dados necessários. Retirar a regra também muda a suficiência do contexto.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Executar primeiro a condição direta do protocolo, sem acrescentar exemplos ou dicas entre as tentativas.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Um pedido com R1 e os dados, mas sem exemplos, continua sendo zero-shot?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 2 de 6</p>
+<h2>Um exemplo mostra o padrão desejado</h2>
+<p class="termo">Exemplos no pedido e few-shot</p>
+<p class="definicao">Few-shot usa alguns exemplos de entrada e saída para mostrar o padrão desejado. Os exemplos orientam a resposta durante a tarefa; não representam um novo treinamento do modelo.</p></div>
+<p>Exemplos são úteis para mostrar categorias, formato e casos de fronteira. Para uma tarefa com várias classes, exemplos de uma única classe podem deixar o padrão incompleto. Também é importante separar demonstração e dados a resolver, evitando incluir E1/E2 como registros finais. A comparação da aula mantém regra, dados e critérios e acrescenta apenas os exemplos da condição B. Isso permite observar se eles ajudaram naquele recorte. O custo pode crescer em tamanho de entrada e esforço de manutenção: quando a regra muda, os exemplos também precisam ser conferidos.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Escolher → Demonstrar → Aplicar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Escolher</strong><span>Usar exemplos corretos e relevantes para a dificuldade.</span></div><div class="no no-1" data-node="1"><strong>Demonstrar</strong><span>Apresentar entrada e saída esperada de cada exemplo.</span></div><div class="no no-2" data-node="2"><strong>Aplicar</strong><span>Pedir a resposta para casos novos, separados dos exemplos.</span></div></div></figure><figcaption>Fluxograma do slide 6.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Exemplos ensinam o padrão dentro do pedido</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>E1: impacto 1, urgência 1 → baixa. E2: impacto 2, urgência 2 → media. Novo caso P3: impacto 2, urgência 3.</dd><dt>O que fazer</dt><dd>Pedir que classifique P3 pela regra, no mesmo formato. Dizer que E1 e E2 são exemplos e não entram na saída final.</dd>
+<dt>Resultado</dt><dd>P3 → alta, porque a soma é 5. Copiar media de E2 seria aplicar o exemplo sem conferir a nova entrada.</dd></dl><p>O exemplo mostra um padrão; a regra ainda governa o caso novo.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Um exemplo ruim também orienta a resposta</span><p>“Qualquer exemplo ajuda; quanto mais exemplos, melhor.”</p><p>Exemplos incorretos, pouco variados ou conflitantes podem induzir erros e aumentar o material processado. Escolher exemplos pela necessidade.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Usar os exemplos definidos no protocolo e conferir se nenhum deles vazou para a tabela final.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se um exemplo contradiz R1, devo pedir que a IA siga os dois?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 3 de 6</p>
+<h2>Revisar começa por critérios</h2>
+<p class="termo">Crítica, revisão e verificação independente</p>
+<p class="definicao">Crítica identifica onde um rascunho atende ou falha em critérios. Revisão produz uma nova versão a partir dessas constatações. O resultado revisado continua precisando de conferência.</p></div>
+<p>Uma crítica específica aponta critério, evidência e ajuste. “Ficou ruim” não localiza o problema; “a soma 5 foi classificada como media” permite uma correção objetiva. Crítica e revisão podem ocorrer em duas interações ou num fluxo definido, mas o esforço total precisa ser comparável ao das outras técnicas. A segunda chamada não é gratuita em tempo nem necessariamente em consumo. Também não é uma avaliação independente só por ser outra resposta do mesmo modelo. Na aula, a pessoa confere com R1 e preserva rascunho e revisão para observar o efeito.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Rascunho → Crítica → Revisão. Retorno: Se o critério ainda falhar, revisar novamente."><div class="trilha"><div class="no no-0" data-node="0"><strong>Rascunho</strong><span>Guardar a primeira resposta sem corrigir silenciosamente.</span></div><div class="no no-1" data-node="1"><strong>Crítica</strong><span>Localizar a divergência e citar o critério correspondente.</span></div><div class="no no-2" data-node="2"><strong>Revisão</strong><span>Corrigir o problema e verificar também o que já estava certo.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>Se o critério ainda falhar, revisar novamente</span></div></figure><figcaption>Fluxograma do slide 9.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma crítica útil localiza a divergência</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Rascunho didático: “P3 | media”. P3 tem impacto 2 e urgência 3. O contrato define soma ≥ 5 como alta.</dd><dt>O que fazer</dt><dd>Pedir que confira a soma e o limite da faixa, corrigindo a tabela sem adicionar campos ou regras.</dd>
+<dt>Resultado</dt><dd>Esperado após a correção: “P3 | alta”. Conferir novamente os demais IDs, a ordem e o formato.</dd></dl><p>A correção tem um motivo localizável: 2 + 3 = 5 pertence à faixa alta.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · “Revise” sozinho não define o que procurar</span><p>“A IA disse que revisou; posso aceitar a nova versão sem conferir.”</p><p>A revisão pode manter o erro ou introduzir outro. Pedir evidências e comparar com uma referência externa à própria declaração.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Na condição C, manter rascunho e revisão na mesma tentativa, contando as duas interações.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Qual tempo deve entrar na comparação da técnica de revisão?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 4 de 6</p>
+<h2>Explicar passos ajuda a localizar um erro</h2>
+<p class="termo">Decomposição e explicação verificável da solução</p>
+<p class="definicao">Decompor é separar uma tarefa em partes menores. Explicar uma solução é mostrar cálculos, regras e justificativas que podem ser conferidos; isso não exige revelar pensamentos internos do modelo.</p></div>
+<p>Duas ideias costumam aparecer juntas, mas precisam ser distinguidas. Uma é pedir um resultado acompanhado de uma justificativa verificável. Outra é transformar um trabalho em tarefas que podem ser executadas e conferidas separadamente. No exemplo, soma e classificação podem ser explicadas na mesma resposta; num projeto maior, requisitos, testes e documentação podem virar unidades distintas. Não precisamos de uma transcrição de raciocínio privado para avaliar uma solução.</p><p>Precisamos das evidências relevantes: entradas preservadas, cálculo correto, regra citada e resultado compatível. Há um caso em que a técnica atrapalha: modelos que já raciocinam antes de responder costumam ganhar pouco com a ordem “pense passo a passo” e gastam mais texto e tempo. Neles, vale pedir a evidência verificável, não a narrativa.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Dados → Cálculo → Decisão."><div class="trilha"><div class="no no-0" data-node="0"><strong>Dados</strong><span>Identificar impacto e urgência sem alterá-los.</span></div><div class="no no-1" data-node="1"><strong>Cálculo</strong><span>Somar os valores e registrar o resultado.</span></div><div class="no no-2" data-node="2"><strong>Decisão</strong><span>Aplicar a faixa correspondente e conferir a classificação.</span></div></div></figure><figcaption>Fluxograma do slide 12.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Separar cálculo e decisão localiza o erro</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Impacto 2 e urgência 3. Resposta hipotética: “2 + 3 = 5; prioridade media”.</dd><dt>O que fazer</dt><dd>Conferir a soma e a regra separadamente. O cálculo está correto; o limite da faixa foi aplicado de forma errada.</dd>
+<dt>Resultado</dt><dd>Correção: “2 + 3 = 5; R1 define soma ≥ 5 como alta”. A evidência permite localizar qual parte precisava mudar.</dd></dl><p>A explicação ajuda quando contém elementos observáveis, não apenas uma conclusão confiante.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Uma explicação convincente ainda pode estar errada</span><p>“Se a resposta tem muitos passos, ela mostra que o raciocínio foi correto.”</p><p>Passos escritos também são conteúdo gerado. Cálculos, fontes e conclusões precisam ser conferidos; uma narrativa longa não é prova.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Pedir a soma e a regra aplicada, em vez de solicitar uma explicação interna extensa e impossível de conferir.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Pedir uma justificativa curta é o mesmo que dividir o trabalho em unidades?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 5 de 6</p>
+<h2>Repetir permite observar variação</h2>
+<p class="termo">Autoconsistência, repetição e dispersão</p>
+<p class="definicao">Autoconsistência gera diferentes soluções para a mesma tarefa e agrega as respostas para escolher a mais consistente. Repetir apenas para observar variação é um uso diferente, mais simples.</p></div>
+<p>A proposta original de autoconsistência trabalha com soluções diversas e agrega suas respostas; não é simplesmente pedir uma confirmação do mesmo texto. Aqui o conceito é apresentado para escolha consciente, enquanto a prática usa duas repetições para observar dispersão. Uma medida simples é a diferença entre a maior e a menor nota de aderência aos critérios. Mesmo essa medida deve ser interpretada com cautela: um conjunto sempre errado pode ter variação zero.</p><p>Qualidade, variação e esforço precisam ser considerados juntos. Repetir chamadas consome tempo e uso do serviço. Em ordem de grandeza, cada família tem seu custo: exemplos aumentam a entrada de toda chamada; raciocínio explicitado aumenta a saída e o tempo; revisão dobra as chamadas; autoconsistência multiplica as chamadas pelo número de amostras; ferramentas acrescentam ações e resultados ao contexto.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Obter alternativas → Agregar → Verificar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Obter alternativas</strong><span>Produzir tentativas separadas para a mesma tarefa.</span></div><div class="no no-1" data-node="1"><strong>Agregar</strong><span>Comparar as conclusões e identificar a mais recorrente.</span></div><div class="no no-2" data-node="2"><strong>Verificar</strong><span>Confrontar a conclusão escolhida com a regra ou evidência.</span></div></div></figure><figcaption>Fluxograma do slide 15.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · A maioria pode concordar no erro</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Três respostas ilustrativas para soma 5: media, media, alta. Pela regra R1, a resposta correta é alta.</dd><dt>O que fazer</dt><dd>A maioria indica media. A conferência com R1 revela que a concordância não corresponde ao resultado esperado.</dd>
+<dt>Resultado</dt><dd>A decisão correta vem da regra. No experimento da aula, duas repetições observam variação; não implementam o método completo de autoconsistência.</dd></dl><p>Mais respostas podem ajudar a comparar, mas também repetir a mesma falha.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Repetir aumenta o esforço e não garante acerto</span><p>“Se várias respostas concordam, não preciso de uma referência para conferir.”</p><p>As tentativas podem compartilhar o mesmo erro. A escolha por concordância tem custo e só deve ser usada com critérios e limites claros.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Guardar as duas tentativas de cada condição e comparar critérios; não votar entre elas para definir o resultado correto.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Notas 3 e 4 em duas tentativas provam que uma técnica é confiável?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 6 de 6</p>
+<h2>Uma ação precisa de evidência</h2>
+<p class="termo">Uso de ferramenta e efeito observável</p>
+<p class="definicao">Uma ferramenta permite ao assistente realizar uma ação, como ler um arquivo ou executar um comando. O pedido é uma intenção; o registro da ação e seu efeito permitem verificar o que aconteceu.</p></div>
+<p>No Claude Code, a tarefa pode envolver várias ações intermediárias. Cada uma acrescenta resultados ao trabalho e pode consumir tempo e contexto. Para esta disciplina, basta reconhecer leitura, escrita e execução, sem construir ferramentas nem orquestrar agentes. Antes de uma alteração, o escopo deve estar claro; depois, a diferença produzida precisa ser examinada. Quando a tarefa é apenas explicar uma regra, ler o arquivo pode ser suficiente. Executar comandos sem necessidade aumenta as ações a conferir. O critério para usar uma ferramenta é a contribuição verificável para a tarefa.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Solicitar → Observar → Interpretar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Solicitar</strong><span>Pedir leitura ou execução dentro de um escopo definido.</span></div><div class="no no-1" data-node="1"><strong>Observar</strong><span>Conferir a ação, o arquivo e o resultado retornado.</span></div><div class="no no-2" data-node="2"><strong>Interpretar</strong><span>Comparar o efeito com o critério da tarefa.</span></div></div></figure><figcaption>Fluxograma do slide 18.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · “Executei os testes” precisa de evidência</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Resposta do assistente: “Os testes passaram”. Não há comando, saída nem identificação de quais casos foram executados.</dd><dt>O que fazer</dt><dd>Localizar a ação registrada. Conferir comando, arquivo, resultado e alcance dos casos antes de aceitar a afirmação.</dd>
+<dt>Resultado</dt><dd>Sem execução registrada, tratar como informação não verificada. Se houve apenas leitura do código, registrar inspeção, não teste executado.</dd></dl><p>Produzir uma afirmação e realizar uma ação são acontecimentos diferentes.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · A ferramenta pode executar a ação errada</span><p>“O comando terminou sem erro; logo, verifiquei tudo que precisava.”</p><p>É possível executar no arquivo errado, usar dados inadequados ou cobrir poucos casos. O alcance da ação precisa ser explicado.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Distinguir no registro: resposta gerada, arquivo lido, inspeção manual e comando realmente executado.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Uma leitura correta do arquivo garante uma interpretação correta da regra?</p></div>
+</section>
+<section class="secao"><h2>Glossário da aula</h2><div class="rolagem"><table><thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody><tr><td>Zero-shot</td><td>Pedido sem exemplo de resposta</td><td>Informar tarefa, dados e formato</td></tr><tr><td>Few-shot</td><td>Pedido com exemplos de entrada e saída</td><td>Mostrar dois casos antes do novo caso</td></tr><tr><td>Crítica e revisão</td><td>Conferir um rascunho por critérios e corrigir o que falhou</td><td>Procurar um estado incluído indevidamente</td></tr><tr><td>Raciocínio explicitado</td><td>Explicação verificável da solução apresentada</td><td>Mostrar a soma e citar a regra; não exigir pensamentos internos</td></tr><tr><td>Autoconsistência</td><td>Gerar soluções diversas e agregar suas respostas para escolher a mais consistente</td><td>A maioria também pode errar; a prática de duas repetições apenas observa variação</td></tr><tr><td>Variância/dispersão</td><td>Quanto os resultados variam</td><td>Notas 3 e 4 para a mesma condição</td></tr><tr><td>Latência</td><td>Tempo de espera definido para a medição</td><td>Segundos do envio até a resposta final</td></tr><tr><td>Ferramenta</td><td>Recurso que lê, escreve ou executa uma ação</td><td>Claude Code ler um arquivo</td></tr></tbody></table></div></section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 1 · O pedido direto</h2></div>
+<p><b>Objetivo.</b> Criar a referência da comparação: o pedido direto, conferido pela regra, na tarefa do ato 1.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>experimentos/tecnicas</code> para fora do kit, por exemplo para a Área de Trabalho. Abra o terminal dentro da cópia e inicie o Claude Code.</p><pre>claude</pre><p class="obs">Fora do kit, o <code>CLAUDE.md</code> do kit não entra na conversa e não muda a comparação.</p></div></li><li><div><p>Antes de enviar, abra <code>entrada.md</code> e calcule à mão a prioridade de P1 a P4 pela R1.</p></div></li><li><div><p>Abra <code>apoio/protocolo-tecnicas.md</code> no kit e envie o pedido A, sem mudar nenhuma palavra.</p></div></li><li><div><p>Anote o modelo exibido, o tempo do envio até a resposta final e a nota de qualidade, de 0 a 4, pelos critérios Q1 a Q4 do mesmo arquivo.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Esperado pela R1: P1 <code>baixa</code> (soma 2), P2 <code>media</code> (3), P3 <code>alta</code> (5), P4 <code>alta</code> (6).</span></li><li><span>A tabela tem só as colunas ID e prioridade, na ordem P1, P2, P3, P4?</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>No ensaio de 06/11, registrado em <code>apoio/protocolo-tecnicas.md</code>, as três técnicas acertaram 4 de 4 nos dois modelos. Neste caso fácil, o pedido direto já basta.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você tem a tabela conferida linha a linha contra a soma da R1, com modelo, tempo e nota anotados.</p></div>
+
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 2 · O mesmo pedido com exemplos</h2></div>
+<p><b>Objetivo.</b> Mudar uma só condição, os exemplos, e comparar pelos mesmos critérios.</p>
+<ol class="passos"><li><div><p>Abra uma conversa nova na mesma pasta e com o mesmo modelo.</p><pre>/clear</pre></div></li><li><div><p>Envie o pedido B de <code>apoio/protocolo-tecnicas.md</code>: o texto de A mais as três linhas de exemplos.</p></div></li><li><div><p>Dê a nota de 0 a 4 pelos mesmos critérios e anote o tempo.</p></div></li><li><div><p>Repita A e B uma segunda vez, cada um em conversa nova, e compare as duas tentativas de cada técnica.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>E1 e E2 são exemplos: se aparecerem na tabela final, Q1 vale 0.</span></li><li><span>Diferença de redação não é diferença de qualidade: compare só os critérios.</span></li><li><span>Se as duas tentativas da mesma técnica divergem, a variação faz parte do resultado.</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>No mesmo ensaio, o pedido com exemplos também acertou 4 de 4. A diferença entre técnicas aparece num caso mais difícil, como o da prática em aula, e não neste.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você escreveu em uma frase se os exemplos pagaram o esforço nesta tarefa, citando notas e tempos.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Rode a técnica C do mesmo arquivo: envie A e, na mesma conversa, o pedido de revisão. Some o tempo das duas interações antes de comparar com A e B.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 3 · Escolher a técnica para uma tarefa sua</h2></div>
+<p><b>Objetivo.</b> Decidir, com evidência, se vale mudar a forma de pedir numa tarefa do seu trabalho.</p>
+<ol class="passos"><li><div><p>Escolha uma tarefa repetitiva do seu trabalho que tenha resposta conferível, sem dado sigiloso. Escreva dois critérios de conferência antes de pedir.</p></div></li><li><div><p>Envie o pedido direto duas vezes, cada uma em conversa nova, e confira as duas respostas pelos critérios.</p></div></li><li><div><p>Acrescente ao pedido dois exemplos já conferidos por você e repita duas vezes. Os exemplos não podem ser os casos que você vai conferir.</p></div></li><li><div><p>Monte uma tabela com técnica, tentativa, critérios cumpridos e tempo.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Qualidade: quantos critérios cada resposta cumpriu.</span></li><li><span>Variação: as duas tentativas da mesma técnica concordam?</span></li><li><span>Esforço: quanto tempo e quantas interações cada técnica pediu.</span></li></ul></div>
+
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>A tabela está preenchida e uma frase responde: o ganho observado justifica o esforço nesta tarefa?</p></div>
+
+</section>
+<section class="secao"><h2>Autoavaliação</h2>
+<p>Marque o que você já consegue fazer sem consultar o material. O que ficar em branco indica o conceito para reler.</p>
+<ul class="checklist"><li><span>Consigo montar um pedido direto e usá-lo como referência de comparação.</span></li><li><span>Consigo acrescentar exemplos ao pedido sem que eles entrem na resposta final.</span></li><li><span>Consigo pedir uma revisão por critérios e contar as duas interações no esforço.</span></li><li><span>Consigo pedir uma explicação que eu confiro, como a soma e a regra aplicada.</span></li><li><span>Consigo distinguir repetir uma tentativa de escolher a resposta por votação.</span></li><li><span>Consigo separar, no registro, resposta gerada, arquivo lido e comando executado.</span></li></ul>
+<h2>Respostas das perguntas</h2><div class="resp"><p><b>1. Um pedido com R1 e os dados, mas sem exemplos, continua sendo zero-shot?</b><br>Sim. Ele fornece a instrução e o contexto da tarefa sem demonstrar pares de entrada e resposta.</p><p><b>2. Se um exemplo contradiz R1, devo pedir que a IA siga os dois?</b><br>Não. Corrigir a contradição antes da execução. Caso não haja autoridade definida, registrar a dúvida em vez de inventar a prioridade.</p><p><b>3. Qual tempo deve entrar na comparação da técnica de revisão?</b><br>O ciclo inteiro: primeiro pedido, rascunho, segundo pedido e resposta final. A conferência humana também deve ser registrada.</p><p><b>4. Pedir uma justificativa curta é o mesmo que dividir o trabalho em unidades?</b><br>Não. A justificativa explica uma saída. Uma unidade tem entrada, saída e critério próprios; a aula 4 aprofunda essa divisão.</p><p><b>5. Notas 3 e 4 em duas tentativas provam que uma técnica é confiável?</b><br>Não. Mostram mínimo 3, máximo 4 e diferença 1 no recorte observado. Duas tentativas não estimam confiabilidade geral.</p><p><b>6. Uma leitura correta do arquivo garante uma interpretação correta da regra?</b><br>Não. Conferir o arquivo acessado e também a conclusão produzida a partir dele.</p></div>
+<h2>Para ler depois</h2><ul><li>Schulhoff et al., “The Prompt Report” (2024): famílias de técnicas com nome: exemplos no pedido, decomposição, crítica e revisão. <a href="https://arxiv.org/abs/2406.06608">https://arxiv.org/abs/2406.06608</a></li><li>White et al., “A Prompt Pattern Catalog” (2023): padrões de pedido que se reutilizam entre tarefas. <a href="https://arxiv.org/abs/2302.11382">https://arxiv.org/abs/2302.11382</a></li><li>Wang et al., “Self-Consistency Improves Chain of Thought Reasoning” (ICLR 2023): autoconsistência agrega várias soluções; não é o mesmo que repetir para observar variação. <a href="https://arxiv.org/abs/2203.11171">https://arxiv.org/abs/2203.11171</a></li></ul>
+</section></main></body></html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso da demonstração da aula 2: P1 a P4 · D1.3</title><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Caso da demonstração da aula 2: P1 a P4</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><p>O professor usa este caso nos slides 21 e 22. A prática em grupo usa outro arquivo, enviado no chat. Dados e regra estão em <code>experimentos/tecnicas/entrada.md</code>.</p>
+<h2 id="criterios">Critérios</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Vale 1 quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1</td>
+<td>A tabela tem P1, P2, P3 e P4, sem exemplos nem IDs extras</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td>As quatro prioridades seguem a soma de R1</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td>A ordem é P1, P2, P3, P4</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>Há só as colunas ID e prioridade</td>
+</tr>
+</tbody>
+</table></div>
+<p>Qualidade é a soma de Q1 a Q4, de 0 a 4. A nota mede o contrato desta tarefa, não o modelo nem o aluno.</p>
+<h2 id="a-pedido-direto">A: pedido direto</h2>
+<pre><code class="language-text">Use apenas entrada.md. Classifique a prioridade de P1 a P4 pela regra fornecida.
+Responda somente com tabela ID | prioridade, na ordem recebida.
+Não acrescente exemplos, explicações, regras ou prazos. Não altere arquivos.
+</code></pre>
+<h2 id="b-pedido-com-exemplos">B: pedido com exemplos</h2>
+<p>Texto de A mais estas linhas:</p>
+<pre><code class="language-text">Exemplos de aplicação: E1, impacto 1 e urgência 1: baixa.
+E2, impacto 2 e urgência 2: media.
+Os exemplos E1 e E2 não entram na tabela final.
+</code></pre>
+<h2 id="c-critica-e-revisao">C: crítica e revisão</h2>
+<p>Envie A. Na mesma conversa, envie:</p>
+<pre><code class="language-text">Confira seu rascunho usando entrada.md: exatamente os quatro IDs;
+classificações corretas pelos limites da soma; mesma ordem; somente
+ID e prioridade, sem informação extra. Corrija o que não atende.
+Responda apenas com a tabela final. Não altere arquivos.
+</code></pre>
+<p>Na técnica C, tempo e consumo incluem os dois pedidos.</p>
+<h2 id="o-que-o-caso-mostrou-no-ensaio">O que o caso mostrou no ensaio</h2>
+<p>No ensaio de 06/11, as três técnicas acertaram 4 de 4 nos dois modelos. Num caso fácil, nenhuma técnica paga o próprio custo. A prática da aula usa um caso em que a diferença aparece.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

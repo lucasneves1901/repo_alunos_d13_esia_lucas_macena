@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Começar no Claude Code · D1.3</title><link rel="stylesheet" href="estilo.css"><link rel="stylesheet" href="material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Começar no Claude Code</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><p>O Claude Code lê os arquivos de uma pasta e responde no terminal. Terminal é a janela onde se digitam comandos. Arquivo <code>.md</code> é texto simples com títulos e listas.</p>
+<h2 id="primeira-tentativa-com-o-professor">Primeira tentativa, com o professor</h2>
+<ol>
+<li>Extraia o ZIP da turma numa pasta sua, separada de projetos de trabalho.</li>
+<li>Abra o terminal nessa pasta e digite <code>claude</code>.</li>
+<li>Envie o pedido abaixo. Quando o Claude Code pedir acesso a um arquivo, confira se o arquivo é o da tarefa.</li>
+</ol>
+<pre><code class="language-text">Leia apenas caso/regras.md. Explique a regra R2 em duas frases simples.
+Mostre um exemplo com os estados aberto, em_andamento e fechado.
+Não altere arquivos. Se faltar uma informação, diga qual é.
+</code></pre>
+<ol start="4">
+<li>Abra <code>caso/regras.md</code> e confira: aberto e em_andamento entram, fechado fica fora.</li>
+<li>Anote o modelo que aparece na tela. Se a versão não aparecer, escreva "versão não informada".</li>
+</ol>
+<p>Não conseguiu ler o arquivo? Confira se o terminal está na pasta do kit. Não conseguiu salvar? Copie o texto para o editor e salve por lá.</p>
+<h2 id="comandos-que-vamos-usar">Comandos que vamos usar</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Para quê</th>
+<th>Aula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude</code></td>
+<td>Iniciar uma conversa na pasta atual</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>Ver e trocar o modelo</td>
+<td>2 e 5</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>Começar outra conversa; salve antes o que precisa</td>
+<td>2 e 5</td>
+</tr>
+<tr>
+<td><code>/usage</code></td>
+<td>Ver o consumo, quando a conta mostrar</td>
+<td>2 e 5</td>
+</tr>
+<tr>
+<td><code>/context</code></td>
+<td>Ver quanto da janela está ocupado</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>Ver quais instruções foram carregadas</td>
+<td>6</td>
+</tr>
+</tbody>
+</table></div>
+<p>As telas mudam conforme a versão. A documentação oficial está nas <a href="referencias.html">referências</a>.</p>
+<h2 id="ao-comparar-resultados">Ao comparar resultados</h2>
+<ul>
+<li>Abra uma conversa nova a cada tentativa. Mantenha tarefa, critérios e modelo; mude só o que a atividade compara.</li>
+<li>Tempo: do envio do primeiro pedido até a resposta final.</li>
+<li>Consumo: o número que a conta mostra, com a unidade. Sem número, escreva N/D. Nunca use zero para o que você não mediu.</li>
+<li>Caracteres medem o tamanho de um arquivo; não são tokens.</li>
+</ul>
+<h2 id="sem-acesso">Sem acesso</h2>
+<p>Acompanhe a execução de um colega e marque "execução observada". Sem nenhuma execução, use <a href="apoio/contingencia.html">as respostas simuladas</a> e marque "simulação". O professor completa a comparação que faltar.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

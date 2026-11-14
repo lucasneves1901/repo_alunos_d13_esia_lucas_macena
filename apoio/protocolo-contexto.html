@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 5: a mesma pergunta com quatro contextos · D1.3</title><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Aula 5: a mesma pergunta com quatro contextos</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><h2 id="pergunta-fixa">Pergunta fixa</h2>
+<pre><code class="language-text">Use somente entrada.md. Para uma pessoa da Oficina, liste os chamados
+ativos que ela pode visualizar, com ID e prioridade, na ordem de entrada.
+Se faltar regra necessária, diga qual falta. Não invente regra,
+não leia outros arquivos e não altere arquivos.
+</code></pre>
+<p>Envie a pergunta sem mudar nenhuma palavra.</p>
+<h2 id="as-quatro-pastas">As quatro pastas</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Pasta</th>
+<th>Conteúdo</th>
+<th>O que muda em relação à completa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>minima</code></td>
+<td>R1, R2 e dados</td>
+<td>Falta R3, a regra de visibilidade</td>
+</tr>
+<tr>
+<td><code>completa</code></td>
+<td>R1, R2, R3 e dados</td>
+<td>Nada: é a referência</td>
+</tr>
+<tr>
+<td><code>invertida</code></td>
+<td>Os mesmos blocos da completa</td>
+<td>Só a ordem dos blocos</td>
+</tr>
+<tr>
+<td><code>ruido</code></td>
+<td>A completa e 24 notas sem relação com a tarefa</td>
+<td>Material irrelevante a mais</td>
+</tr>
+</tbody>
+</table></div>
+<p>O tamanho de cada arquivo está em <code>experimentos/tamanhos.md</code>. Caracteres medem o arquivo; não são tokens.</p>
+<h2 id="como-rodar-cada-condicao">Como rodar cada condição</h2>
+<ol>
+<li>Copie a pasta da condição para fora do kit. Ela contém só <code>entrada.md</code>.</li>
+<li>Abra o terminal dentro dessa cópia e inicie o Claude Code com <code>claude</code>.</li>
+<li>Envie a pergunta fixa. Anote o tempo do envio até a resposta final.</li>
+<li>Salve a resposta antes de sair. Para a próxima condição, abra outra conversa em outra pasta.</li>
+</ol>
+<p>Se o Claude Code ler outro arquivo, marque a tentativa como contaminada.</p>
+<h2 id="criterios">Critérios</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>Vale 1 quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1</td>
+<td>A resposta usa só o material recebido e aponta lacunas sem inventar regra</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td>Aplica os estados ativos de R2 e preserva a ordem</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td>As prioridades seguem as somas de R1</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>Aplica R3 e entrega a lista final T1 alta, T4 baixa, T6 alta</td>
+</tr>
+</tbody>
+</table></div>
+<p>Qualidade é a soma de Q1 a Q4, de 0 a 4. Marque à parte se a tarefa foi concluída. Na mínima, apontar a falta de R3 vale Q1, mas a tarefa fica incompleta. Uma suposição sobre R3 não conta como regra.</p>
+<h2 id="registro">Registro</h2>
+<p>Use <code>exercicios/aula-5/registro.md</code>. Campo sem medida recebe N/D, nunca zero. O gráfico de <a href="comparar-contextos.html">comparar-contextos.html</a> usa tamanho no eixo horizontal e qualidade no vertical. Oito pontos mostram uma tendência local, não um resultado geral.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Estudo dirigido · Aula 1</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap"><style>
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}
+
+:root{
+  --papel:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --aviso:#8A5A00; --aviso-suave:#FEF4E1; --certo:#1F7A45; --certo-suave:#E7F6EE;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:16px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--tinta);line-height:1.18;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3.4vw,1.6rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--marca-tx);overflow-wrap:anywhere}
+code{font-family:var(--f-codigo);font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);border-radius:4px;padding:0 .3em;color:var(--tinta);overflow-wrap:anywhere}
+.sobre{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.capa{display:flex;flex-direction:column;gap:12px;padding-bottom:18px;border-bottom:3px solid var(--marca);margin-bottom:22px}
+.lide{font-size:1.1rem;color:var(--tinta-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--superficie-2);border:1px solid var(--linha);border-radius:999px;padding:2px 11px;font-size:.84rem;color:var(--tinta-2)}
+section{display:flex;flex-direction:column;gap:12px;margin:0 0 30px}
+.quadro{border:1px solid var(--linha);border-radius:var(--raio);padding:12px 14px;background:var(--superficie-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+.quadro.marca{background:var(--marca-suave);border-color:#FFD2B8}
+.quadro.certo{background:var(--certo-suave);border-color:#BFE3CD}
+.quadro.aviso{background:var(--aviso-suave);border-color:#F3D9A4}
+.rot{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3)}
+.quadro.marca .rot{color:var(--marca-forte)}.quadro.certo .rot{color:var(--certo)}.quadro.aviso .rot{color:var(--aviso)}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.num{font-family:var(--f-codigo);font-size:.84rem;color:var(--marca-tx);font-weight:700}
+.termo{color:var(--tinta-3);font-size:.95rem}
+.definicao{font-size:1.06rem;font-weight:600;color:var(--tinta);border-left:4px solid var(--marca);padding:2px 0 2px 12px}
+figure.ilustra{margin:2px 0;break-inside:avoid;background:#fff;border:1px solid var(--linha);border-radius:10px;padding:10px;min-width:0;
+  --line:var(--linha-forte);--panel:#fff;--panel-2:var(--marca-suave);--accent-soft:var(--marca-tx);--ink:var(--tinta);--muted:var(--tinta-3)}
+figure.ilustra figcaption{font-size:.8rem;color:var(--tinta-3);margin-top:6px}
+.ilustra .diagrama{margin:2px 0}
+.ilustra .diagrama .no{min-height:0!important;padding:9px 10px;gap:4px;border-radius:9px}
+.ilustra .diagrama .no strong{font-size:.92rem}
+.ilustra .diagrama .no span{font-size:.8rem;line-height:1.35}
+.ilustra .diagrama .trilha{gap:16px}
+.ilustra .diagrama .trilha .no:not(:last-child)::after{font-size:16px;right:-14px}
+.ilustra .mapa-num{font-size:.74rem}
+.ilustra .rede{min-height:0;gap:12px 0}
+.ilustra .forma-decisao .rede{min-height:170px}
+.ilustra .forma-decisao .no-1{min-height:150px!important;padding:22px 16px}
+.ilustra .seta-rede{font-size:16px}
+.ilustra .retorno{height:auto}
+.ilustra .retorno span{font-size:.8rem}
+.passos-caso{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}
+.passos-caso dt{font-weight:700;color:var(--tinta);font-size:.9rem}
+.passos-caso dd{margin:0;min-width:0}
+.lado{display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid}
+.rolagem{overflow-x:auto;border:1px solid var(--linha);border-radius:var(--raio)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3);background:var(--superficie-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--tinta)}
+.cab-pratica{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;border-bottom:2px solid var(--marca);padding-bottom:6px}
+ol.passos{list-style:none;padding:0;counter-reset:p;gap:12px}
+ol.passos>li{counter-increment:p;display:grid;grid-template-columns:26px 1fr;gap:8px;break-inside:avoid}
+ol.passos>li::before{content:counter(p);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:.8rem}
+ol.passos>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+pre{margin:0;font-family:var(--f-codigo);font-size:.82rem;line-height:1.5;background:#1E1C1A;color:#F4F2EF;border-radius:8px;padding:9px 11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pedido small{display:block;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
+.obs{font-size:.88rem;color:var(--tinta-3)}
+.checklist{list-style:none;padding:0}
+.checklist li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.checklist li::before{content:"";width:11px;height:11px;border:1.5px solid var(--linha-forte);border-radius:2px;margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:8px}
+.resp p{break-inside:avoid}
+.quadro,.definicao,pre,.pedido,.passos-caso,.cabeca{break-inside:avoid}
+.cabeca{display:flex;flex-direction:column;gap:8px;break-after:avoid}
+@media (max-width:560px){
+  body{font-size:15px}
+  .lado{grid-template-columns:1fr}
+  .passos-caso{grid-template-columns:1fr;gap:2px}
+  .passos-caso dd{margin-bottom:6px}
+  .ilustra .diagrama .trilha{flex-direction:column;gap:18px}
+  .ilustra .diagrama .trilha .no:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-20px}
+}
+@media print{
+  body{font-size:12.2pt}
+  main{max-width:none;padding:0}
+  .pratica,.secao{break-before:page}
+  .conceito{padding-top:16px;border-top:2px solid var(--linha)}
+  h1{font-size:28pt}h2{font-size:19pt}
+}
+</style></head><body><main><header class="capa">
+<p class="sobre">Estudo dirigido · Aula 1 de 6 · D1.3 Prompting Técnico, Especificação e Contexto</p>
+<h1>Como explicar o que eu quero?</h1>
+<p class="lide">Ao fim deste estudo você escreve um pedido que outra pessoa consegue executar sem perguntar, com a fonte, o formato e os critérios que permitem conferir a resposta.</p>
+<div class="meta"><span>Aula de 06/11/2026</span><span>Caso Fila Clara</span><span>Revisão sem entrega</span></div>
+</header>
+<section><h2>Como usar este estudo</h2>
+<p>Leia os seis conceitos na ordem da aula: cada um prepara o seguinte. Depois faça as três práticas no Claude Code, com o caso Fila Clara do kit. As práticas 1 e 2 refazem os dois atos da demonstração; a prática 3 leva a ideia para uma tarefa do seu trabalho. No fim, marque a autoavaliação e confira as respostas das perguntas.</p><p>Este estudo é material de revisão. Ele não substitui a atividade feita em aula e não tem entrega.</p><p>As execuções registradas citadas nas práticas são do guia interativo da aula: modelo claude-opus-5-5, em 06/11/2026, numa conversa sem ferramentas, com os arquivos colados no pedido. No Claude Code, que lê os arquivos da pasta, a sua resposta pode ter outra redação. Confira pelos critérios, não pela semelhança de texto.</p>
+<div class="quadro"><span class="rot">Antes de começar</span><ul class="checklist"><li><span>Claude Code instalado e com login. Teste no terminal: <code>claude -p &quot;responda apenas: ok&quot;</code> precisa responder <code>ok</code>.</span></li><li><span>O kit da turma no seu computador, do ZIP ou do repositório <a href="https://github.com/victorhwfreire/repo_alunos_d13_esia">github.com/victorhwfreire/repo_alunos_d13_esia</a>. Os caminhos citados partem da pasta do kit.</span></li><li><span>Sem acesso ao Claude Code: acompanhe a execução de um colega ou use as execuções registradas de cada prática, como diz a seção &quot;Sem acesso&quot; de <code>guia-claude-code.md</code>. Anote no seu texto que não executou.</span></li></ul></div>
+</section>
+<section><h2>O mapa da aula</h2>
+<p>Pergunta da aula: <b>Outra pessoa consegue usar e conferir meu pedido?</b></p>
+<figure class="ilustra"><figure class="diagrama forma-mapa" aria-label="Caminho numerado: 1. Tarefa → 2. Contexto → 3. Formato → 4. Critério → 5. Variação → 6. Reuso."><div class="trilha"><div class="no no-0" data-node="0"><b class="mapa-num">01</b><strong>Tarefa</strong><span>Escolho uma entrega.</span></div><div class="no no-1" data-node="1"><b class="mapa-num">02</b><strong>Contexto</strong><span>Dou a informação necessária.</span></div><div class="no no-2" data-node="2"><b class="mapa-num">03</b><strong>Formato</strong><span>Combino a forma da resposta.</span></div><div class="no no-3" data-node="3"><b class="mapa-num">04</b><strong>Critério</strong><span>Defino como conferir.</span></div><div class="no no-4" data-node="4"><b class="mapa-num">05</b><strong>Variação</strong><span>Confiro cada nova tentativa.</span></div><div class="no no-5" data-node="5"><b class="mapa-num">06</b><strong>Reuso</strong><span>Guardo e reviso o pedido.</span></div></div></figure><figcaption>Fluxograma do slide 2.</figcaption></figure>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 1 de 6</p>
+<h2>Um pedido começa por uma tarefa</h2>
+<p class="termo">Prompt, tarefa e objetivo</p>
+<p class="definicao">Prompt é a mensagem que orienta a IA em uma tarefa. O objetivo explica para que o resultado será usado; a tarefa diz o que deve ser produzido agora.</p></div>
+<p>Objetivo e tarefa se relacionam, mas não são a mesma coisa. “Ajudar uma pessoa nova a trabalhar” é um objetivo; “escrever uma explicação de R2” é uma tarefa que contribui para ele. Uma mesma necessidade pode gerar várias tarefas. Antes de escrever o pedido, vale escolher a menor entrega que já seja útil. O Claude Code pode interpretar uma solicitação ampla como autorização para explorar e modificar arquivos; delimitar a entrega e as ações esperadas reduz essa ambiguidade. Isso orienta o trabalho, mas o resultado ainda precisa de conferência.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Necessidade → Tarefa → Pedido."><div class="trilha"><div class="no no-0" data-node="0"><strong>Necessidade</strong><span>Uma pessoa nova precisa entender os chamados.</span></div><div class="no no-1" data-node="1"><strong>Tarefa</strong><span>Produzir uma explicação da regra de chamados ativos.</span></div><div class="no no-2" data-node="2"><strong>Pedido</strong><span>Indicar a regra, o público e o tamanho do texto.</span></div></div></figure><figcaption>Fluxograma do slide 3.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Da necessidade ao pedido que cabe agora</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Necessidade: preparar alguém para usar a lista de chamados ativos. Pedido inicial: “Me ajude com o sistema”.</dd><dt>O que fazer</dt><dd>Escolher um resultado: explicar R2. Informar o público: pessoa nova no suporte. Limitar a resposta: duas frases e um exemplo.</dd>
+<dt>Resultado</dt><dd>Pedido: “Leia R2 em caso/regras.md. Explique chamados ativos para alguém novo, em duas frases e um exemplo. Não altere arquivos”.</dd></dl><p>A pessoa que recebe o pedido sabe o que produzir e para quem.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Um pedido claro pode ser curto</span><p>“Quanto mais longo e cheio de termos técnicos for o pedido, melhor será a resposta.”</p><p>Detalhes ajudam quando reduzem uma dúvida relevante. Repetições, adjetivos vagos e ordens conflitantes podem dificultar a tarefa.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>No Claude Code, pedir uma explicação curta antes de pedir uma implementação. Guardar o texto exato usado na tentativa.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>“Melhore o sistema” informa qual resultado deve ficar pronto?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 2 de 6</p>
+<h2>A IA precisa das informações da tarefa</h2>
+<p class="termo">Contexto, informação disponível e fonte da verdade</p>
+<p class="definicao">Contexto é a informação disponibilizada ao modelo durante o trabalho: pedido, histórico, instruções e conteúdo efetivamente lido. Um arquivo existir na pasta não significa que seu conteúdo já foi usado.</p></div>
+<p>Na atividade, a fonte da verdade é o documento designado para definir a regra vigente. Uma resposta anterior, um comentário ou um exemplo não o substitui automaticamente. O contexto pode trazer informações úteis, ausentes, desatualizadas ou contraditórias. Quando duas fontes divergem e não há prioridade definida, a lacuna precisa ser registrada. Dar contexto também não é treinar novamente o modelo: estamos fornecendo informações para a tarefa atual. As condições de memória e retenção do produto são assuntos diferentes e não podem ser inferidas apenas por anexar um arquivo.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Fonte → Acesso → Uso."><div class="trilha"><div class="no no-0" data-node="0"><strong>Fonte</strong><span>O contrato contém a regra R2 vigente.</span></div><div class="no no-1" data-node="1"><strong>Acesso</strong><span>O pedido indica o arquivo; a ferramenta lê o conteúdo.</span></div><div class="no no-2" data-node="2"><strong>Uso</strong><span>A resposta aplica a regra à tarefa solicitada.</span></div></div></figure><figcaption>Fluxograma do slide 6.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · O nome do projeto não explica sua regra</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Pedido: “Explique o que é um chamado ativo no Fila Clara”. O texto de R2 não foi fornecido nem lido.</dd><dt>O que fazer</dt><dd>Indicar caso/regras.md e a seção R2. Conferir o conteúdo lido antes de julgar a explicação.</dd>
+<dt>Resultado</dt><dd>R2 informa dois estados ativos: aberto e em_andamento. Fechado fica fora. A explicação deve preservar essas condições.</dd></dl><p>A regra escrita sustenta a resposta; familiaridade com o nome do projeto não substitui a fonte.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Acesso, leitura e aplicação são diferentes</span><p>“O arquivo está na pasta; então a IA já conhece e segue tudo que está nele.”</p><p>É preciso distinguir arquivo acessível, conteúdo lido e regra corretamente aplicada. Uma resposta plausível não comprova essas três etapas.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Indicar o arquivo e a seção no pedido; depois abrir a mesma seção para conferir a resposta.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se a IA citar o nome do arquivo, isso prova que aplicou corretamente R2?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 3 de 6</p>
+<h2>A resposta precisa ter uma forma combinada</h2>
+<p class="termo">Formato de saída e uso do resultado</p>
+<p class="definicao">Formato de saída é a organização combinada para a resposta: texto, lista, tabela ou campos. A escolha depende de quem vai usar o resultado e de como ele será conferido.</p></div>
+<p>Um formato bem escolhido reduz o esforço para localizar informações. Se outra pessoa precisa comparar registros, uma tabela costuma ajudar. Se precisa entender uma ideia, uma explicação curta com exemplo pode ser melhor. A especificação pode combinar mais de uma forma: primeiro a tabela, depois uma observação sobre lacunas. É útil dizer quais campos são obrigatórios, qual ordem importa e se texto adicional é permitido. Exigir uma forma complicada sem necessidade aumenta o trabalho de produzir e verificar. No bloco 3, essa mesma ideia será aprofundada como contrato de saída estruturada.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Uso → Formato → Conferência."><div class="trilha"><div class="no no-0" data-node="0"><strong>Uso</strong><span>Comparar os chamados incluídos na lista.</span></div><div class="no no-1" data-node="1"><strong>Formato</strong><span>Uma linha por chamado, com ID e estado.</span></div><div class="no no-2" data-node="2"><strong>Conferência</strong><span>Verificar presença, ordem e valores de cada linha.</span></div></div></figure><figcaption>Fluxograma do slide 9.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · O formato facilita enxergar uma ausência</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Dados: X1 aberto, X2 fechado, X3 em_andamento. Regra: listar apenas os ativos, na ordem recebida.</dd><dt>O que fazer</dt><dd>Pedir uma tabela ID | estado. Examinar quais registros entraram e se houve inversão de ordem.</dd>
+<dt>Resultado</dt><dd>X1 | aberto; X3 | em_andamento. X2 não aparece. O formato torna a inclusão e a exclusão fáceis de localizar.</dd></dl><p>A forma organiza a evidência; o contrato determina se o conteúdo está correto.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Uma tabela organizada ainda pode estar errada</span><p>“A resposta está bem formatada; portanto, a tarefa foi cumprida.”</p><p>Formato e conteúdo têm conferências diferentes. Uma tabela pode ter as colunas certas e incluir um chamado fechado.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Pedir a mesma explicação em parágrafo e a mesma lista em tabela; justificar o formato pelo uso pretendido.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Para explicar a regra a uma pessoa nova, a tabela é sempre a melhor escolha?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 4 de 6</p>
+<h2>Conferir exige uma condição observável</h2>
+<p class="termo">Critério de aceite, evidência e decisão</p>
+<p class="definicao">Critério de aceite é a condição que precisa ser atendida para aceitar um resultado. Evidência é o trecho, cálculo ou comportamento que permite conferir essa condição.</p></div>
+<p>O critério deve ser definido antes de julgar a resposta, para evitar mudar a exigência conforme o que a IA produziu. Nem todo critério é um teste automatizado. Uma pessoa pode verificar presença de campos, correspondência com uma regra, limite de palavras ou um cálculo. A referência do resultado esperado precisa ter origem identificável. Pedir à IA que confira a própria resposta pode ajudar como revisão, mas essa autodeclaração não substitui comparar com a regra. Aceitar significa atender ao recorte combinado; a decisão não garante adequação para usos que não foram avaliados.</p>
+<figure class="ilustra"><figure class="diagrama forma-convergencia" aria-label="Critério e Evidência convergem para Decisão."><div class="rede"><svg class="arestas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 43 24 H 49 V 50 H 57 M 43 76 H 49 V 50"/></svg><b class="seta-rede" style="left:55%;top:50%" aria-hidden="true">→</b><div class="no no-0" data-node="0"><strong>Critério</strong><span>A explicação deve incluir os dois estados ativos.</span></div><div class="no no-1" data-node="1"><strong>Evidência</strong><span>Localizar aberto e em_andamento no texto.</span></div><div class="no no-2" data-node="2"><strong>Decisão</strong><span>Aceitar se atende; revisar se falta uma condição.</span></div></div></figure><figcaption>Fluxograma do slide 12.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Trocar uma impressão por uma conferência</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Critério vago: “A explicação deve ser boa”. Resposta: “Chamados ativos são os que estão abertos”.</dd><dt>O que fazer</dt><dd>Usar um critério observável: citar aberto e em_andamento, excluir fechado e manter a ordem ao listar registros.</dd>
+<dt>Resultado</dt><dd>A resposta omite em_andamento. A revisão deve corrigir essa omissão, mesmo que a frase seja fluente e fácil de ler.</dd></dl><p>O motivo da revisão está numa condição faltante, não numa preferência de redação.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Um critério atendido não cobre o sistema inteiro</span><p>“Conferi uma frase; então toda a resposta e todo o sistema estão corretos.”</p><p>A conclusão vale para os critérios e casos examinados. É preciso dizer o que foi conferido e o que permanece fora do recorte.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Anotar dois critérios antes de enviar o pedido e citar uma evidência para cada um depois da resposta.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>“Eu gostei da resposta” permite que um colega repita a conferência?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 5 de 6</p>
+<h2>Uma resposta boa não garante a próxima</h2>
+<p class="termo">Variabilidade e reprodução de uma tarefa</p>
+<p class="definicao">Variabilidade é a possibilidade de obter respostas diferentes ao repetir uma tarefa. A diferença pode estar apenas nas palavras ou alterar o significado e o atendimento dos critérios.</p></div>
+<p>A geração pode envolver escolhas que variam entre execuções. Além disso, histórico, arquivos lidos, instruções persistentes, configuração e versão do modelo podem mudar. Por isso, “usei o mesmo prompt” não basta para demonstrar que as condições eram iguais. Para reproduzir uma tarefa, precisamos recuperar o pedido e as informações usadas, e refazer a verificação. Não se promete uma resposta idêntica. É mais útil perguntar se o resultado continua atendendo aos critérios.</p><p>O mesmo pedido também se comporta de forma diferente entre tarefas: funcionar para explicar R2 não garante funcionar para listar chamados. E entre versões de modelo: um pedido validado numa versão precisa de nova conferência antes de ser reutilizado na seguinte. Generalizar a partir de um acerto isolado é o hábito que este conceito quer desfazer.</p>
+<figure class="ilustra"><figure class="diagrama forma-leque" aria-label="As mesmas condições podem produzir três respostas. A e B preservam os dois estados; C omite em_andamento. A comparação usa R2, não apenas a redação."><div class="rede"><svg class="arestas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 43 50 H 49 V 16 H 57 M 49 50 H 57 M 49 50 V 84 H 57"/></svg><b class="seta-rede" style="left:55%;top:16%" aria-hidden="true">→</b><b class="seta-rede" style="left:55%;top:50%" aria-hidden="true">→</b><b class="seta-rede" style="left:55%;top:84%" aria-hidden="true">→</b><div class="no no-0" data-node="0"><strong>Mesmas condições</strong><span>Pedido, contexto e modelo registrados.</span></div><div class="no no-1" data-node="1"><strong>Resposta A</strong><span>“Ativos: aberto e em_andamento.”</span></div><div class="no no-2" data-node="2"><strong>Resposta B</strong><span>“Incluir em_andamento e aberto.”</span></div><div class="no no-3" data-node="3"><strong>Resposta C</strong><span>“Ativos são os abertos.”</span></div></div></figure><figcaption>Fluxograma do slide 15.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Textos diferentes podem cumprir a mesma regra</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Resposta A: “Ativos são aberto e em_andamento”. Resposta B: “Inclua em_andamento e aberto; exclua fechado”.</dd><dt>O que fazer</dt><dd>Comparar o significado com R2. A ordem das palavras da definição não é a ordem dos registros de uma lista.</dd>
+<dt>Resultado</dt><dd>As duas definições podem atender. Uma resposta C que omita em_andamento falha no conteúdo, mesmo com uma redação parecida.</dd></dl><p>Repetir o texto literalmente só é necessário quando isso faz parte do contrato.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Repetição não é garantia de confiabilidade</span><p>“Duas respostas iguais provam que o pedido sempre funciona.”</p><p>Poucas tentativas mostram apenas o que foi observado. Outra tarefa, contexto ou versão de modelo pode produzir comportamento diferente.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Guardar duas respostas sem apagar a primeira. Comparar o atendimento dos critérios, além da redação.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se a resposta mudou, posso concluir que o modelo piorou?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 6 de 6</p>
+<h2>Guardar o pedido permite melhorá-lo</h2>
+<p class="termo">Artefato, responsabilidade e ciclo de vida</p>
+<p class="definicao">Um prompt vira artefato de trabalho quando pode ser recuperado, entendido, revisado e reutilizado. Isso exige finalidade, entradas, critérios, responsável e histórico de mudanças.</p></div>
+<p>O ciclo de vida começa com uma necessidade e continua após a primeira resposta. O pedido é preparado, usado, conferido e ajustado. Quando a regra do projeto muda, o pedido pode precisar de revisão; quando deixa de servir, pode ser arquivado ou substituído. Guardar muitas versões sem explicar a diferença também dificulta o reuso. O responsável não precisa executar todas as tarefas: sua função é assegurar que a referência está atual e que mudanças relevantes recebem revisão. A aula 6 aprofundará ferramentas de versionamento, revisão e conferência de regressão.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Preparar → Usar e conferir → Manter. Retorno: Nova necessidade ou problema encontrado."><div class="trilha"><div class="no no-0" data-node="0"><strong>Preparar</strong><span>Definir tarefa, fonte, critérios e responsável.</span></div><div class="no no-1" data-node="1"><strong>Usar e conferir</strong><span>Guardar entrada, saída e resultado da revisão.</span></div><div class="no no-2" data-node="2"><strong>Manter</strong><span>Revisar, testar de novo ou retirar um pedido desatualizado.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>Nova necessidade ou problema encontrado</span></div></figure><figcaption>Fluxograma do slide 18.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma mudança com motivo pode ser revisada</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>v1: “Liste chamados ativos”. O colega pergunta de qual departamento e quais campos devem aparecer.</dd><dt>O que fazer</dt><dd>Criar v2 indicando Oficina, R1 a R3, ID e prioridade. Guardar v1, devolutiva, v2 e a nova conferência.</dd>
+<dt>Resultado</dt><dd>O histórico explica a mudança: o pedido anterior não definia o recorte. Um terceiro consegue recuperar as duas versões.</dd></dl><p>O aprendizado fica no artefato e no histórico, não apenas na conversa.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Salvar um arquivo é só o começo</span><p>“Se está num arquivo chamado prompt-final.md, já está pronto para qualquer uso.”</p><p>O nome não comprova qualidade nem atualidade. O artefato precisa de critérios, revisão e uma pessoa responsável por mantê-lo.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Salvar v1 e v2 e escrever uma frase que ligue a mudança a uma dificuldade encontrada pelo colega.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>O que registrar além do pedido para entender uma revisão?</p></div>
+</section>
+<section class="secao"><h2>Glossário da aula</h2><div class="rolagem"><table><thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody><tr><td>Prompt</td><td>Pedido enviado à IA</td><td>“Explique R2 em duas frases”</td></tr><tr><td>Contexto</td><td>Informações que a IA recebe para fazer a tarefa</td><td>Regra R2 e lista de chamados</td></tr><tr><td>Modelo</td><td>O componente que produz a resposta</td><td>Nome exibido pelo Claude Code</td></tr><tr><td>Sessão</td><td>Uma conversa e suas informações disponíveis</td><td>Nova conversa para uma tentativa</td></tr><tr><td>Artefato</td><td>Resultado de trabalho que pode ser guardado e revisto</td><td>Um pedido salvo em arquivo</td></tr><tr><td>Restrição</td><td>Um limite que precisa ser respeitado</td><td>“Não inventar uma regra nova”</td></tr><tr><td>Critério de aceite</td><td>Condição observável para aceitar o resultado</td><td>“Excluir o estado fechado”</td></tr></tbody></table></div></section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 1 · O pedido vago</h2></div>
+<p><b>Objetivo.</b> Ver quais escolhas um pedido vago deixa para a IA, na mesma tarefa do ato 1 da demonstração.</p>
+<ol class="passos"><li><div><p>Abra o terminal na pasta do kit e inicie o Claude Code.</p><pre>claude</pre></div></li><li><div><p>Envie o pedido do ato 1, sem mudar nenhuma palavra:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia caso/regras.md. Sou da Oficina. Quais chamados precisam de atenção? Não altere arquivos.</pre></div></div></li><li><div><p>Copie a resposta para um arquivo de texto seu, fora de <code>entregas/</code>.</p></div></li><li><div><p>Abra <code>caso/regras.md</code> e marque, na resposta, cada escolha que o pedido não determinou.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Que sentido a resposta deu a “precisam de atenção”: chamados ativos, prioridade alta ou outro critério?</span></li><li><span>A resposta aplicou R3 (departamento) e R2 (estado), ou só a prioridade?</span></li><li><span>A resposta avisou o que supôs, ou apresentou a suposição como regra?</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>Nas duas execuções, o modelo listou T1, T4 e T6 e avisou que as regras não definem “precisar de atenção”. Ele leu o termo como chamado ativo do departamento e ofereceu outra leitura: só T1 e T6, de prioridade alta. A escolha ficou com o modelo, porque o pedido não a fez.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>A resposta está salva e você marcou pelo menos uma escolha que o pedido deixou aberta.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Repita o mesmo pedido numa conversa nova, com <code>/clear</code>, e compare as duas respostas pelos critérios.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 2 · O pedido com o combinado</h2></div>
+<p><b>Objetivo.</b> Ver como fonte, critério e formato tornam a resposta conferível, na mesma tarefa.</p>
+<ol class="passos"><li><div><p>Abra uma conversa nova.</p><pre>/clear</pre></div></li><li><div><p>Envie o pedido do ato 2:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia caso/regras.md. Sou da Oficina. Liste somente os chamados ativos que posso visualizar, mantendo a ordem de entrada. Use R1 para prioridade, R2 para estados e R3 para departamento. Responda em tabela ID | prioridade. Não invente prazo de atendimento e não altere arquivos.</pre></div></div></li><li><div><p>Confira cada linha com <code>caso/regras.md</code>: R3 (só Oficina), R2 (só <code>aberto</code> e <code>em_andamento</code>, na ordem de entrada) e R1 (soma de impacto e urgência).</p></div></li><li><div><p>Compare com a resposta da prática 1: o que o pedido novo fixou que o primeiro deixava aberto?</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Esperado pelo contrato: T1 <code>alta</code>, T4 <code>baixa</code> e T6 <code>alta</code>, nessa ordem.</span></li><li><span>T3 tem soma 6, mas fica fora por estar <code>fechado</code> (R2).</span></li><li><span>T2 e T5 ficam fora por serem do Laboratório (R3).</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções responderam T1 alta, T4 baixa e T6 alta, com T2, T3 e T5 fora pelas regras certas. A redação das explicações mudou; a tabela foi a mesma.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Cada linha da tabela tem a regra que a sustenta, e você escreveu em uma frase o que mudou entre os dois pedidos.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Troque Oficina por Laboratório no pedido. Calcule antes o esperado: T2 <code>media</code> e T5 <code>media</code>.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 3 · Um pedido do seu trabalho</h2></div>
+<p><b>Objetivo.</b> Levar os cinco campos do modelo para um pedido que você já usa.</p>
+<ol class="passos"><li><div><p>Escolha um pedido que você já fez a uma IA no trabalho, sem dado sigiloso. Copie <code>modelos/pedido.md</code> e preencha os cinco campos com ele.</p></div></li><li><div><p>Abra o Claude Code numa pasta sua, fora do kit, e peça uma crítica do pedido:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia o pedido abaixo. Diga quais escolhas ele deixa abertas para quem executa e qual critério falta para conferir a resposta. Aponte no máximo três pontos. Não reescreva o pedido.
+
+(cole aqui o seu pedido)</pre></div></div></li><li><div><p>Escreva a v2 do pedido. Guarde v1 e v2, com uma frase sobre o motivo de cada mudança.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>A crítica aponta lacunas do pedido ou só sugere outra redação?</span></li><li><span>Cada mudança da v2 resolve uma lacuna que você consegue nomear?</span></li></ul></div>
+
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você tem v1 e v2 do pedido e uma frase que liga cada mudança a uma lacuna.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Adapte o pedido para alguém que está entrando no time, com os mesmos critérios. O formato precisou mudar?</p></div>
+</section>
+<section class="secao"><h2>Autoavaliação</h2>
+<p>Marque o que você já consegue fazer sem consultar o material. O que ficar em branco indica o conceito para reler.</p>
+<ul class="checklist"><li><span>Consigo dizer qual resultado um pedido precisa deixar pronto.</span></li><li><span>Consigo indicar no pedido o arquivo e a seção que sustentam a resposta.</span></li><li><span>Consigo escolher o formato da resposta pelo uso que ela vai ter.</span></li><li><span>Consigo escrever um critério observável e citar a evidência que o confere.</span></li><li><span>Consigo comparar duas respostas pelos critérios, e não pela redação.</span></li><li><span>Consigo guardar v1 e v2 de um pedido e explicar o motivo da mudança.</span></li></ul>
+<h2>Respostas das perguntas</h2><div class="resp"><p><b>1. “Melhore o sistema” informa qual resultado deve ficar pronto?</b><br>Não. É preciso escolher um resultado observável: um texto, uma lista, um teste ou uma alteração delimitada.</p><p><b>2. Se a IA citar o nome do arquivo, isso prova que aplicou corretamente R2?</b><br>Não. Conferir a explicação e os exemplos contra a regra, além de observar quais arquivos foram usados.</p><p><b>3. Para explicar a regra a uma pessoa nova, a tabela é sempre a melhor escolha?</b><br>Não. Um parágrafo com exemplo pode ser mais adequado. O formato deve servir ao uso, não virar uma exigência automática.</p><p><b>4. “Eu gostei da resposta” permite que um colega repita a conferência?</b><br>Não. É necessário apontar a condição e a evidência: por exemplo, quais estados deveriam aparecer e quais apareceram.</p><p><b>5. Se a resposta mudou, posso concluir que o modelo piorou?</b><br>Não apenas pela mudança. Primeiro verificar se o significado ou algum critério piorou, e se as condições eram comparáveis.</p><p><b>6. O que registrar além do pedido para entender uma revisão?</b><br>O que mudou, por que mudou, quem revisou e o que foi conferido depois, preservando a versão anterior.</p></div>
+<h2>Para ler depois</h2><ul><li>Chen et al., “Promptware Engineering” (2025): o pedido tratado como artefato de software, mantido ao longo do tempo. <a href="https://arxiv.org/abs/2503.02400">https://arxiv.org/abs/2503.02400</a></li><li>Villamizar et al., “Prompts as Software Engineering Artifacts” (2025): resultados exploratórios sobre como equipes guardam e revisam pedidos. <a href="https://arxiv.org/abs/2509.17548">https://arxiv.org/abs/2509.17548</a></li><li>Claude Code, visão geral: abrir a pasta, iniciar a ferramenta e enviar o primeiro pedido. <a href="https://code.claude.com/docs/en/overview">https://code.claude.com/docs/en/overview</a></li></ul>
+</section></main></body></html>

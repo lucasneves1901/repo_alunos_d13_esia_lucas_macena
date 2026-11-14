@@ -1,0 +1,29 @@
+# Contingência: respostas construídas para análise
+
+**SIMULAÇÃO DIDÁTICA.** Textos escritos na preparação da aula. Não são saídas medidas do Claude Code. Não há tempo, tokens, custo ou desempenho de modelo associados a eles.
+
+## Pedido e resposta A
+
+Pedido: “Liste os chamados que precisam de atenção.”
+
+Resposta simulada: “T1, T3 e T6 precisam de atenção porque têm prioridade alta.”
+
+Pergunta para análise: qual sentido de “atenção” foi escolhido? O pedido determinava isso? Que informação faltava? Não atribuir a escolha a um fornecedor específico.
+
+## Pedido e resposta B
+
+Pedido: “Liste os chamados ativos de Oficina, pela regra R2 e pela regra R3. Mantenha a ordem e mostre ID e prioridade conforme R1.”
+
+Resposta simulada: “T1 alta; T4 baixa; T6 alta.”
+
+Conferir cada registro com o contrato. Uma resposta simulada correta permite praticar verificação, mas não é evidência de sucesso de um modelo real.
+
+## Rascunho C para crítica
+
+“Ativos são apenas chamados abertos. Uma pessoa administradora pode consultar todas as áreas. Os de alta prioridade serão atendidos em duas horas.”
+
+Usar os critérios da atividade para separar erro de regra, requisito inventado e informação ausente. Registrar as correções em uma nova versão.
+
+## O que entregar sem acesso
+
+Pedido reescrito, critérios, conferência dos textos acima e limite: “analisei uma simulação; não medi a execução”. Nos blocos 2 e 5, deixar a tabela de medições sem resultados inventados. O professor deve completar as condições de modelos em uma execução demonstrada ou registrar a pendência.

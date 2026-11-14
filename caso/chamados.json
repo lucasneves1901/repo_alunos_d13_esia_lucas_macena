@@ -1,0 +1,44 @@
+[
+  {
+    "id": "T1",
+    "departamento": "Oficina",
+    "estado": "aberto",
+    "impacto": 3,
+    "urgencia": 2
+  },
+  {
+    "id": "T2",
+    "departamento": "Laboratório",
+    "estado": "em_andamento",
+    "impacto": 1,
+    "urgencia": 2
+  },
+  {
+    "id": "T3",
+    "departamento": "Oficina",
+    "estado": "fechado",
+    "impacto": 3,
+    "urgencia": 3
+  },
+  {
+    "id": "T4",
+    "departamento": "Oficina",
+    "estado": "em_andamento",
+    "impacto": 1,
+    "urgencia": 1
+  },
+  {
+    "id": "T5",
+    "departamento": "Laboratório",
+    "estado": "aberto",
+    "impacto": 2,
+    "urgencia": 2
+  },
+  {
+    "id": "T6",
+    "departamento": "Oficina",
+    "estado": "aberto",
+    "impacto": 2,
+    "urgencia": 3
+  }
+]

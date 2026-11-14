@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Estudo dirigido · Aula 6</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap"><style>
+.diagrama{margin:24px 0;max-width:1120px;width:100%;position:relative}
+.diagrama .trilha{display:flex;align-items:stretch;gap:22px}
+.diagrama .no{min-width:0;border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;z-index:1}
+.diagrama .no strong{font-size:23px;line-height:1.22;font-weight:700}
+.diagrama .no span{font-size:22px;line-height:1.4;overflow-wrap:anywhere}
+.diagrama .trilha .no{flex:1}
+.diagrama .trilha .no:not(:last-child)::after{content:'→';position:absolute;right:-23px;top:42%;font-size:27px;color:var(--accent-soft)}
+.diagrama .no:last-child{border:2px solid var(--accent-soft);background:var(--panel-2)}
+.slide.mecanismo .diagrama .trilha .no{min-height:155px}
+.slide.caso .diagrama .trilha .no{min-height:245px;justify-content:flex-start}
+.slide.limite .diagrama .trilha .no{min-height:175px;justify-content:flex-start}
+.slide.limite .diagrama{margin:18px 0}
+.slide:not(.conceitual) .diagrama .no{min-height:110px}
+.forma-mapa .trilha{gap:13px}.forma-mapa .trilha .no{padding:15px 11px;justify-content:flex-start;gap:12px}
+.forma-mapa .trilha .no:not(:last-child)::after{right:-15px;font-size:23px}
+.forma-mapa .no strong{font-size:19px}.forma-mapa .no span{font-size:18px;line-height:1.35}
+.mapa-num{font-size:17px;color:var(--accent-soft);letter-spacing:.06em}
+.chegada{margin:2px 0 10px;padding:15px 20px;border-left:4px solid var(--accent-soft);background:var(--panel-2);font-size:24px;line-height:1.35;max-width:1120px}
+.retorno{height:62px;position:relative;text-align:center}.retorno svg{width:100%;height:32px;display:block}.retorno path{fill:none;stroke:var(--accent-soft);stroke-width:2}.retorno span{font-size:18px;line-height:1.3;color:var(--muted)}
+.rede{display:grid;grid-template-columns:43% 14% 43%;grid-template-rows:1fr 1fr;gap:22px 0;position:relative;min-height:270px}
+.arestas{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.arestas path{fill:none;stroke:var(--accent-soft);stroke-width:2;vector-effect:non-scaling-stroke}
+.seta-rede{position:absolute;transform:translate(-50%,-52%);font-size:25px;font-weight:400;color:var(--accent-soft);line-height:1}
+.rede .no{padding:17px 20px;min-height:0!important}.rede .no span{font-size:21px;line-height:1.35}
+.forma-convergencia .no-0{grid-area:1/1}.forma-convergencia .no-1{grid-area:2/1}.forma-convergencia .no-2{grid-area:1/3/3/4;align-self:center;min-height:160px!important}
+.forma-ramificacao .no-0{grid-area:1/1/3/2;align-self:center;min-height:160px!important}.forma-ramificacao .no-1{grid-area:1/3}.forma-ramificacao .no-2{grid-area:2/3}
+.forma-leque .rede{grid-template-rows:1fr 1fr 1fr;gap:15px 0;min-height:300px}.forma-leque .no-0{grid-area:1/1/4/2;align-self:center;min-height:160px!important}.forma-leque .no-1{grid-area:1/3}.forma-leque .no-2{grid-area:2/3}.forma-leque .no-3{grid-area:3/3}.forma-leque .no:not(:first-of-type){padding:12px 18px;gap:6px}.forma-leque .no span{font-size:20px}.forma-leque .no strong{font-size:21px}
+.forma-decisao .rede{grid-template-columns:25% 8% 27% 13% 27%;grid-template-rows:1fr 1fr;min-height:285px;gap:24px 0}
+.forma-decisao .no-0{grid-area:1/1/3/2;align-self:center}.forma-decisao .no-1{grid-area:1/3/3/4;align-self:center;background:transparent;border:0;padding:30px 24px;text-align:center;isolation:isolate;min-height:215px!important;justify-content:center;gap:8px}
+.contorno-decisao{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}.contorno-decisao polygon{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.forma-decisao .no-1 strong{font-size:19px;max-width:190px;align-self:center}.forma-decisao .no-1 span{font-size:18px;max-width:174px;margin:0 auto}
+.forma-decisao .no-2{grid-area:1/5}.forma-decisao .no-3{grid-area:2/5}.forma-decisao .no strong{font-size:21px}.forma-decisao .no span{font-size:20px}
+.slide.demonstracao .diagrama .no span{font-size:22px}.slide.demonstracao .step{font-size:19px}
+@media(max-width:700px){
+ .diagrama .trilha{flex-direction:column;gap:22px}.diagrama .trilha .no{padding:17px;min-height:0!important}.diagrama .trilha .no:not(:last-child)::after{content:'↓';right:48%;top:auto;bottom:-25px}.diagrama .no strong{font-size:21px}.diagrama .no span{font-size:19px}
+ .rede,.forma-leque .rede,.forma-decisao .rede{display:flex;flex-direction:column;gap:16px;min-height:0}.rede .no{width:100%;min-height:0!important;align-self:stretch}.arestas,.seta-rede{display:none}
+ .forma-decisao .no-1{padding:35px;min-height:200px!important}.forma-decisao .no-1 span{max-width:175px}.forma-decisao .no-1 strong{max-width:200px;margin:0 auto}.forma-leque .no-0{min-height:0!important}
+ .forma-convergencia .no-2::before{content:'As duas observações levam a';font-size:16px;color:var(--muted)}
+ .forma-ramificacao .no:not(.no-0)::before,.forma-leque .no:not(.no-0)::before{content:'A partir da mesma entrada';font-size:16px;color:var(--muted)}
+ .forma-ciclo .retorno svg{display:none}.retorno{height:auto;margin-top:16px;border-top:1px solid var(--accent-soft);padding-top:10px}.retorno span::before{content:'↶ '}.forma-orcamento .retorno span::before{content:''}
+ .chegada{font-size:21px}.forma-mapa .no span{font-size:19px}
+}
+@media print{
+ .diagrama .no,.diagrama .no:last-child{background:#f6f6f6;color:#111;border-color:#777}.diagrama .no:last-child{border-color:#9b2019}.diagrama .trilha .no::after,.mapa-num{color:#9b2019}.chegada{background:#f6f6f6;color:#111;border-color:#9b2019}.retorno span{color:#444}.arestas path,.retorno path{stroke:#9b2019}.contorno-decisao polygon{fill:#f6f6f6;stroke:#777}.forma-decisao .no-1{background:transparent}.forma-convergencia .rede,.forma-ramificacao .rede,.forma-leque .rede,.forma-decisao .rede{break-inside:avoid}
+}
+
+:root{
+  --papel:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --aviso:#8A5A00; --aviso-suave:#FEF4E1; --certo:#1F7A45; --certo-suave:#E7F6EE;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:16px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{color:var(--tinta);line-height:1.18;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3.4vw,1.6rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--marca-tx);overflow-wrap:anywhere}
+code{font-family:var(--f-codigo);font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);border-radius:4px;padding:0 .3em;color:var(--tinta);overflow-wrap:anywhere}
+.sobre{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.capa{display:flex;flex-direction:column;gap:12px;padding-bottom:18px;border-bottom:3px solid var(--marca);margin-bottom:22px}
+.lide{font-size:1.1rem;color:var(--tinta-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{background:var(--superficie-2);border:1px solid var(--linha);border-radius:999px;padding:2px 11px;font-size:.84rem;color:var(--tinta-2)}
+section{display:flex;flex-direction:column;gap:12px;margin:0 0 30px}
+.quadro{border:1px solid var(--linha);border-radius:var(--raio);padding:12px 14px;background:var(--superficie-2);display:flex;flex-direction:column;gap:8px;min-width:0}
+.quadro.marca{background:var(--marca-suave);border-color:#FFD2B8}
+.quadro.certo{background:var(--certo-suave);border-color:#BFE3CD}
+.quadro.aviso{background:var(--aviso-suave);border-color:#F3D9A4}
+.rot{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3)}
+.quadro.marca .rot{color:var(--marca-forte)}.quadro.certo .rot{color:var(--certo)}.quadro.aviso .rot{color:var(--aviso)}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.num{font-family:var(--f-codigo);font-size:.84rem;color:var(--marca-tx);font-weight:700}
+.termo{color:var(--tinta-3);font-size:.95rem}
+.definicao{font-size:1.06rem;font-weight:600;color:var(--tinta);border-left:4px solid var(--marca);padding:2px 0 2px 12px}
+figure.ilustra{margin:2px 0;break-inside:avoid;background:#fff;border:1px solid var(--linha);border-radius:10px;padding:10px;min-width:0;
+  --line:var(--linha-forte);--panel:#fff;--panel-2:var(--marca-suave);--accent-soft:var(--marca-tx);--ink:var(--tinta);--muted:var(--tinta-3)}
+figure.ilustra figcaption{font-size:.8rem;color:var(--tinta-3);margin-top:6px}
+.ilustra .diagrama{margin:2px 0}
+.ilustra .diagrama .no{min-height:0!important;padding:9px 10px;gap:4px;border-radius:9px}
+.ilustra .diagrama .no strong{font-size:.92rem}
+.ilustra .diagrama .no span{font-size:.8rem;line-height:1.35}
+.ilustra .diagrama .trilha{gap:16px}
+.ilustra .diagrama .trilha .no:not(:last-child)::after{font-size:16px;right:-14px}
+.ilustra .mapa-num{font-size:.74rem}
+.ilustra .rede{min-height:0;gap:12px 0}
+.ilustra .forma-decisao .rede{min-height:170px}
+.ilustra .forma-decisao .no-1{min-height:150px!important;padding:22px 16px}
+.ilustra .seta-rede{font-size:16px}
+.ilustra .retorno{height:auto}
+.ilustra .retorno span{font-size:.8rem}
+.passos-caso{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0}
+.passos-caso dt{font-weight:700;color:var(--tinta);font-size:.9rem}
+.passos-caso dd{margin:0;min-width:0}
+.lado{display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid}
+.rolagem{overflow-x:auto;border:1px solid var(--linha);border-radius:var(--raio)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3);background:var(--superficie-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--tinta)}
+.cab-pratica{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;border-bottom:2px solid var(--marca);padding-bottom:6px}
+ol.passos{list-style:none;padding:0;counter-reset:p;gap:12px}
+ol.passos>li{counter-increment:p;display:grid;grid-template-columns:26px 1fr;gap:8px;break-inside:avoid}
+ol.passos>li::before{content:counter(p);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--marca);color:#fff;font-weight:700;font-size:.8rem}
+ol.passos>li>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+pre{margin:0;font-family:var(--f-codigo);font-size:.82rem;line-height:1.5;background:#1E1C1A;color:#F4F2EF;border-radius:8px;padding:9px 11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pedido small{display:block;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tinta-3);margin-bottom:4px}
+.obs{font-size:.88rem;color:var(--tinta-3)}
+.checklist{list-style:none;padding:0}
+.checklist li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.checklist li::before{content:"";width:11px;height:11px;border:1.5px solid var(--linha-forte);border-radius:2px;margin-top:6px}
+.resp{display:flex;flex-direction:column;gap:8px}
+.resp p{break-inside:avoid}
+.quadro,.definicao,pre,.pedido,.passos-caso,.cabeca{break-inside:avoid}
+.cabeca{display:flex;flex-direction:column;gap:8px;break-after:avoid}
+@media (max-width:560px){
+  body{font-size:15px}
+  .lado{grid-template-columns:1fr}
+  .passos-caso{grid-template-columns:1fr;gap:2px}
+  .passos-caso dd{margin-bottom:6px}
+  .ilustra .diagrama .trilha{flex-direction:column;gap:18px}
+  .ilustra .diagrama .trilha .no:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-20px}
+}
+@media print{
+  body{font-size:12.2pt}
+  main{max-width:none;padding:0}
+  .pratica,.secao{break-before:page}
+  .conceito{padding-top:16px;border-top:2px solid var(--linha)}
+  h1{font-size:28pt}h2{font-size:19pt}
+}
+</style></head><body><main><header class="capa">
+<p class="sobre">Estudo dirigido · Aula 6 de 6 · D1.3 Prompting Técnico, Especificação e Contexto</p>
+<h1>Como guardar o que funciona?</h1>
+<p class="lide">Ao fim deste estudo você escreve instruções persistentes que uma pessoa nova segue e confere, revisa o texto com motivo registrado e confere de novo os casos que já funcionavam.</p>
+<div class="meta"><span>Aula de 14/11/2026</span><span>Caso Fila Clara</span><span>Revisão sem entrega</span></div>
+</header>
+<section><h2>Como usar este estudo</h2>
+<p>Leia os seis conceitos na ordem da aula: cada um prepara o seguinte. Depois faça as três práticas no Claude Code, com o caso Fila Clara do kit. As práticas 1 e 2 refazem os dois atos da demonstração; a prática 3 leva a ideia para uma tarefa do seu trabalho. No fim, marque a autoavaliação e confira as respostas das perguntas.</p><p>Este estudo é material de revisão. Ele não substitui a atividade feita em aula e não tem entrega.</p><p>As execuções registradas citadas nas práticas são do guia interativo da aula: modelo claude-opus-5-5, em 06/11/2026, numa conversa sem ferramentas, com os arquivos colados no pedido. No Claude Code, que lê os arquivos da pasta, a sua resposta pode ter outra redação. Confira pelos critérios, não pela semelhança de texto.</p>
+<div class="quadro"><span class="rot">Antes de começar</span><ul class="checklist"><li><span>Claude Code instalado e com login. Teste no terminal: <code>claude -p &quot;responda apenas: ok&quot;</code> precisa responder <code>ok</code>.</span></li><li><span>O kit da turma no seu computador, do ZIP ou do repositório <a href="https://github.com/victorhwfreire/repo_alunos_d13_esia">github.com/victorhwfreire/repo_alunos_d13_esia</a>. Os caminhos citados partem da pasta do kit.</span></li><li><span>Sem acesso ao Claude Code: acompanhe a execução de um colega ou use as execuções registradas de cada prática, como diz a seção &quot;Sem acesso&quot; de <code>guia-claude-code.md</code>. Anote no seu texto que não executou.</span></li></ul></div>
+</section>
+<section><h2>O mapa da aula</h2>
+<p>Pergunta da aula: <b>Como manter as instruções úteis quando o projeto muda?</b></p>
+<figure class="ilustra"><figure class="diagrama forma-mapa" aria-label="Caminho numerado: 1. Documento → 2. Seleção → 3. Leitura → 4. Revisão → 5. Regressão → 6. Manutenção."><div class="trilha"><div class="no no-0" data-node="0"><b class="mapa-num">01</b><strong>Documento</strong><span>Escrevo orientações recorrentes.</span></div><div class="no no-1" data-node="1"><b class="mapa-num">02</b><strong>Seleção</strong><span>Escolho o que pertence aqui.</span></div><div class="no no-2" data-node="2"><b class="mapa-num">03</b><strong>Leitura</strong><span>Confiro leitura e aplicação.</span></div><div class="no no-3" data-node="3"><b class="mapa-num">04</b><strong>Revisão</strong><span>Explico cada mudança.</span></div><div class="no no-4" data-node="4"><b class="mapa-num">05</b><strong>Regressão</strong><span>Retomo casos conhecidos.</span></div><div class="no no-5" data-node="5"><b class="mapa-num">06</b><strong>Manutenção</strong><span>Defino responsável e revisão.</span></div></div></figure><figcaption>Fluxograma do slide 2.</figcaption></figure>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 1 de 6</p>
+<h2>Uma orientação duradoura pode virar documento</h2>
+<p class="termo">Instrução persistente e documentação para pessoas e IA</p>
+<p class="definicao">Instrução persistente registra uma orientação do projeto para reutilização em várias tarefas. Ela deve ser compreensível, específica e verificável por uma pessoa, além de ser disponibilizada à ferramenta.</p></div>
+<p>O documento deve ajudar alguém que não participou das conversas anteriores. Instruções vagas dependem de conhecimento informal e dificultam a revisão. Uma orientação útil combina ação, referência e consequência: consultar uma fonte, preservar um formato, executar uma verificação conhecida ou registrar uma lacuna. Não é necessário repetir todos os detalhes do código. Também não é necessário descrever arquitetura de agente. Nesta disciplina, o foco é o documento que governa o trabalho e pode ser mantido por pessoas. Sua utilidade aparece quando outro colega consegue usá-lo em uma nova tarefa.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Reconhecer repetição → Documentar → Usar e revisar."><div class="trilha"><div class="no no-0" data-node="0"><strong>Reconhecer repetição</strong><span>Identificar um combinado útil em várias tarefas.</span></div><div class="no no-1" data-node="1"><strong>Documentar</strong><span>Escrever ação, referência e forma de conferir.</span></div><div class="no no-2" data-node="2"><strong>Usar e revisar</strong><span>Observar o uso pelo colega e corrigir ambiguidades.</span></div></div></figure><figcaption>Fluxograma do slide 3.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma orientação específica reduz dúvidas recorrentes</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Frase vaga: “Siga as boas práticas e faça tudo com qualidade”. Ela não indica ação nem referência concreta.</dd><dt>O que fazer</dt><dd>Reescrever: “Consulte caso/regras.md antes de propor mudança. Preserve os nomes dos campos e confira os resultados com R1 a R3”.</dd>
+<dt>Resultado</dt><dd>O colega sabe qual documento consultar e quais convenções preservar. A orientação pode ser conferida no trabalho produzido.</dd></dl><p>O documento ajuda porque torna o combinado localizável e executável.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Texto persistente não garante cumprimento</span><p>“A instrução está no arquivo; então a IA sempre vai obedecer.”</p><p>Instruções orientam a execução. Ainda é preciso verificar leitura, aplicação e resultado; elas não substituem controles de acesso ou testes.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Pedir ao colega que use as instruções sem uma explicação adicional do autor e registre onde ainda houve dúvida.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Uma pessoa nova entenderia “faça do jeito padrão do time” sem outra referência?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 2 de 6</p>
+<h2>Nem tudo pertence às instruções do projeto</h2>
+<p class="termo">Conteúdo adequado, referência única e manutenção</p>
+<p class="definicao">Instruções de projeto devem concentrar convenções, limites e formas de conferência recorrentes. Dados temporários, cópias desnecessárias de regras e detalhes já evidentes no código podem envelhecer ou gerar conflito.</p></div>
+<p>Uma orientação precisa justificar o espaço que ocupa e ter um caminho de manutenção. O critério não é um número mágico de linhas, embora um limite pequeno ajude no exercício. O texto deve explicar o que uma pessoa ou assistente não deveria precisar redescobrir em toda tarefa. Nomes de campos, limites de edição, fonte vigente e conferência são exemplos. Listas de pendências da semana e dados da execução ficam melhor no registro da tarefa. Se um comando for incluído, indicar o contexto em que ele funciona e verificar sua saída; um nome conhecido como “test” não comprova validade no projeto.</p>
+<figure class="ilustra"><figure class="diagrama forma-decisao" aria-label="Examinar a informação. Se for recorrente, útil e mantida por alguém, incluí-la nas instruções ou referenciar sua fonte. Caso contrário, mantê-la no contexto da tarefa ou na fonte apropriada."><div class="rede"><svg class="arestas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 25 50 H 32 M 60 50 H 66 V 24 H 73 M 66 50 V 76 H 73"/></svg><b class="seta-rede" style="left:31%;top:50%" aria-hidden="true">→</b><b class="seta-rede" style="left:71%;top:24%" aria-hidden="true">→</b><b class="seta-rede" style="left:71%;top:76%" aria-hidden="true">→</b><div class="no no-0" data-node="0"><strong>Informação candidata</strong><span>Examinar o que se pretende registrar.</span></div><div class="no no-1" data-node="1"><svg class="contorno-decisao" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="50,1 99,50 50,99 1,50"/></svg><strong>É recorrente e útil?</strong><span>Há responsável por mantê-la?</span></div><div class="no no-2" data-node="2"><strong>Sim: guardar</strong><span>Orientação do projeto; apontar a fonte vigente.</span></div><div class="no no-3" data-node="3"><strong>Não: outra fonte</strong><span>Dado da tarefa ou conteúdo já mantido no código.</span></div></div></figure><figcaption>Fluxograma do slide 6.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Cada informação precisa do lugar adequado</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Três frases: “use media sem acento”; “hoje revise T6”; “a regra de prioridade está em caso/regras.md”.</dd><dt>O que fazer</dt><dd>A convenção e a referência podem orientar várias tarefas. A seleção de T6 pertence ao pedido atual.</dd>
+<dt>Resultado</dt><dd>CLAUDE.md mantém orientação e referência. A tarefa registra T6. A regra completa permanece no contrato, evitando cópias divergentes.</dd></dl><p>Um documento menor e bem referenciado pode ser mais fácil de manter.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Um comando só ajuda se for verdadeiro e aplicável</span><p>“Todo CLAUDE.md deve ter um comando de teste, mesmo que eu não saiba qual funciona.”</p><p>Não inventar comandos. Registrar um comando conferido ou uma sequência manual verificável adequada ao projeto.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Revisar cada linha do documento perguntando: é útil na próxima tarefa, tem fonte e pode ser conferida?</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Copiar uma regra inteira para três documentos garante que ninguém a esqueça?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 3 de 6</p>
+<h2>O nome do arquivo depende da ferramenta</h2>
+<p class="termo">CLAUDE.md, carregamento e portabilidade</p>
+<p class="definicao">CLAUDE.md é um arquivo usado para fornecer orientações ao Claude Code. O texto pode ser reaproveitado em outras ferramentas, mas nome, localização, carregamento e prioridade precisam ser verificados em cada ambiente.</p></div>
+<p>O conteúdo pode ser portátil quando descreve o projeto em termos claros e evita depender de detalhes desnecessários de um produto. O mecanismo que o carrega é específico do ambiente. Também podem existir instruções pessoais, de organização ou de subpastas com efeitos sobre a sessão. O objetivo da aula não é memorizar toda a hierarquia de configuração, mas saber que ela existe e precisa ser observada. A documentação oficial orienta a operação; uma tentativa pequena fornece evidência local de uso.</p><p>Texto de instrução não é uma configuração que obriga qualquer comportamento em todas as execuções. O kit desta disciplina é um exemplo: desde a aula 1, um CLAUDE.md na raiz entrou em toda sessão aberta ali e pedia para registrar dúvidas, sem aparecer em nenhum pedido. Quem não conferiu /memory não sabia que ele estava agindo.</p>
+<figure class="ilustra"><figure class="diagrama forma-cadeia" aria-label="Disponibilizar → Confirmar leitura → Testar efeito."><div class="trilha"><div class="no no-0" data-node="0"><strong>Disponibilizar</strong><span>Colocar o documento no local reconhecido pelo produto.</span></div><div class="no no-1" data-node="1"><strong>Confirmar leitura</strong><span>Examinar as instruções disponíveis na sessão.</span></div><div class="no no-2" data-node="2"><strong>Testar efeito</strong><span>Usar uma tarefa pequena e conferir o comportamento.</span></div></div></figure><figcaption>Fluxograma do slide 9.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Leitura e cumprimento deixam evidências diferentes</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>CLAUDE.md pede respostas com ID e prioridade. A ferramenta informa que consultou o arquivo.</dd><dt>O que fazer</dt><dd>Pedir uma tabela pequena e examinar campos, valores e regras. Conferir se outras instruções interferem na execução.</dd>
+<dt>Resultado</dt><dd>O registro de leitura mostra acesso ao documento. A tabela correta mostra atendimento do critério nessa tentativa. Uma evidência não substitui a outra.</dd></dl><p>Portabilidade exige verificar o mecanismo de leitura e o resultado, não apenas copiar um arquivo.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · O nome do arquivo não cria compatibilidade universal</span><p>“Qualquer assistente vai ler CLAUDE.md automaticamente e da mesma forma.”</p><p>O suporte varia por ferramenta, versão e configuração. Consultar a documentação do ambiente escolhido e testar uma tarefa curta.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>No Claude Code, conferir os arquivos de instrução disponíveis e executar uma tarefa pequena para verificar o efeito.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se outro produto usa AGENTS.md, basta renomear sem conferir?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 4 de 6</p>
+<h2>Uma revisão precisa explicar a mudança</h2>
+<p class="termo">Versionamento, diff, revisão e pull request</p>
+<p class="definicao">Versionar é preservar estados recuperáveis e registrar por que mudaram. Diff mostra diferenças; revisão avalia a mudança; pull request é um pedido de revisão antes de integrar uma alteração num repositório compartilhado.</p></div>
+<p>No Git, um commit registra uma versão; o diff mostra alterações em relação a outra referência. Um pull request organiza a conversa de revisão antes da integração: problema, mudança, verificação e comentários. Essas ferramentas ajudam, mas não substituem o conteúdo da revisão. Um colega precisa entender qual comportamento deve mudar e qual precisa permanecer. Guardar versões permite recuperar um estado anterior se necessário, mas voltar um arquivo também deve considerar outras mudanças relacionadas. Na atividade, v1, v2 e v3 podem atingir artefatos diferentes; o histórico precisa identificar exatamente qual documento mudou.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Versão inicial → Mudança e revisão → Nova versão. Retorno: A próxima revisão parte da versão guardada."><div class="trilha"><div class="no no-0" data-node="0"><strong>Versão inicial</strong><span>Guardar v1 com objetivo e referência.</span></div><div class="no no-1" data-node="1"><strong>Mudança e revisão</strong><span>Comparar o diff e registrar motivo, revisor e evidência.</span></div><div class="no no-2" data-node="2"><strong>Nova versão</strong><span>Preservar v2/v3 e o que foi conferido depois.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>A próxima revisão parte da versão guardada</span></div></figure><figcaption>Fluxograma do slide 12.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · O histórico explica a diferença, não só a numera</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>v1 diz “listar ativos”. O colega não sabe qual departamento. v2 inclui Oficina e R3. A nova conferência revela falta da ordem.</dd><dt>O que fazer</dt><dd>v3 explicita a ordem de entrada. O histórico liga a primeira mudança à dúvida do colega e a segunda à conferência dos registros.</dd>
+<dt>Resultado</dt><dd>Há três estados recuperáveis e duas revisões fundamentadas. Um revisor consegue examinar o motivo e o efeito de cada mudança.</dd></dl><p>Versões permitem recuperar o texto; histórico e evidência permitem entender a decisão.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Renomear arquivos não demonstra uma revisão</span><p>“Tenho final, final2 e final-agora-vai; portanto, documentei o aprendizado.”</p><p>É necessário preservar o conteúdo e explicar mudanças reais. Um número novo sem motivo e conferência não demonstra evolução.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Usar o caminho de arquivos ou Git do kit e registrar duas revisões reais, com três estados recuperáveis.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Preciso publicar no GitHub para praticar revisão de mudanças?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 5 de 6</p>
+<h2>Mudar pede conferir o que já funcionava</h2>
+<p class="termo">Regressão e nova conferência após mudança</p>
+<p class="definicao">Regressão é perder um comportamento que antes atendia ao combinado. A conferência de regressão repete casos conhecidos depois de mudar pedido, instrução, especificação, código ou modelo.</p></div>
+<p>O resultado esperado deve continuar ligado à regra, não apenas à resposta anterior. Uma versão anterior também pode conter erro. A comparação deve perguntar tanto se houve perda quanto se a nova saída atende ao contrato vigente. Quando a regra muda legitimamente, alguns esperados precisam mudar e isso deve ser registrado. Na troca de modelo, manter pedido, contexto e casos ajuda a observar o efeito, mas não controla toda a infraestrutura do serviço. A disciplina usa uma conferência pequena e manual ou executada; não exige criar um sistema completo de avaliação automatizada.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Referência anterior → Mudança delimitada → Nova conferência. Retorno: Se houver perda, corrigir e conferir de novo."><div class="trilha"><div class="no no-0" data-node="0"><strong>Referência anterior</strong><span>Guardar casos, resultados esperados e saídas anteriores.</span></div><div class="no no-1" data-node="1"><strong>Mudança delimitada</strong><span>Alterar uma condição e registrar o motivo.</span></div><div class="no no-2" data-node="2"><strong>Nova conferência</strong><span>Executar ou inspecionar os mesmos casos e comparar.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>Se houver perda, corrigir e conferir de novo</span></div></figure><figcaption>Fluxograma do slide 15.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Melhorar uma parte pode prejudicar outra</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Caso normal: soma 3 → media. Fronteira: soma 5 → alta. Exclusão: T3 fechado não aparece na lista de ativos.</dd><dt>O que fazer</dt><dd>Após revisar o pedido, conferir os mesmos três casos. Registrar antes, depois, critério e evidência.</dd>
+<dt>Resultado</dt><dd>Se T3 passar a aparecer, houve perda no critério de exclusão, mesmo que a explicação da prioridade tenha melhorado.</dd></dl><p>Uma revisão é aceita pelo efeito completo no recorte conferido, não apenas pelo trecho melhorado.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Três casos conhecidos não provam qualidade geral</span><p>“Os três casos passaram; o sistema está garantido para qualquer entrada e modelo.”</p><p>A conferência cobre esses casos. Novas regras, entradas ou condições podem exigir ampliar a verificação.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Antes de revisar, salvar os casos e os esperados. Depois, preencher a ficha de verificação com evidência real ou inspeção identificada.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Se eu mudar prompt e modelo ao mesmo tempo, sei qual causou a diferença?</p></div>
+</section>
+<section class="conceito">
+<div class="cabeca"><p class="num">Conceito 6 de 6</p>
+<h2>Alguém precisa manter o combinado vivo</h2>
+<p class="termo">Responsabilidade, gatilho de revisão e manutenção</p>
+<p class="definicao">Manter um artefato é assegurar que continue útil e coerente com o projeto. Isso exige responsável, eventos que pedem revisão e uma forma de conferir a atualização ou decidir sua retirada.</p></div>
+<p>A manutenção fecha o ciclo iniciado no primeiro encontro: necessidade, pedido, produção, conferência, revisão e reuso. O documento deve indicar quem responde pela referência e quais acontecimentos exigem reavaliação. Mudança de requisito, comando que deixou de funcionar, resultado recorrente incorreto ou troca de modelo são exemplos. O histórico precisa distinguir regra vigente, hipótese e proposta. O Módulo 2 vai usar esses hábitos na integração de partes e na preparação de informação; não é necessário antecipar RAG ou infraestrutura de agentes para entregar contexto e contratos mais claros agora.</p>
+<figure class="ilustra"><figure class="diagrama forma-ciclo" aria-label="Detectar mudança → Revisar referências → Conferir e comunicar. Retorno: Uma nova mudança reabre a revisão."><div class="trilha"><div class="no no-0" data-node="0"><strong>Detectar mudança</strong><span>Regra, comando, ferramenta ou uso deixou de ser o mesmo.</span></div><div class="no no-1" data-node="1"><strong>Revisar referências</strong><span>Responsável atualiza os artefatos afetados.</span></div><div class="no no-2" data-node="2"><strong>Conferir e comunicar</strong><span>Repetir casos, registrar decisão e indicar a versão vigente.</span></div></div><div class="retorno"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true"><path d="M 960 5 V 25 H 40 V 5"/><path d="M32 13 L40 5 L48 13"/></svg><span>Uma nova mudança reabre a revisão</span></div></figure><figcaption>Fluxograma do slide 18.</figcaption></figure>
+<div class="quadro marca"><span class="rot">Exemplo resolvido · Uma regra alterada afeta mais de um arquivo</span>
+<dl class="passos-caso"><dt>Entrada</dt><dd>Hipótese de projeto: uma regra de prioridade foi formalmente alterada. A tarefa é identificar o que precisaria mudar; R1 do exercício permanece vigente.</dd><dt>O que fazer</dt><dd>Localizar referências na especificação, exemplos, critérios, testes e instruções. Revisar os documentos afetados e seus resultados esperados.</dd>
+<dt>Resultado</dt><dd>A equipe identifica qual versão vale e quais verificações sustentam a atualização. Artefatos obsoletos são sinalizados para evitar reuso acidental.</dd></dl><p>O arquivo criado hoje precisa de um caminho explícito para continuar válido amanhã.</p></div>
+<div class="lado"><div class="quadro aviso"><span class="rot">Confusão frequente · Um responsável não precisa fazer tudo sozinho</span><p>“Definir um dono significa que só essa pessoa pode contribuir ou revisar.”</p><p>Autoria, revisão e manutenção podem ser distribuídas. O responsável assegura que mudanças e decisões tenham encaminhamento.</p></div>
+<div class="quadro certo"><span class="rot">Na prática</span><p>Concluir CLAUDE.md com responsável, fonte vigente e um evento que exige revisar o documento e conferir os casos afetados.</p></div></div>
+<div class="quadro"><span class="rot">Para conferir · resposta no fim</span><p>Uma revisão apenas por data é suficiente quando a regra mudou antes?</p></div>
+</section>
+<section class="secao"><h2>Glossário da aula</h2><div class="rolagem"><table><thead><tr><th>Termo</th><th>O que é</th><th>Exemplo</th></tr></thead><tbody><tr><td>Instrução persistente</td><td>Orientação do projeto reutilizada entre tarefas</td><td>Convenção escrita no <code>CLAUDE.md</code></td></tr><tr><td>Versionamento</td><td>Guardar versões e explicar mudanças</td><td>v1, v2 e v3 com histórico</td></tr><tr><td>Diff</td><td>Diferença entre duas versões</td><td>Um limite corrigido no texto</td></tr><tr><td>Regressão</td><td>Algo que funcionava deixar de funcionar após uma mudança</td><td>O prompt novo passar a incluir chamados fechados</td></tr><tr><td>Pull request</td><td>Pedido de revisão de uma mudança em repositório</td><td>Colega comenta o texto antes da integração</td></tr><tr><td>Artefato</td><td>Resultado de trabalho que pode ser guardado e revisto</td><td>Um pedido salvo em arquivo</td></tr></tbody></table></div></section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 1 · A instrução vaga</h2></div>
+<p><b>Objetivo.</b> Ver quanto uma instrução vaga ajuda, na tarefa do ato 1 da demonstração.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>aulas/aula-6/demonstracao/ato-1</code> para fora do kit. Ela tem <code>CLAUDE.md</code> e <code>regras.md</code>. Abra o terminal dentro da cópia e inicie o Claude Code.</p><pre>claude</pre><p class="obs">Dentro do kit, o <code>CLAUDE.md</code> do kit também seria carregado e misturaria as instruções.</p></div></li><li><div><p>Confira quais arquivos de instrução foram carregados: o <code>CLAUDE.md</code> da pasta e, se houver, o do seu usuário.</p><pre>/memory</pre></div></li><li><div><p>Envie o pedido do ato 1:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia as instruções do projeto em CLAUDE.md e a regra R1 em regras.md. Explique a prioridade para uma pessoa nova, em até 120 palavras, com um exemplo de soma 4 e outro de soma 5. Não altere arquivos.</pre></div></div></li><li><div><p>Confira a resposta: até 120 palavras, um exemplo de soma 4 (<code>media</code>), um de soma 5 (<code>alta</code>) e nenhum prazo de atendimento.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>“Documentação boa e completa” não diz o que conferir.</span></li><li><span>A resposta pode estar certa sem ajuda da instrução: a regra veio de <code>regras.md</code>.</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções explicaram a soma com os exemplos de T5 (soma 4, <code>media</code>) e T1 (soma 5, <code>alta</code>), dentro do limite. Nesta tarefa, a instrução vaga não impediu uma boa resposta.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você marcou quais frases do <code>CLAUDE.md</code> v1 uma pessoa consegue seguir e conferir.</p></div>
+
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 2 · A instrução revisada</h2></div>
+<p><b>Objetivo.</b> Revisar a instrução e conferir de novo, pelos mesmos critérios, o que já funcionava.</p>
+<ol class="passos"><li><div><p>Copie a pasta <code>aulas/aula-6/demonstracao/ato-2</code> para fora do kit, abra o terminal na cópia e inicie uma conversa nova.</p><pre>claude</pre></div></li><li><div><p>Compare <code>CLAUDE.md</code> com a v1: sete linhas, cada uma com uma ação que se confere.</p></div></li><li><div><p>Envie o mesmo pedido do ato 1:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia as instruções do projeto em CLAUDE.md e a regra R1 em regras.md. Explique a prioridade para uma pessoa nova, em até 120 palavras, com um exemplo de soma 4 e outro de soma 5. Não altere arquivos.</pre></div></div></li><li><div><p>Confira os critérios da prática 1 e, além deles, cada linha da v2 que se aplica à tarefa.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Revisar pede conferir de novo o que já funcionava, com os mesmos critérios de antes.</span></li><li><span>Ler a instrução não prova cumprimento: procure na resposta a evidência de cada linha.</span></li></ul></div>
+<div class="quadro"><span class="rot">O que as execuções registradas mostraram</span><p>As duas execuções repetiram os exemplos de T5 e T1 e acrescentaram que a prioridade não define prazo de atendimento, como manda uma linha da v2.</p></div>
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você tem uma tabela com os critérios da tarefa, o resultado com a v1 e o resultado com a v2.</p></div>
+<div class="quadro marca"><span class="rot">Para ir além</span><p>Descreva o que precisaria conferir para levar o documento a outra ferramenta. Não afirme leitura automática que você não testou.</p></div>
+</section>
+<section class="pratica">
+<div class="cab-pratica"><h2>Prática 3 · Instruções para um projeto seu</h2></div>
+<p><b>Objetivo.</b> Escrever, revisar e conferir as instruções persistentes de um projeto seu.</p>
+<ol class="passos"><li><div><p>Copie <code>modelos/CLAUDE-modelo.md</code> para um projeto seu, sem dado sigiloso, e escreva três instruções: fonte da regra, limite de alteração e forma de conferir.</p></div></li><li><div><p>Escolha uma tarefa pequena desse projeto e anote o resultado esperado antes de usar as instruções.</p></div></li><li><div><p>Abra o Claude Code no projeto e peça a revisão abaixo:</p><div class="pedido"><small>Pedido para o Claude Code</small><pre>Leia o CLAUDE.md deste projeto. Para cada orientação, diga se uma pessoa consegue executá-la e conferir. Aponte frases vagas, dados temporários e regras duplicadas. Não altere arquivos.</pre></div></div></li><li><div><p>Escreva a v2, registre o motivo numa cópia de <code>modelos/historico.md</code> e rode a mesma tarefa em conversa nova.</p></div></li></ol>
+<div class="quadro"><span class="rot">O que observar</span><ul><li><span>Cada linha da v2 tem uma ação que alguém confere?</span></li><li><span>O resultado esperado da tarefa se manteve depois da revisão?</span></li></ul></div>
+
+<div class="quadro certo"><span class="rot">Está pronto quando</span><p>Você tem v1 e v2 das instruções, o motivo da mudança e a conferência da mesma tarefa com as duas versões.</p></div>
+
+</section>
+<section class="secao"><h2>Autoavaliação</h2>
+<p>Marque o que você já consegue fazer sem consultar o material. O que ficar em branco indica o conceito para reler.</p>
+<ul class="checklist"><li><span>Consigo escrever uma instrução que uma pessoa nova segue sem explicação do autor.</span></li><li><span>Consigo dizer, para cada linha, se ela é útil, tem fonte e pode ser conferida.</span></li><li><span>Consigo conferir quais arquivos de instrução o Claude Code carregou.</span></li><li><span>Consigo registrar uma revisão com o que mudou, por que mudou e quem revisou.</span></li><li><span>Consigo conferir de novo os casos conhecidos depois de uma mudança.</span></li><li><span>Consigo indicar o responsável e o evento que obriga a revisar as instruções.</span></li></ul>
+<h2>Respostas das perguntas</h2><div class="resp"><p><b>1. Uma pessoa nova entenderia “faça do jeito padrão do time” sem outra referência?</b><br>Provavelmente não. Indicar qual padrão, onde está descrito e qual efeito deve ser observado no resultado.</p><p><b>2. Copiar uma regra inteira para três documentos garante que ninguém a esqueça?</b><br>Não. As cópias podem divergir. Preferir uma fonte identificada e indicar como consultá-la, mantendo apenas repetições justificadas.</p><p><b>3. Se outro produto usa AGENTS.md, basta renomear sem conferir?</b><br>Não. Verificar conteúdo, localização, regras de carregamento e efeito. Não presumir equivalência completa só pelo nome.</p><p><b>4. Preciso publicar no GitHub para praticar revisão de mudanças?</b><br>Não. O curso permite versões em arquivos e devolutiva documentada. Git e pull request são formas de organizar esse trabalho, não a condição para entendê-lo.</p><p><b>5. Se eu mudar prompt e modelo ao mesmo tempo, sei qual causou a diferença?</b><br>Não diretamente. Registrar a limitação; quando possível, variar uma condição por vez mantendo casos e critérios.</p><p><b>6. Uma revisão apenas por data é suficiente quando a regra mudou antes?</b><br>Não. Eventos relevantes precisam disparar revisão. Uma rotina periódica pode complementar esse cuidado, sem substituir o gatilho da mudança.</p></div>
+<h2>Para ler depois</h2><ul><li>Chen et al., “Promptware Engineering” (2025): manutenção de pedidos e instruções como parte do software. <a href="https://arxiv.org/abs/2503.02400">https://arxiv.org/abs/2503.02400</a></li><li>Villamizar et al., “Prompts as Software Engineering Artifacts” (2025): como equipes versionam e revisam pedidos; resultados exploratórios. <a href="https://arxiv.org/abs/2509.17548">https://arxiv.org/abs/2509.17548</a></li><li>Claude Code, instruções e memória: como o <code>CLAUDE.md</code> é carregado; instrução orienta o trabalho, mas não garante execução. <a href="https://code.claude.com/docs/en/memory">https://code.claude.com/docs/en/memory</a></li></ul>
+</section></main></body></html>

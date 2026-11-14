@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fila Clara: recorte da D1.3 · D1.3</title><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../material.css">
+<style>:root{--accent:#e2231a;--accent-soft:#ff5a4d}</style></head><body><main>
+<header class="hero"><div class="kicker">CESAR School · Pós-graduação · 2026</div><h1>Fila Clara: recorte da D1.3</h1><p class="sub">D1.3 · Prompting Técnico, Especificação e Contexto</p></header>
+<section class="secao"><p>Organização fictícia que recebe chamados das áreas Oficina e Laboratório. Vamos escrever pedidos, requisitos, testes e documentação para esse serviço. O contrato retoma as regras didáticas da D1.1; não é preciso lembrar aquela aula para começar.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Regra vigente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>Impacto e urgência são inteiros de 1 a 3. Somar os dois. Soma maior ou igual a 5: <code>alta</code>; soma 3 ou 4: <code>media</code>; soma 2: <code>baixa</code>.</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>Chamados ativos têm estado <code>aberto</code> ou <code>em_andamento</code>. <code>fechado</code> fica fora. Manter a ordem da lista recebida.</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>Uma pessoa só pode visualizar chamados do próprio departamento. Estado e prioridade não mudam essa regra.</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>Testes e documentação precisam respeitar R1, R2 e R3.</td>
+</tr>
+</tbody>
+</table></div>
+<p>As entradas são válidas. <code>media</code> é escrito sem acento na saída. Não há regra de prazo de atendimento, envio de e-mail, administrador com acesso geral, banco de dados ou autenticação a implementar. Se isso aparecer numa resposta, é uma sugestão nova e depende de decisão; não é requisito deste caso.</p>
+<h2 id="pequenos-exemplos-resolvidos">Pequenos exemplos resolvidos</h2>
+<ul>
+<li>Impacto 2 e urgência 3: soma 5, prioridade <code>alta</code>.</li>
+<li>A lista X1 aberto, X2 fechado, X3 em_andamento tem dois ativos: X1 e X3, nessa ordem.</li>
+<li>Uma pessoa da Oficina não vê um chamado do Laboratório, mesmo com prioridade alta.</li>
+</ul>
+<h2 id="os-registros-das-praticas">Os registros das práticas</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Departamento</th>
+<th>Estado</th>
+<th style="text-align: right;">Impacto</th>
+<th style="text-align: right;">Urgência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>Oficina</td>
+<td>aberto</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>Laboratório</td>
+<td>em_andamento</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>Oficina</td>
+<td>fechado</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>Oficina</td>
+<td>em_andamento</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>T5</td>
+<td>Laboratório</td>
+<td>aberto</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>T6</td>
+<td>Oficina</td>
+<td>aberto</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table></div>
+<p>Os mesmos dados estão em <code>chamados.json</code>. As tarefas definem quais regras usar; não se deve acrescentar filtro por departamento se a tarefa pedir somente classificação de prioridade.</p></section><footer>D1.3 · Victor Hugo Wanderley Freire · CESAR School · Material didático em português brasileiro.</footer>
+</main></body></html>
