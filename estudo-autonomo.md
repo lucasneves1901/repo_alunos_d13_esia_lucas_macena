@@ -22,8 +22,8 @@ Para cada referência: título; seção ou página consultada; uma ideia em suas
 
 ## Atividade 1: reescrever e conferir · 2h
 
-Prazo: 11/11/2026, 23h59. Passos, tempo de cada um e critérios no [enunciado da Atividade 1](avaliacao/atividade-1.md).
+Prazo: 30/11/2026, 23h59. Passos, tempo de cada um e critérios no [enunciado da Atividade 1](avaliacao/atividade-1.md).
 
 ## Atividade 2: revisar o conjunto construído em aula · 2h
 
-Prazo: 19/11/2026, 23h59. Colete as execuções até o bloco 6; depois, a conferência e a organização dispensam o Claude Code. Passos, tempo de cada um e critérios no [enunciado da Atividade 2](avaliacao/atividade-2.md).
+Prazo: 30/11/2026, 23h59. Colete as execuções até o bloco 6; depois, a conferência e a organização dispensam o Claude Code. Passos, tempo de cada um e critérios no [enunciado da Atividade 2](avaliacao/atividade-2.md).

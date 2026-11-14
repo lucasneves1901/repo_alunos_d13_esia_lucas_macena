@@ -85,8 +85,8 @@ Desenho didático proposto: **duas atividades individuais, especificação revis
 | Atividade | Tempo | Entrega | Prazo proposto |
 |---|---:|---|---|
 | L0: leitura orientada de duas referências básicas | 2h | Fichamento curto, formativo | 11/11/2026, 23h59 |
-| Atividade 1: reescrita do bloco 3 | 2h | Especificação revista, decomposição curta e registro | 11/11/2026, 23h59 |
-| Atividade 2: organizar e conferir o conjunto final | 2h | Pasta versionada com os artefatos já construídos | 19/11/2026, 23h59 |
+| Atividade 1: reescrita do bloco 3 | 2h | Especificação revista, decomposição curta e registro | 30/11/2026, 23h59 |
+| Atividade 2: organizar e conferir o conjunto final | 2h | Pasta versionada com os artefatos já construídos | 30/11/2026, 23h59 |
 
 Os trabalhos são desenvolvidos progressivamente em aula. A Atividade 2 usa as duas horas para revisar, conferir e organizar, sem exigir construir uma aplicação nova. Horário de Brasília.
 

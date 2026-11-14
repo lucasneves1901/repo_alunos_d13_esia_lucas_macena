@@ -1,8 +1,8 @@
 # Atividade 1: especificação revisada
 
-Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Individual · Peso 40% · Prazo: 11/11/2026, 23h59 · Professor: Victor Hugo Wanderley Freire
+Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Individual · Peso 40% · Prazo: 30/11/2026, 23h59 · Professor: Victor Hugo Wanderley Freire
 
-O prazo terminou. Este enunciado detalha o pedido da antiga AV2, sem exigência nova. Quem entregou não refaz nem reorganiza: a correção olha o conteúdo, não o nome dos arquivos.
+O prazo passou para 30/11/2026, 23h59. Este enunciado detalha o pedido da antiga AV2, sem exigência nova. A correção olha o conteúdo, não o nome dos arquivos.
 
 ## Objetivo
 
@@ -95,4 +95,4 @@ Cada critério recebe nível 0, 1 ou 2. O [cálculo](../avaliacao.md) transforma
 
 ## Entrega
 
-Envie a pasta `atividade-1/` pelo canal de entrega da disciplina indicado pelo professor.
+Envie a pasta `atividade-1/` em .zip na tarefa “Atividade 1: especificação revisada” do Moodle da disciplina, até 30/11/2026, 23h59.

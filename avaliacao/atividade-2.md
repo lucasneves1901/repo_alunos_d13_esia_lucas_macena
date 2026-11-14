@@ -1,6 +1,6 @@
 # Atividade 2: conjunto final de artefatos
 
-Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Individual · Peso 60% · Prazo: 19/11/2026, 23h59 · Professor: Victor Hugo Wanderley Freire
+Disciplina: D1.3 Prompting Técnico, Especificação e Contexto · Individual · Peso 60% · Prazo: 30/11/2026, 23h59 · Professor: Victor Hugo Wanderley Freire
 
 ## Objetivo
 
@@ -102,4 +102,4 @@ Cada critério recebe nível 0, 1 ou 2. O [cálculo](../avaliacao.md) transforma
 
 ## Entrega
 
-Envie a pasta `atividade-2/` pelo canal de entrega da disciplina indicado pelo professor, até 19/11/2026, 23h59.
+Envie a pasta `atividade-2/` em .zip na tarefa “Atividade 2: conjunto final de artefatos” do Moodle da disciplina, até 30/11/2026, 23h59.

@@ -1,11 +1,11 @@
 # Avaliação: duas atividades
 
-A nota da D1.3 vem de duas atividades individuais. As práticas em aula não têm nota: o que você produz nelas é o ponto de partida das duas atividades. Pesos e prazos são a proposta do plano de ensino, no horário de Brasília. As regras particulares da D1.1 não valem aqui.
+A nota da D1.3 vem de duas atividades individuais. As práticas em aula não têm nota: o que você produz nelas é o ponto de partida das duas atividades. Os pesos são a proposta do plano de ensino. As duas atividades vencem em 30/11/2026, às 23h59, horário de Brasília, e são entregues na tarefa de cada uma no Moodle da disciplina. As regras particulares da D1.1 não valem aqui.
 
 | Atividade | Peso | Prazo | Parte de | Enunciado |
 |---|---:|---|---|---|
-| 1. Especificação revisada (antiga AV2) | 40% | 11/11/2026, 23h59 | Especificação da aula 3 | [atividade-1.md](avaliacao/atividade-1.md) |
-| 2. Conjunto final de artefatos (antiga AV3) | 60% | 19/11/2026, 23h59 | Arquivos das aulas 2 a 6 | [atividade-2.md](avaliacao/atividade-2.md) |
+| 1. Especificação revisada (antiga AV2) | 40% | 30/11/2026, 23h59 | Especificação da aula 3 | [atividade-1.md](avaliacao/atividade-1.md) |
+| 2. Conjunto final de artefatos (antiga AV3) | 60% | 30/11/2026, 23h59 | Arquivos das aulas 2 a 6 | [atividade-2.md](avaliacao/atividade-2.md) |
 
 Cada enunciado traz objetivo, arquivos, critério de pronto, passos, plano B e a tabela de critérios da nota.
 
