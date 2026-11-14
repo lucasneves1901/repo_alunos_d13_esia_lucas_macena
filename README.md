@@ -31,5 +31,6 @@ Salve tudo em `entregas/seu-nome/aula-N/`. As práticas não têm nota: o que vo
 - Estudo dirigido de cada aula em `aulas/aula-N/estudo-dirigido.pdf`: conceitos para revisar e a demonstração para refazer. Não tem entrega.
 - [Avaliação](avaliacao.md), [estudo autônomo](estudo-autonomo.md), [plano de ensino](ementa.md), [glossário](glossario.md) e [referências](referencias.md).
 - Modelos para preencher em `modelos/`.
+- Repositório fictício do SDD em `sdd/fila-clara`, com o Spec Kit já instalado. Copie a pasta para fora do kit antes de usar.
 
 Os arquivos HTML abrem no navegador, sem servidor. Este kit não contém gabaritos.
