@@ -14,7 +14,7 @@ Nesta disciplina, você escreve pedidos, especificações e instruções que out
 
 Cada atividade começa com uma demonstração do professor e uma tentativa acompanhada. O enunciado diz o que entregar, como saber que terminou e o que fazer se algo falhar.
 
-| Encontro | Atividade | O que você entrega |
+| Encontro | Atividade | O que você guarda |
 |---|---|---|
 | 1 | [Um pedido que o colega consegue usar](exercicios/aula-1/README.md) | Pedido v1 e v2 e registro |
 | 2 | [Três formas de pedir](exercicios/aula-2/README.md) | Respostas da dupla, tabela do grupo e registro |
@@ -23,7 +23,7 @@ Cada atividade começa com uma demonstração do professor e uma tentativa acomp
 | 5 | [Quatro contextos](exercicios/aula-5/README.md) | Respostas, tabela do grupo e registro |
 | 6 | [Um CLAUDE.md que o colega segue](exercicios/aula-6/README.md) | CLAUDE.md v1 e v2, um caso conferido e registro |
 
-Salve tudo em `entregas/seu-nome/aula-N/`. O registro tem quatro seções curtas e vale para a AV1.
+Salve tudo em `entregas/seu-nome/aula-N/`. As práticas não têm nota: o que você guarda nelas é o ponto de partida das [duas atividades avaliativas](avaliacao.md).
 
 ## Para consultar
 

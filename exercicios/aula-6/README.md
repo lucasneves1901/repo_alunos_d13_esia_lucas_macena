@@ -49,7 +49,7 @@ Na pasta `entregas/seu-nome/aula-6/`:
 2. Numa pasta nova, `projeto-b6`, salve o v1 como `CLAUDE.md` e copie só os arquivos que ele cita.
 3. O colega abre o Claude Code nessa pasta, envia o pedido de partida abaixo e anota o que não conseguiu seguir. Troquem os papéis.
 4. Escreva o v2, registre o motivo no histórico e confira 1 caso com v1 e com v2.
-5. Preencha o registro e salve as execuções. A v3 e os outros dois casos ficam para a AV3.
+5. Preencha o registro e salve as execuções. A v3 e os outros dois casos ficam para a Atividade 2.
 
 Pedido de partida:
 
@@ -74,4 +74,4 @@ Siga as instruções deste projeto. Proponha três casos de teste para a regra d
 
 ## Entrega
 
-O registro vale para a AV1, com a rubrica de [avaliacao.md](../../avaliacao.md). Prazo: 23h59 do dia do encontro, horário de Brasília.
+A prática não tem nota nem prazo. Guarde os arquivos e o registro: as duas atividades avaliativas de [avaliacao.md](../../avaliacao.md) partem deles.

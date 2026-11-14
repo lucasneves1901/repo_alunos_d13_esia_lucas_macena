@@ -78,17 +78,17 @@ Nos blocos 2 e 5, comparam-se dois modelos ou duas versões disponíveis no Clau
 
 ## 8. Avaliação
 
-Desenho didático proposto: **20% práticas + 30% reescrita + 50% conjunto final de artefatos**. A [avaliação](avaliacao.md) detalha critérios, limites de tamanho, cálculo e tratamento de ocorrências. Não há nota por falar em público ou por quantidade de chamadas à IA.
+Desenho didático proposto: **duas atividades individuais, especificação revisada (40%) e conjunto final de artefatos (60%)**. As práticas em aula são formativas, sem nota. A [avaliação](avaliacao.md) detalha critérios, limites de tamanho, cálculo e tratamento de ocorrências. Não há nota por falar em público ou por quantidade de chamadas à IA.
 
 ## 9. Estudo autônomo
 
 | Atividade | Tempo | Entrega | Prazo proposto |
 |---|---:|---|---|
 | L0: leitura orientada de duas referências básicas | 2h | Fichamento curto, formativo | 11/11/2026, 23h59 |
-| AV2: reescrita do bloco 3 | 2h | Especificação revista, decomposição curta e registro | 11/11/2026, 23h59 |
-| AV3: organizar e conferir o conjunto final | 2h | Pasta versionada com os artefatos já construídos | 19/11/2026, 23h59 |
+| Atividade 1: reescrita do bloco 3 | 2h | Especificação revista, decomposição curta e registro | 11/11/2026, 23h59 |
+| Atividade 2: organizar e conferir o conjunto final | 2h | Pasta versionada com os artefatos já construídos | 19/11/2026, 23h59 |
 
-Os trabalhos são desenvolvidos progressivamente em aula. A AV3 usa as duas horas para revisar, conferir e organizar, sem exigir construir uma aplicação nova. Horário de Brasília.
+Os trabalhos são desenvolvidos progressivamente em aula. A Atividade 2 usa as duas horas para revisar, conferir e organizar, sem exigir construir uma aplicação nova. Horário de Brasília.
 
 ## 10. Acessibilidade e apoio
 

@@ -1,6 +1,6 @@
 # Estudo autônomo: 6 horas
 
-São três atividades de duas horas. O material produzido em aula é o ponto de partida. Os prazos abaixo são a proposta do plano de ensino, no horário de Brasília.
+São três atividades de duas horas: uma leitura sem nota e as duas atividades avaliativas. O material produzido em aula é o ponto de partida. Os prazos abaixo são a proposta do plano de ensino, no horário de Brasília.
 
 ## L0: ler para explicar com as próprias palavras · 2h
 
@@ -20,10 +20,10 @@ O primeiro texto organiza diferentes maneiras de formular pedidos. Nesta discipl
 
 Para cada referência: título; seção ou página consultada; uma ideia em suas palavras; um exemplo do seu exercício; uma limitação ou dúvida. Não basta copiar uma síntese da IA. Encerrar com uma mudança que pretende testar em um pedido. O professor confirma a entrega e comenta dúvidas recorrentes.
 
-## AV2: reescrever e conferir · 2h
+## Atividade 1: reescrever e conferir · 2h
 
 Prazo: **11/11/2026, 23h59**. 20min para reler v1 e devolutiva; 40min para reescrever; 25min para explicitar duas partes e sua passagem; 25min para conferir casos; 10min para registrar mudanças. [Enunciado e critérios](avaliacao.md).
 
-## AV3: revisar o conjunto construído em aula · 2h
+## Atividade 2: revisar o conjunto construído em aula · 2h
 
 Prazo: **19/11/2026, 23h59**. 20min para reunir arquivos; 30min para corrigir lacunas; 30min para a terceira versão e conferir três casos; 25min para explicitar contexto e técnica; 15min para organizar a entrega. As execuções necessárias devem ser coletadas até o bloco 6; depois é possível conferir e organizar o material sem Claude Code ativo. [Enunciado e critérios](avaliacao.md).

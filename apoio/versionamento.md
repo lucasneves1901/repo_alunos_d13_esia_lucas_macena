@@ -1,6 +1,6 @@
 # Guardar versões sem complicar
 
-A AV3 pede três estados recuperáveis: v1 inicial, v2 depois da primeira revisão e v3 depois da segunda. Cada mudança tem motivo, revisor e nova conferência. Renomear arquivo sem mudar conteúdo não conta.
+A Atividade 2 pede três estados recuperáveis: v1 inicial, v2 depois da primeira revisão e v3 depois da segunda. Cada mudança tem motivo, revisor e nova conferência. Renomear arquivo sem mudar conteúdo não conta.
 
 ## Com pastas: disponível para todos
 

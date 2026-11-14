@@ -73,4 +73,4 @@ Leia caso/regras.md e a demanda escolhida de caso/demandas.md. Proponha uma hist
 
 ## Entrega
 
-O registro vale para a AV1, com a rubrica de [avaliacao.md](../../avaliacao.md). Prazo: 23h59 do dia do encontro, horário de Brasília.
+A prática não tem nota nem prazo. Guarde os arquivos e o registro: as duas atividades avaliativas de [avaliacao.md](../../avaliacao.md) partem deles.
