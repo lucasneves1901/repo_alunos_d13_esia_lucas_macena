@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>
+<!-- publicar:inicio -->
+<title>D1.3 · Aula 4 · Dividir uma tarefa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap">
+<style>
+/* Caderno de laboratório: texto em coluna de leitura, bancadas na largura toda.
+   CESAR Design System, tema único claro. */
+:root{
+  --papel:#FFFFFF; --superficie:#FFFFFF; --superficie-2:#F8F7F6; --superficie-3:#F1F0EE;
+  --tinta:#0C0B0A; --texto:#2A2825; --tinta-2:#403E3B; --tinta-3:#5C5955;
+  --linha:#E4E2DF; --linha-forte:#A5A19C;
+  --marca:#FF6002; --marca-tx:#DD3805; --marca-forte:#B32C04; --marca-suave:#FFF2EB;
+  --selo-bg:#FFF2EB; --selo-tx:#B32C04; --btn-bg:#DD3805; --btn-tx:#FFFFFF; --sobre-marca:#FFFFFF;
+  --erro:#E23A2E; --erro-suave:#FCEBEA; --aviso:#F5A623; --aviso-suave:#FEF4E1;
+  --certo:#1F9D55; --certo-suave:#E7F6EE; --ia:#5C5955;
+  --sombra:0 4px 12px rgba(12,11,10,.08),0 2px 4px rgba(12,11,10,.04);
+  --f-display:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-texto:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --f-codigo:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+  --raio:12px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+body{background:var(--papel);color:var(--texto);font-family:var(--f-texto);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--papel)}
+a{color:var(--marca-tx);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--marca);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0;color:var(--tinta)}
+h2{font-size:clamp(1.85rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.25rem;font-weight:700}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:0}
+code,pre{font-family:var(--f-codigo)}
+:not(pre)>code{font-size:.86em;background:var(--superficie-2);border:1px solid var(--linha);padding:.05em .35em;border-radius:5px;overflow-wrap:anywhere;color:var(--tinta)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prosa{max-width:68ch;display:flex;flex-direction:column;gap:1rem}
+.prosa ul{margin:0;padding-left:1.3rem;display:flex;flex-direction:column;gap:.35rem}
+
+.trilha{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--papel) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.trilha .wrap{display:flex;align-items:center;gap:14px;min-height:54px}
+.trilha .marca{font-family:var(--f-display);font-weight:800;font-size:.98rem;white-space:nowrap;color:var(--tinta);text-decoration:none}
+.trilha nav{overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.trilha nav::-webkit-scrollbar{display:none}
+.trilha ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+.trilha a{display:block;white-space:nowrap;text-decoration:none;color:var(--tinta-2);font-size:.86rem;font-weight:600;padding:6px 10px;border-radius:999px}
+.trilha a:hover{background:var(--superficie-2);color:var(--tinta)}
+.trilha a.ativo{background:var(--selo-bg);color:var(--selo-tx)}
+@media (max-width:640px){.trilha .marca{display:none}}
+
+.abertura{padding-block:56px 40px}
+.abertura .wrap{display:flex;flex-direction:column;gap:22px}
+.sobrelinha{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--marca-tx);font-weight:700}
+.abertura h1{font-size:clamp(2.3rem,6vw,4.2rem);font-weight:800;letter-spacing:-.03em;max-width:18ch}
+.abertura h1 .mais{color:var(--marca)}
+.abertura .lide{font-size:1.22rem;line-height:1.55;color:var(--tinta-2);max-width:64ch}
+.fio{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:10px;border:1px solid var(--linha);border-radius:var(--raio);background:var(--superficie);overflow:hidden;box-shadow:var(--sombra)}
+.fio a{position:relative;display:flex;flex-direction:column;gap:4px;padding:16px 18px 18px;text-decoration:none;color:var(--tinta);border-right:1px solid var(--linha);min-width:0}
+.fio a:last-child{border-right:0;background:var(--marca-suave)}
+.fio a:hover{background:var(--superficie-2)}
+.fio a:last-child:hover{background:var(--marca-suave)}
+.fio .n{font-family:var(--f-codigo);font-size:.74rem;color:var(--tinta-3);font-weight:600}
+.fio strong{font-family:var(--f-display);font-size:1.08rem}
+.fio span.d{font-size:.88rem;color:var(--tinta-2);line-height:1.35}
+.fio a:not(:last-child)::after{content:"";position:absolute;right:-7px;top:50%;width:12px;height:12px;background:var(--superficie);border-top:1px solid var(--linha);border-right:1px solid var(--linha);transform:translateY(-50%) rotate(45deg);z-index:1}
+@media (max-width:900px){.fio{grid-template-columns:repeat(3,minmax(0,1fr))}.fio a:nth-child(3){border-right:0}.fio a:nth-child(-n+3){border-bottom:1px solid var(--linha)}.fio a:nth-child(3)::after{display:none}}
+@media (max-width:520px){.fio{grid-template-columns:1fr}.fio a{border-right:0;border-bottom:1px solid var(--linha)}.fio a::after{display:none}}
+.carimbo{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.88rem;color:var(--tinta-3)}
+.carimbo b{color:var(--tinta-2);font-weight:600}
+.como{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.como div{display:flex;gap:10px;align-items:flex-start;font-size:.96rem;color:var(--tinta-2);line-height:1.45}
+.como b{color:var(--tinta)}
+.como span>b:first-child{display:block}
+.como i{flex:0 0 28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font:700 .82rem var(--f-codigo);background:var(--superficie-3);color:var(--tinta)}
+@media (max-width:720px){.como{grid-template-columns:1fr}}
+
+.secao{padding-block:64px 28px;border-top:1px solid var(--linha)}
+.secao>.wrap{display:flex;flex-direction:column;gap:26px}
+.secao-cab{display:flex;flex-direction:column;gap:12px;max-width:70ch}
+.secao-cab .sobrelinha{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.secao-cab .sobrelinha i{font-style:normal;display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:6px;background:var(--tinta);color:var(--papel);font-size:.8rem}
+.secao-cab .tempo{font-family:var(--f-codigo);font-size:.72rem;color:var(--tinta-3);letter-spacing:.04em;font-weight:600;text-transform:none}
+.definicao{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;max-width:70ch;padding:16px 20px;background:var(--superficie);border:1px solid var(--linha);border-left:4px solid var(--marca);border-radius:0 var(--raio) var(--raio) 0}
+.definicao .rot{font-family:var(--f-codigo);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--marca-tx);font-weight:600}
+.definicao p{font-size:1.12rem;line-height:1.5;color:var(--tinta)}
+.definicao small{grid-column:2;font-size:.82rem;color:var(--tinta-3)}
+@media (max-width:520px){.definicao{grid-template-columns:1fr}.definicao small{grid-column:1}}
+.nota{max-width:70ch;display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-radius:var(--raio);background:var(--superficie-2);font-size:.98rem;line-height:1.55;color:var(--tinta-2)}
+.nota>b:first-child{font-family:var(--f-codigo);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta)}
+.nota.armadilha{background:var(--erro-suave);box-shadow:inset 4px 0 0 var(--erro)}
+.nota.projeto{background:var(--marca-suave);box-shadow:inset 4px 0 0 var(--marca)}
+.nota.projeto>b:first-child{color:var(--marca-forte)}
+.nota.regra{background:var(--certo-suave);box-shadow:inset 4px 0 0 var(--certo)}
+.ambiente{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ambiente div{padding:14px 16px;border:1px solid var(--linha);border-radius:10px;background:var(--superficie);font-size:.95rem;line-height:1.45;color:var(--tinta-2)}
+.ambiente b{display:block;font-family:var(--f-display);font-size:1.04rem;color:var(--tinta);margin-bottom:2px}
+@media (max-width:760px){.ambiente{grid-template-columns:1fr}}
+
+/* fala real do professor, com a fonte */
+.fala{max-width:760px;margin:0;padding:20px 24px;border-radius:var(--raio);background:var(--superficie-2);border:1px solid var(--linha);display:flex;flex-direction:column;gap:10px}
+.fala blockquote{margin:0;font-family:var(--f-display);font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;color:var(--tinta)}
+.fala blockquote::before{content:"“";color:var(--marca);font-weight:800;margin-right:2px}
+.fala blockquote::after{content:"”";color:var(--marca);font-weight:800;margin-left:2px}
+.fala figcaption{font-size:.86rem;color:var(--tinta-3)}
+.fala figcaption b{color:var(--tinta-2);font-weight:600}
+
+/* fluxogramas: tracejado = produzido por IA; borda verde = julgamento humano; laranja cheio = ponto de chegada */
+.fluxo{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:4px 2px 8px}
+.fluxo .no{flex:1 1 0;min-width:120px;padding:12px 14px;border:2px solid var(--linha-forte);border-radius:12px;background:var(--superficie-2);display:flex;flex-direction:column;gap:2px;justify-content:center;text-align:center;font-size:.9rem;line-height:1.35;color:var(--tinta-2);transition:background .25s,border-color .25s,box-shadow .25s,opacity .25s}
+.fluxo .no b,.decisao-fx .no b,.convergencia .no b{font-family:var(--f-display);font-size:1rem;color:var(--tinta)}
+.no.ia{background:var(--superficie);border-style:dashed;border-color:var(--ia)}
+.no.humano{background:var(--superficie);border-color:var(--certo);border-width:3px}
+.no.foco{background:var(--marca-tx);border-color:var(--marca-tx);color:var(--sobre-marca)}
+.no.foco b{color:var(--sobre-marca)}
+.no.aceso{box-shadow:0 0 0 4px var(--marca);border-color:var(--marca)}
+.no.apagado{opacity:.4;border-style:dashed;border-color:var(--erro)}
+.fluxo .seta{flex:0 0 34px;display:grid;place-items:center;color:var(--tinta-3);font-weight:700;font-size:1.2rem}
+@media (max-width:620px){.fluxo{flex-direction:column}.fluxo .no{min-width:0}.fluxo .seta{flex-basis:26px;transform:rotate(90deg)}}
+.legenda-fluxo{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.82rem;color:var(--tinta-3)}
+.legenda-fluxo span{display:inline-flex;align-items:center;gap:6px}
+.legenda-fluxo i{display:inline-block;width:22px;height:14px;border-radius:4px;border:2px solid var(--linha-forte);background:var(--superficie-2)}
+.legenda-fluxo i.ia{border-style:dashed;border-color:var(--ia);background:var(--superficie)}
+.legenda-fluxo i.humano{border-color:var(--certo);background:var(--superficie)}
+.legenda-fluxo i.foco{border-color:var(--marca-tx);background:var(--marca-tx)}
+.convergencia{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:10px;align-items:center;max-width:820px}
+.convergencia .entradas{display:flex;flex-direction:column;gap:10px}
+.convergencia .no,.decisao-fx .no{padding:12px 14px;border:2px solid var(--linha-forte);border-radius:12px;background:var(--superficie-2);display:flex;flex-direction:column;gap:2px;text-align:center;font-size:.9rem;line-height:1.35;color:var(--tinta-2)}
+.convergencia .seta{text-align:center;color:var(--tinta-3);font-weight:700;font-size:1.3rem}
+@media (max-width:620px){.convergencia{grid-template-columns:1fr}.convergencia .seta{transform:rotate(90deg)}}
+.decisao-fx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,2.4fr);gap:12px;align-items:center}
+.losango{justify-self:center;width:170px;height:170px;display:grid;place-items:center;position:relative}
+.losango::before{content:"";position:absolute;inset:22px;background:var(--aviso-suave);border:2.5px solid var(--aviso);transform:rotate(45deg);border-radius:8px}
+.losango span{position:relative;text-align:center;font-size:.9rem;font-weight:700;color:var(--tinta);max-width:110px;line-height:1.3}
+.ramos{display:flex;flex-direction:column;gap:14px}
+.ramo{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ramo>small{font:700 .78rem var(--f-codigo);text-transform:uppercase;letter-spacing:.05em;color:var(--tinta-3);width:36px}
+.ramo .no{flex:1 1 140px}
+.ramo .s{color:var(--tinta-3);font-weight:700}
+@media (max-width:760px){.decisao-fx{grid-template-columns:1fr}.ramo .s{display:none}}
+
+/* bancadas */
+.bancada{background:var(--superficie);border:1px solid var(--linha);border-radius:16px;box-shadow:var(--sombra);overflow:hidden;min-width:0}
+.bancada-cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:16px 20px 14px;border-bottom:1px solid var(--linha);background:linear-gradient(var(--superficie-2),var(--superficie))}
+.selo{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--selo-tx);background:var(--selo-bg);padding:4px 11px;border-radius:999px}
+.selo.real{background:var(--certo-suave);color:var(--tinta)}
+.bancada-cab h3{font-size:1.16rem}
+.bancada-cab p{flex-basis:100%;font-size:.95rem;color:var(--tinta-2);line-height:1.45}
+.bancada-corpo{padding:18px 20px 20px;display:flex;flex-direction:column;gap:16px}
+.controles{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.campo{display:flex;flex-direction:column;gap:4px;font-size:.86rem;color:var(--tinta-2);font-weight:600;min-width:0;max-width:100%}
+select{max-width:100%;font:500 .95rem var(--f-texto);color:var(--tinta);background:var(--superficie);border:1px solid var(--linha-forte);border-radius:7px;padding:7px 10px}
+.btn{font:700 .9rem var(--f-texto);padding:9px 18px;border-radius:999px;border:1px solid var(--btn-bg);background:var(--btn-bg);color:var(--btn-tx);cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.sec{background:var(--superficie);color:var(--tinta);border-color:var(--linha-forte)}
+.btn:disabled{opacity:.45;cursor:default;filter:none}
+.btn.vivo::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--btn-tx);margin-right:8px;vertical-align:1px}
+.explica{font-size:1rem;line-height:1.55;color:var(--tinta-2);padding:12px 14px;border-radius:9px;background:var(--superficie-2);min-height:3em}
+.explica b{color:var(--tinta)}
+.aviso-vivo{font-size:.86rem;color:var(--tinta-3)}
+.passos-nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pontos{display:flex;gap:6px;flex-wrap:wrap}
+.pontos button{width:32px;height:32px;border-radius:50%;border:1px solid var(--linha-forte);background:var(--superficie);color:var(--tinta-2);font:700 .8rem var(--f-codigo);cursor:pointer}
+.pontos button.feito{background:var(--superficie-3);color:var(--tinta)}
+.pontos button.atual{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-tx)}
+.passo-tit{display:flex;flex-direction:column;gap:2px}
+.passo-tit small{font-family:var(--f-codigo);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--marca-forte);font-weight:600}
+.passo-tit strong{font-family:var(--f-display);font-size:1.2rem;color:var(--tinta)}
+
+/* abas com dois lados: o que se vê sem e com a evidência (padrão de Eric) */
+.abas{display:flex;flex-wrap:wrap;gap:6px}
+.abas button{font:600 .9rem var(--f-texto);padding:7px 14px;border-radius:999px;border:1px solid var(--linha-forte);background:var(--superficie);color:var(--tinta-2);cursor:pointer}
+.abas button small{font-family:var(--f-codigo);font-size:.72rem;color:var(--tinta-3);margin-right:6px}
+.abas button[aria-selected="true"]{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-tx)}
+.abas button[aria-selected="true"] small{color:var(--btn-tx)}
+.motivo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.motivo .lado{padding:14px 16px;border-radius:12px;border:1px solid var(--linha);background:var(--superficie);display:flex;flex-direction:column;gap:6px;font-size:.96rem;line-height:1.5;color:var(--tinta-2);min-width:0}
+.motivo .lado b.rot{font:700 .72rem var(--f-codigo);letter-spacing:.07em;text-transform:uppercase}
+.motivo .sem{border-style:dashed;border-color:var(--ia)}
+.motivo .sem b.rot{color:var(--tinta-3)}
+.motivo .com{border:3px solid var(--certo)}
+.motivo .com b.rot{color:var(--certo)}
+.motivo .ponte{grid-column:1/-1;padding:12px 16px;border-top:1px dashed var(--linha-forte);font-size:1rem;font-weight:600;color:var(--tinta)}
+.motivo .ponte.fim{border-top:0;border-radius:10px;background:var(--certo-suave);box-shadow:inset 4px 0 0 var(--certo)}
+.motivo .disse{grid-column:1/-1;padding:12px 16px;border-radius:10px;background:var(--marca-suave);font-size:.98rem;color:var(--tinta);line-height:1.5}
+.motivo .disse small{display:block;font:700 .7rem var(--f-codigo);letter-spacing:.08em;text-transform:uppercase;color:var(--marca-forte);margin-bottom:2px}
+.motivo pre{margin:0;padding:10px 12px;border-radius:8px;background:var(--superficie-2);border:1px solid var(--linha);font-size:.8rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--texto)}
+@media (max-width:720px){.motivo{grid-template-columns:1fr}}
+
+/* passo a passo com painel de estado ao lado (padrão de Eric) */
+.ciclo-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+.ciclo-palco{display:flex;flex-direction:column;gap:12px;min-width:0}
+.estado-base{border:1px solid var(--linha);border-radius:12px;background:var(--superficie-2);padding:14px 16px;display:flex;flex-direction:column;gap:12px;min-width:0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px)}
+.estado-rot{font:700 .7rem var(--f-codigo);letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-3)}
+.mini-arq{display:flex;flex-direction:column;gap:6px}
+.mini-nome{font:600 .8rem var(--f-codigo);color:var(--marca-forte)}
+.mini-arq ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mini-arq li{padding:8px 10px;border-radius:8px;background:var(--superficie);border:1px solid var(--linha);font-size:.84rem;line-height:1.4;color:var(--tinta-2);overflow-wrap:anywhere}
+.mini-arq li code{font-size:.78rem}
+.mini-arq li.novo{border-color:var(--marca);box-shadow:0 0 0 2px var(--marca-suave)}
+.mini-arq li.vazio{border-style:dashed;color:var(--tinta-3);font-style:italic}
+.mini-arq pre{margin:0;padding:8px 10px;border-radius:8px;background:var(--superficie);border:1px solid var(--linha);font-size:.76rem;line-height:1.5;white-space:pre-wrap;color:var(--texto)}
+@media (max-width:900px){.ciclo-grid{grid-template-columns:1fr}.estado-base{position:static}}
+.conversa{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:90%;padding:10px 14px;border-radius:12px;font-size:.94rem;line-height:1.45;color:var(--tinta)}
+.msg b{display:block;font:700 .72rem var(--f-codigo);letter-spacing:.06em;color:var(--tinta-3)}
+.msg.ag{align-self:flex-start;background:var(--superficie-3);border:1px dashed var(--ia)}
+.msg.qa{align-self:flex-end;background:var(--certo-suave)}
+
+/* explorador de arquivos (padrão de Eric) */
+.explorador{display:grid;grid-template-columns:minmax(0,270px) minmax(0,1fr);border:1px solid var(--linha);border-radius:12px;overflow:hidden;min-height:380px;background:var(--superficie)}
+.arvore{background:var(--superficie-2);border-right:1px solid var(--linha);padding:10px 8px;display:flex;flex-direction:column;gap:2px;font-family:var(--f-codigo);font-size:.82rem;max-height:520px;overflow-y:auto}
+.arvore .pasta{padding:6px 8px 2px;color:var(--tinta-3);font-weight:600}
+.arvore button{display:flex;align-items:center;gap:8px;text-align:left;font:inherit;padding:5px 8px;border:0;border-radius:6px;background:none;color:var(--tinta-2);cursor:pointer}
+.arvore button.n2{padding-left:24px}
+.arvore button:hover{background:var(--superficie-3);color:var(--tinta)}
+.arvore button[aria-selected="true"]{background:var(--selo-bg);color:var(--selo-tx);font-weight:700}
+.leitor{display:flex;flex-direction:column;min-width:0}
+.leitor-cab{padding:9px 14px;border-bottom:1px solid var(--linha);font:600 .8rem var(--f-codigo);color:var(--tinta-3)}
+.leitor pre{margin:0;padding:14px 16px;font-size:.82rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--texto);background:var(--superficie);flex:1;max-height:440px;overflow-y:auto}
+.leitor .porque{padding:10px 14px;border-top:1px solid var(--linha);background:var(--marca-suave);font-size:.9rem;color:var(--tinta);line-height:1.45}
+@media (max-width:760px){.explorador{grid-template-columns:1fr}.arvore{border-right:0;border-bottom:1px solid var(--linha);max-height:220px}}
+
+/* revisão com a fonte fixa ao lado (padrão de Eric) */
+.revisao{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;align-items:start}
+.revisao-lista{display:flex;flex-direction:column;gap:10px;min-width:0}
+.fonte-fixa{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);border:1px solid var(--linha);border-left:4px solid var(--marca);border-radius:0 12px 12px 0;background:var(--superficie-2);padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0;max-height:calc(100vh - 90px);overflow-y:auto}
+.fonte-fixa .rot{font:700 .7rem var(--f-codigo);letter-spacing:.08em;text-transform:uppercase;color:var(--marca-forte)}
+.fonte-fixa pre{margin:0;font-size:.8rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--texto)}
+@media (max-width:900px){.revisao{grid-template-columns:1fr}.fonte-fixa{position:static;max-height:none}}
+.linha-rev{border:1px solid var(--linha);border-radius:12px;background:var(--superficie);padding:12px 14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .2s,opacity .2s}
+.linha-rev.sel{border-color:var(--marca);box-shadow:0 0 0 2px var(--marca-suave)}
+.linha-rev.sai .campos{text-decoration:line-through;color:var(--tinta-3)}
+.linha-rev .topo{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.linha-rev .topo b{font-family:var(--f-codigo);font-size:.86rem;color:var(--tinta)}
+.linha-rev .campos{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:.88rem;line-height:1.45;color:var(--tinta-2)}
+.linha-rev .campos dt{font:700 .72rem var(--f-codigo);letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-3);padding-top:2px}
+.linha-rev .campos dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.placar{font:700 .9rem var(--f-codigo);color:var(--tinta-2)}
+
+/* saída do modelo */
+.saida{border:1px solid var(--linha);border-radius:12px;background:var(--superficie);overflow:hidden;min-width:0}
+.saida-cab{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:9px 14px;border-bottom:1px solid var(--linha);background:var(--superficie-2);font-size:.82rem;color:var(--tinta-3)}
+.saida-cab b{color:var(--tinta);font-family:var(--f-codigo);font-size:.8rem}
+.saida-corpo{padding:12px 16px;font-size:.92rem;line-height:1.55;color:var(--texto);display:flex;flex-direction:column;gap:10px;min-width:0}
+.saida-corpo .md-h{font-family:var(--f-display);font-weight:700;color:var(--tinta)}
+.saida-corpo ul,.saida-corpo ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px}
+.arquivo{border:1px solid var(--linha-forte);border-radius:10px;overflow:hidden}
+.arquivo>small{display:block;padding:6px 12px;border-bottom:1px solid var(--linha);background:var(--superficie-3);font:600 .74rem var(--f-codigo);color:var(--tinta-3)}
+.arquivo>div{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.pensando{color:var(--tinta-3);font-style:italic}
+.pedido{padding:12px 16px;border-radius:10px;background:var(--superficie-2);border:1px solid var(--linha);box-shadow:inset 4px 0 0 var(--tinta);font-family:var(--f-codigo);font-size:.84rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow-y:auto;color:var(--texto)}
+.pedido small{display:block;font-family:var(--f-texto);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-2);font-weight:700;margin-bottom:4px;white-space:normal}
+.rolagem{overflow-x:auto;min-width:0}
+.tabela{width:100%;border-collapse:collapse;font-size:.88rem}
+.tabela th,.tabela td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--linha);vertical-align:top;color:var(--tinta-2)}
+.tabela th{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--tinta-3)}
+.saida .tabela,.tabela.larga{min-width:640px}
+.tag{display:inline-block;font:700 .72rem var(--f-codigo);padding:2px 8px;border-radius:5px;white-space:nowrap;color:var(--tinta)}
+.tag.s{background:var(--certo-suave);border:1px solid var(--certo)}
+.tag.i{background:var(--aviso-suave);border:1px solid var(--aviso)}
+.tag.x{background:var(--erro-suave);border:1px solid var(--erro)}
+.tag.n{background:var(--superficie-3);border:1px solid var(--linha-forte);color:var(--tinta-2)}
+
+/* comandos para copiar */
+.cmd{position:relative;margin:0;padding:12px 70px 12px 14px;border-radius:10px;background:var(--superficie-3);border:1px solid var(--linha);font-size:.84rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--tinta)}
+.cmd button{position:absolute;top:8px;right:8px;font:700 .74rem var(--f-texto);padding:4px 10px;border-radius:999px;border:1px solid var(--linha-forte);background:var(--superficie);color:var(--tinta);cursor:pointer}
+.passos-lab{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.passos-lab>div{border:1px solid var(--linha);border-radius:12px;background:var(--superficie);padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.passos-lab h4{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.passos-lab h4 small{font:600 .74rem var(--f-codigo);color:var(--tinta-3)}
+.passos-lab p,.passos-lab li{font-size:.92rem;line-height:1.5;color:var(--tinta-2)}
+.passos-lab ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px}
+
+.cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.cartoes>div{border:1px solid var(--linha);border-radius:12px;background:var(--superficie);padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cartoes h4{font-size:1rem}
+.cartoes p,.cartoes li{font-size:.92rem;line-height:1.5;color:var(--tinta-2)}
+.cartoes ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:3px}
+.cartoes small{font-size:.78rem;color:var(--tinta-3)}
+.cartoes .arq{font:600 .76rem var(--f-codigo);color:var(--marca-forte)}
+.cartoes.fora>div{background:var(--erro-suave);border-color:color-mix(in srgb,var(--erro) 35%,transparent)}
+.quiz{display:flex;flex-direction:column;gap:10px}
+.quiz-q{padding:14px 16px;border:1px solid var(--linha);border-radius:10px;background:var(--superficie);display:flex;flex-direction:column;gap:10px}
+.quiz-q .enun{font-size:.98rem;color:var(--tinta)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.tabela .opts{flex-wrap:nowrap;gap:6px}
+.op{font:600 .86rem var(--f-texto);padding:7px 12px;border-radius:8px;border:1px solid var(--linha-forte);background:var(--superficie);color:var(--tinta);cursor:pointer}
+.op.certo{background:var(--certo-suave);border-color:var(--certo)}
+.op.errado{background:var(--erro-suave);border-color:var(--erro)}
+.op.marcado{background:var(--selo-bg);border-color:var(--marca);color:var(--selo-tx)}
+.fb{font-size:.94rem;color:var(--tinta-2);line-height:1.5}
+.tabela-modos td.res{font-weight:600;color:var(--tinta)}
+.partes{display:flex;flex-wrap:wrap;gap:8px}
+.partes label{display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--linha);border-radius:999px;background:var(--superficie);font-size:.9rem;color:var(--tinta);cursor:pointer}
+.partes input{accent-color:var(--marca);width:16px;height:16px}
+details.revelar{max-width:70ch;border:1px solid var(--linha);border-radius:10px;background:var(--superficie)}
+details.revelar summary{cursor:pointer;padding:12px 16px;font-weight:700;list-style:none;display:flex;gap:10px;align-items:center;color:var(--tinta)}
+details.revelar summary::-webkit-details-marker{display:none}
+details.revelar summary::before{content:"+";font-family:var(--f-codigo);color:var(--marca-tx);font-weight:700;width:14px}
+details.revelar[open] summary::before{content:"\2212"}
+details.revelar>div{padding:0 16px 14px 40px;color:var(--tinta-2);font-size:.98rem;line-height:1.55;display:flex;flex-direction:column;gap:8px}
+.argumentos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;max-width:860px}
+.argumentos div{padding:14px 16px;border:1px solid var(--linha);border-radius:12px;background:var(--superficie);font-size:.96rem;line-height:1.5;color:var(--tinta-2)}
+.argumentos b{display:block;font-family:var(--f-display);color:var(--tinta)}
+.argumentos .q{grid-column:1/-1;justify-self:center;padding:12px 22px;border:2px solid var(--marca-tx);border-radius:999px;background:var(--marca-suave);font-weight:700;color:var(--tinta);text-align:center}
+@media (max-width:620px){.argumentos{grid-template-columns:1fr}}
+.checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.checklist li{display:flex;gap:10px;align-items:flex-start;line-height:1.4;color:var(--tinta-2)}
+.checklist li::before{content:"";flex:0 0 14px;height:14px;margin-top:4px;border:2px solid var(--certo);border-radius:4px}
+.mapa-final{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mapa-final div{padding:16px 18px;border:1px solid var(--linha);border-radius:12px;background:var(--superficie);display:flex;flex-direction:column;gap:6px}
+.mapa-final strong{font-family:var(--f-display);font-size:1.08rem;color:var(--tinta)}
+.mapa-final p{font-size:.95rem;color:var(--tinta-2);line-height:1.45}
+.mapa-final small{font-family:var(--f-codigo);font-size:.72rem;color:var(--tinta-3);letter-spacing:.06em;text-transform:uppercase}
+.mapa-final div:last-child{background:var(--marca-suave);border-color:color-mix(in srgb,var(--marca) 40%,transparent)}
+@media (max-width:860px){.mapa-final{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.mapa-final{grid-template-columns:1fr}}
+.rodape{padding-block:40px 60px;border-top:1px solid var(--linha);font-size:.88rem;color:var(--tinta-3)}
+.rodape .wrap{display:flex;flex-direction:column;gap:10px}
+.rodape ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:4px}
+.rodape b{color:var(--tinta-2)}
+
+/* componentes do guia do E1 (gerador passo a passo, seletor de janela, leque, colunas clicáveis, documento-fonte) */
+.retorno{font-size:.88rem;color:var(--tinta-3);font-style:italic;text-align:center;border-top:2px solid var(--linha-forte);padding-top:6px;margin:0 60px}
+@media (max-width:620px){.fluxo{flex-direction:column}.fluxo .no{min-width:0}.fluxo .seta{flex-basis:26px;transform:rotate(90deg)}.retorno{margin:0}}
+.leque{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:10px;align-items:center;max-width:760px}
+.leque .saidas{display:flex;flex-direction:column;gap:8px}
+.leque .seta{text-align:center;color:var(--tinta-3);font-weight:700;font-size:1.3rem}
+.leque .faixa{grid-column:1/-1;padding:10px 14px;border-radius:9px;background:var(--superficie-3);font-size:.9rem;color:var(--tinta-2);text-align:center}
+@media (max-width:620px){.leque{grid-template-columns:1fr}.leque .seta{transform:rotate(90deg)}}
+input[type="range"]{accent-color:var(--marca);width:220px;max-width:100%}
+.duas{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.duas{grid-template-columns:1fr}}
+.tabela tr.dest td{background:var(--marca-suave)}
+.frase{font-size:1.3rem;line-height:1.5;padding:14px 16px;border-radius:10px;background:var(--superficie-2);border:1px solid var(--linha);color:var(--tinta)}
+.frase .gerado{background:var(--marca-suave);border-bottom:2px solid var(--marca);padding:0 2px;border-radius:3px}
+.frase .novo{background:var(--marca);color:var(--sobre-marca)}
+.candidatos{display:flex;flex-direction:column;gap:6px;max-width:620px}
+.cand{display:grid;grid-template-columns:150px 1fr 52px;gap:10px;align-items:center;font:inherit;font-size:.95rem;background:none;border:1px solid transparent;border-radius:8px;padding:4px 6px;cursor:pointer;text-align:left;color:var(--tinta)}
+.cand:hover{border-color:var(--linha-forte);background:var(--superficie-2)}
+.cand .barra{height:14px;border-radius:7px;background:var(--superficie-3);overflow:hidden}
+.cand .barra i{display:block;height:100%;background:var(--marca);transition:width .3s}
+.cand .pct{font-variant-numeric:tabular-nums;color:var(--tinta-2);text-align:right}
+.cand.escolhido{border-color:var(--marca);background:var(--marca-suave)}
+@media (max-width:520px){.cand{grid-template-columns:110px 1fr 46px}}
+.contagens{display:flex;flex-wrap:wrap;gap:8px}
+.contagens span{font:600 .86rem var(--f-codigo);padding:5px 10px;border-radius:8px;background:var(--superficie-2);border:1px solid var(--linha)}
+.itens-janela{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:8px}
+.item-j{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--superficie);font-size:.9rem;line-height:1.4;color:var(--tinta-2);cursor:pointer}
+.item-j b{display:block;color:var(--tinta)}
+.item-j input{margin-top:4px;accent-color:var(--marca)}
+.item-j.fixo{background:var(--superficie-2);cursor:default}
+.barra-janela{display:flex;height:34px;border-radius:9px;border:2px solid var(--tinta);overflow:hidden;background:var(--superficie)}
+.barra-janela span{display:grid;place-items:center;font-size:.72rem;font-weight:700;color:var(--tinta);white-space:nowrap;overflow:hidden;border-right:1px solid var(--papel);transition:width .3s}
+.quiz-q .origem{font-size:.8rem;color:var(--tinta-3)}
+.faixas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.faixas button{display:flex;flex-direction:column;gap:6px;text-align:left;padding:0;border:0;background:none;cursor:pointer;font:inherit}
+.faixas .no{width:100%;padding:12px;border:2px dashed var(--ia);border-radius:12px;background:var(--superficie);font-size:.9rem;color:var(--tinta-2)}
+.faixas .no b{display:block;color:var(--tinta);font-family:var(--f-display)}
+.faixas .desce{text-align:center;color:var(--tinta-3);font-weight:700}
+.faixas .q{width:100%;padding:12px;border:3px solid var(--certo);border-radius:12px;background:var(--superficie);font-weight:700;color:var(--tinta);font-size:.95rem}
+.faixas button[aria-pressed="true"] .q{background:var(--certo-suave)}
+.faixas button:last-child .q{background:var(--marca-tx);border-color:var(--marca-tx);color:var(--sobre-marca)}
+.rotulo-faixa{display:flex;justify-content:space-between;font:700 .76rem var(--f-codigo);text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-3)}
+@media (max-width:760px){.faixas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.historia{border:1px solid var(--linha);border-radius:12px;background:var(--superficie);padding:16px 18px;display:flex;flex-direction:column;gap:8px;max-width:820px}
+.historia h3{font-size:1.08rem}
+.historia ul{margin:0;padding-left:1.1rem;font-size:.95rem;line-height:1.5;color:var(--tinta-2);display:flex;flex-direction:column;gap:3px}
+.historia b{color:var(--tinta)}
+
+.fio.sete{grid-template-columns:repeat(7,minmax(0,1fr))}
+.fio.sete a{padding:14px 12px 16px}
+.fio.sete strong{font-size:1rem}
+@media (max-width:900px){.fio.sete{grid-template-columns:repeat(3,minmax(0,1fr))}.fio.sete a:nth-child(3n){border-right:0}.fio.sete a:nth-child(3n)::after{display:none}.fio.sete a:nth-child(-n+6){border-bottom:1px solid var(--linha)}.fio.sete a:last-child{grid-column:1/-1}}
+@media (max-width:520px){.fio.sete{grid-template-columns:1fr}.fio.sete a{border-right:0}}
+.mapa-final div:last-child{grid-column:1/-1}
+.total-janela{font-size:.86rem;color:var(--tinta-3);font-variant-numeric:tabular-nums}
+.valor{font-family:var(--f-codigo);font-weight:700;color:var(--tinta)}
+.campo input[type="checkbox"]{accent-color:var(--marca)}
+.historia table{font-size:.9rem}
+td code{white-space:nowrap}
+.vivo-extra{display:flex;flex-direction:column;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--linha)}
+.vivo-tit{margin:0;font-weight:700;color:var(--tinta)}
+</style>
+<header class="trilha"><div class="wrap"><a class="marca" href="#topo">D1.3 · Aula 4</a><nav aria-label="Seções da aula"><ol><li><a href="#partida">Ponto de partida</a></li><li><a href="#c1">1 Resultado</a></li><li><a href="#c2">2 Unidades</a></li><li><a href="#c3">3 Dependências</a></li><li><a href="#c4">4 Verificação</a></li><li><a href="#c5">5 Decisão</a></li><li><a href="#c6">6 Tamanho</a></li><li><a href="#demo">Demonstração</a></li><li><a href="#discussao">Discussão</a></li><li><a href="#cartao">Cartão</a></li><li><a href="#fechamento">Fechamento</a></li></ol></nav></div></header>
+<main>
+<section class="abertura" id="topo"><div class="wrap">
+<p class="sobrelinha">Aula 4 de 6 · D1.3 Prompting Técnico, Especificação e Contexto · CESAR School · 13/11/2026</p>
+<h1>Uma divisão funciona quando cada parte se usa e se confere <span class="mais">sem adivinhar</span></h1>
+<p class="lide">Esta aula leva o cuidado da especificação para um trabalho com várias partes. São seis ideias em cadeia, do resultado final ao tamanho do corte. Cada uma aparece numa bancada. Na demonstração, a mesma unidade recebe a passagem duas vezes, sem e com o departamento de quem consulta, em respostas reais do modelo.</p>
+<nav class="fio sete" aria-label="O fio da aula"><a href="#c1"><span class="n">1</span><strong>Resultado</strong><span class="d">Defino o conjunto esperado</span></a><a href="#c2"><span class="n">2</span><strong>Unidades</strong><span class="d">Combino entrada e saída</span></a><a href="#c3"><span class="n">3</span><strong>Dependências</strong><span class="d">Mostro o que passa entre partes</span></a><a href="#c4"><span class="n">4</span><strong>Verificação</strong><span class="d">Confiro cada parte e a integração</span></a><a href="#c5"><span class="n">5</span><strong>Decisão</strong><span class="d">Levo lacunas ao responsável</span></a><a href="#c6"><span class="n">6</span><strong>Tamanho</strong><span class="d">Peso ganho e coordenação</span></a><a href="#fechamento"><span class="n">?</span><strong>A pergunta</strong><span class="d">Cada parte pode ser usada e conferida sem adivinhar?</span></a></nav>
+<div class="como"><div><i>1</i><span><b>Leia a ideia</b>Cada seção abre com uma definição curta e um exemplo do caso Fila Clara.</span></div><div><i>2</i><span><b>Mexa na bancada</b>As bancadas são simuladores e passo a passos: mude uma opção e veja o efeito.</span></div><div><i>3</i><span><b>Confira o real</b>Respostas marcadas como <b>registradas</b> vieram de execuções reais, sem edição. O botão <b>Rodar agora</b> chama o Claude ao vivo.</span></div></div>
+<p class="carimbo"><span><b>Execuções registradas:</b> claude-opus-5-5, uma conversa nova por execução, em 06/11/2026</span><span><b>Caso:</b> Fila Clara, fictício</span></p>
+</div></section>
+<section class="secao" id="partida"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha">Ponto de partida</p><h2>O que você precisa ter à mão</h2></div>
+<div class="ambiente"><div><b>Unidade de trabalho</b>Uma parte do trabalho com entrada, saída e critério próprios. Na demonstração, U1 entrega regras e dados; U2 escreve três casos de teste.</div><div><b>Passagem</b>O arquivo que uma unidade entrega à seguinte. Na demonstração, é <code>passagem.md</code>: o contrato de U2, as regras e os chamados.</div><div><b>Demanda D</b>Pedido de mudança do caso Fila Clara: a supervisão quer ver chamados de prioridade alta de todos os departamentos. Ele esbarra em R3 e é a demanda que os grupos dividem na prática.</div></div>
+<div class="historia"><h3>A régua de hoje: o contrato, os chamados e a demanda D</h3><ul>
+<li><b>R1.</b> Impacto e urgência são inteiros de 1 a 3. Somar os dois. Soma maior ou igual a 5: <code>alta</code>; soma 3 ou 4: <code>media</code>; soma 2: <code>baixa</code>.</li>
+<li><b>R2.</b> Chamados ativos têm estado <code>aberto</code> ou <code>em_andamento</code>. <code>fechado</code> fica fora. Manter a ordem da lista recebida.</li>
+<li><b>R3.</b> Uma pessoa só pode visualizar chamados do próprio departamento. Estado e prioridade não mudam essa regra.</li>
+<li><b>R4.</b> Testes e documentação precisam respeitar R1, R2 e R3.</li>
+</ul>
+<div class="rolagem"><table class="tabela"><thead><tr><th>ID</th><th>Departamento</th><th>Estado</th><th>Impacto</th><th>Urgência</th></tr></thead><tbody>
+<tr><td>T1</td><td>Oficina</td><td>aberto</td><td>3</td><td>2</td></tr>
+<tr><td>T2</td><td>Laboratório</td><td>em_andamento</td><td>1</td><td>2</td></tr>
+<tr><td>T3</td><td>Oficina</td><td>fechado</td><td>3</td><td>3</td></tr>
+<tr><td>T4</td><td>Oficina</td><td>em_andamento</td><td>1</td><td>1</td></tr>
+<tr><td>T5</td><td>Laboratório</td><td>aberto</td><td>2</td><td>2</td></tr>
+<tr><td>T6</td><td>Oficina</td><td>aberto</td><td>2</td><td>3</td></tr>
+</tbody></table></div>
+<p><b>Demanda D</b>, em <code>caso/demandas.md</code>: “A supervisão da manutenção quer acompanhar os chamados de prioridade alta de todos os departamentos.”</p>
+<details class="revelar"><summary>Decisão registrada para a demanda D: abra depois de marcar o ponto de decisão</summary><div>
+<p>Em <code>caso/decisoes-confirmadas.md</code>: a demanda D conflita com R3 e só pode avançar com decisão de quem responde pelo acesso. A decisão cria o papel <b>supervisão</b>. Quem tem esse papel visualiza os chamados <b>ativos</b> de prioridade <b>alta</b> de qualquer departamento; os demais casos seguem R3. R1 e R2 não mudam. A decisão vale só para o pacote da aula 4.</p>
+</div></details></div>
+<div class="nota projeto"><b>A pergunta desta aula</b><span>Cada parte pode ser usada e conferida sem adivinhar? Guarde a sua resposta de agora. No fim, a gente compara.</span></div>
+</div></section>
+<section class="secao" id="c1"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>1</i> Conceito 1 de 6 · Decomposição, resultado final e diagnóstico de falhas</p><h2>Dividir começa pelo resultado final</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Decomposição divide um trabalho em unidades menores e conectadas. A divisão deve preservar o objetivo final e tornar mais fácil produzir, localizar problemas e conferir cada resultado.</p></div>
+<div class="prosa"><p>Eu já consigo especificar uma tarefa. Agora vou lidar com uma demanda que precisa de mais de um artefato e várias conferências.</p><p>Um pedido grande pode falhar de várias formas ao mesmo tempo: interpretar uma regra, escolher dados, implementar e explicar incorretamente. Quando tudo vem em uma única saída, fica difícil atribuir a causa e revisar apenas o necessário. A decomposição busca separar responsabilidades relevantes, não apenas reduzir o número de palavras do pedido. Começar pelo resultado final evita criar peças que não contribuem para a demanda. Ao final, é preciso conferir também a integração: artefatos isoladamente coerentes podem usar nomes ou versões de regra incompatíveis entre si.</p></div>
+<div class="fluxo" role="img" aria-label="Resultado final: Descrever o pacote que precisa ficar pronto. → Unidades: Escolher partes com saídas identificáveis. → Composição: Reunir as partes e conferir se atendem ao objetivo."><div class="no " id="c1-n1"><b>Resultado final</b>Descrever o pacote que precisa ficar pronto.</div><span class="seta" aria-hidden="true">→</span><div class="no " id="c1-n2"><b>Unidades</b>Escolher partes com saídas identificáveis.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c1-n3"><b>Composição</b>Reunir as partes e conferir se atendem ao objetivo.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c1"><div class="bancada-cab"><span class="selo">Bancada 1</span><h3>Uma lista de verbos ainda não divide o trabalho</h3><p>Exemplo resolvido do caso Fila Clara. Avance um passo de cada vez e acompanhe o diagrama acima.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-c1-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-c1-voltar">Voltar</button><button type="button" class="btn" id="b-c1-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-c1-cont"></small><strong id="b-c1-tit"></strong></div><div class="explica" id="b-c1-explica" aria-live="polite"></div><div id="b-c1-corpo"></div><p class="aviso-vivo">Exemplo construído para ensinar o mecanismo; não é uma execução de modelo.</p></div></div>
+<div class="nota regra"><b>Na prática</b><span>Pedir uma proposta de duas a quatro unidades, avaliar seus contratos e só depois solicitar a execução das partes.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Quanto mais tarefas pequenas eu criar, melhor será o resultado.” Cada parte cria trabalho de orientação, passagem e revisão. A divisão precisa melhorar a conferência sem perder a visão do conjunto.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: “Analisar”, “criar” e “validar” já definem três unidades executáveis?</summary><div><p>Não. Faltam entradas, saídas e critérios. Uma pessoa precisa saber o que recebe e qual resultado deve entregar.</p></div></details>
+</div></section><section class="secao" id="c2"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>2</i> Conceito 2 de 6 · Unidade de trabalho e contrato de entrada/saída</p><h2>Cada parte precisa de entrada e saída</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Uma unidade de trabalho é uma tarefa delimitada, com entrada identificável, saída definida e critério próprio. Seu contrato informa também limites e dependências necessárias para começar.</p></div>
+<div class="prosa"><p>Eu escolhi as partes do resultado final. Agora vou escrever o combinado de cada uma para permitir que outra pessoa a execute.</p><p>O contrato pode caber em uma linha de tabela, desde que seus campos sejam concretos. “Entrada: contexto” é vago; “entrada: regra R1 v2 e dados P1 a P4” identifica o material. “Saída: análise” também é vago; “tabela com ID, soma, prioridade e divergência” permite trabalhar e conferir. O responsável pela unidade pode ser uma pessoa usando Claude Code; o revisor pode ser outra pessoa. A unidade não precisa de um agente autônomo, de uma ferramenta nova ou de infraestrutura. O importante é que o trabalho seja recuperável e verificável.</p></div>
+<div class="fluxo" role="img" aria-label="Receber: Regra confirmada e formato dos casos. → Produzir: Tabela de entradas e resultados esperados. → Conferir: Comparar cada esperado com a regra recebida."><div class="no " id="c2-n1"><b>Receber</b>Regra confirmada e formato dos casos.</div><span class="seta" aria-hidden="true">→</span><div class="no " id="c2-n2"><b>Produzir</b>Tabela de entradas e resultados esperados.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c2-n3"><b>Conferir</b>Comparar cada esperado com a regra recebida.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c2"><div class="bancada-cab"><span class="selo">Bancada 2</span><h3>“Fazer testes” precisa de um contrato</h3><p>Exemplo resolvido do caso Fila Clara. Avance um passo de cada vez e acompanhe o diagrama acima.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-c2-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-c2-voltar">Voltar</button><button type="button" class="btn" id="b-c2-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-c2-cont"></small><strong id="b-c2-tit"></strong></div><div class="explica" id="b-c2-explica" aria-live="polite"></div><div id="b-c2-corpo"></div><p class="aviso-vivo">Exemplo construído para ensinar o mecanismo; não é uma execução de modelo.</p></div></div>
+<div class="nota regra"><b>Na prática</b><span>Enviar ao Claude Code apenas o contrato da unidade e suas entradas; registrar o que ele precisou supor.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Chamei a tarefa de testes; todos vão entender o mesmo trabalho.” O mesmo nome pode representar tabela, código, execução ou relatório. A saída e o alcance precisam estar escritos.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: Como uma pessoa sabe que terminou a unidade?</summary><div><p>Quando produziu a saída combinada e conferiu seus critérios, registrando lacunas ou resultados que ainda não pôde verificar.</p></div></details>
+</div></section><section class="secao" id="c3"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>3</i> Conceito 3 de 6 · Dependência, acoplamento e passagem entre unidades</p><h2>Uma dependência precisa ficar visível</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Dependência é algo que uma unidade precisa receber de outra. Acoplamento é o quanto mudanças em uma parte afetam as demais. Uma passagem explícita define conteúdo, formato e versão transferidos.</p></div>
+<div class="prosa"><p>Eu defini as entradas de cada unidade. Agora vou conferir de onde elas vêm e o que acontece quando uma parte muda.</p><p>Dependência não é um defeito por si só. Ela precisa ser conhecida e ter uma passagem estável o suficiente para o trabalho. Quanto mais uma unidade depende de detalhes internos de outra, maior pode ser o efeito de uma mudança. No curso, podemos observar isso perguntando: se eu alterar esta frase ou campo, quantos artefatos preciso revisar? Um contrato de passagem reduz a necessidade de conhecer toda a conversa anterior. Ele não elimina mudanças, mas ajuda a localizar seu impacto. Não vamos implementar orquestração; vamos explicitar a sequência e os documentos necessários.</p></div>
+<div class="fluxo" role="img" aria-label="U1 confirma: Produz a especificação vigente e suas dúvidas. → Passagem: Entrega o documento com versão e campos combinados. → U2 recebe: Usa a referência para escrever casos de teste."><div class="no " id="c3-n1"><b>U1 confirma</b>Produz a especificação vigente e suas dúvidas.</div><span class="seta" aria-hidden="true">→</span><div class="no " id="c3-n2"><b>Passagem</b>Entrega o documento com versão e campos combinados.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c3-n3"><b>U2 recebe</b>Usa a referência para escrever casos de teste.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c3"><div class="bancada-cab"><span class="selo real">Registradas</span><h3>Uma seção na passagem muda dois dos três casos</h3><p>A mesma unidade U2 recebeu a passagem duas vezes: sem e com o departamento de quem consulta. Acompanhe o que mudou em cada caso.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-c3-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-c3-voltar">Voltar</button><button type="button" class="btn" id="b-c3-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-c3-cont"></small><strong id="b-c3-tit"></strong></div><div class="explica" id="b-c3-explica" aria-live="polite"></div><div id="b-c3-corpo"></div></div></div>
+<div class="nota regra"><b>Na prática</b><span>Na troca entre grupos, passar o arquivo produzido e sua versão, sem completar as lacunas por explicação oral.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Como dividi o trabalho, posso executar todas as unidades ao mesmo tempo.” Uma unidade que precisa de uma decisão ainda não tomada deve aguardar essa definição. Outras podem trabalhar sobre a mesma entrada já confirmada.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: Testes e documentação podem usar a mesma especificação?</summary><div><p>Sim, se ela estiver confirmada e identificada. Ambas precisam saber quando a referência muda; não devem usar versões divergentes.</p></div></details>
+</div></section><section class="secao" id="c4"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>4</i> Conceito 4 de 6 · Verificação independente e integração</p><h2>Uma parte boa pode ser conferida sozinha</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Uma unidade é verificável separadamente quando sua saída pode ser julgada com entradas e critérios definidos. Isso não significa ausência de dependências; significa que a conferência tem uma referência localizável.</p></div>
+<div class="prosa"><p>Eu tornei a passagem visível. Agora vou testar se cada parte pode ser conferida sem esperar que todo o trabalho esteja pronto.</p><p>Independência de verificação e independência de execução são propriedades diferentes. Uma tabela de testes pode depender de uma especificação, mas ser conferida assim que recebe essa referência. A qualidade do corte aparece quando o revisor consegue identificar erro e localização sem reconstruir uma conversa inteira. A integração acrescenta outra pergunta: as saídas combinam entre si e atendem ao objetivo final? Nomes inconsistentes, formatos incompatíveis ou regras em versões diferentes podem aparecer apenas nesse momento. A revisão precisa reconhecer os dois níveis, sem tratar uma passagem isolada como garantia global.</p></div>
+<div class="fluxo" role="img" aria-label="Referência local: Usar a entrada confirmada da unidade. → Conferência da parte: Comparar sua saída com o critério próprio. → Conferência do conjunto: Verificar nomes, versões e coerência entre as saídas."><div class="no " id="c4-n1"><b>Referência local</b>Usar a entrada confirmada da unidade.</div><span class="seta" aria-hidden="true">→</span><div class="no " id="c4-n2"><b>Conferência da parte</b>Comparar sua saída com o critério próprio.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c4-n3"><b>Conferência do conjunto</b>Verificar nomes, versões e coerência entre as saídas.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c4"><div class="bancada-cab"><span class="selo">Bancada 4</span><h3>Posso conferir um teste antes do código</h3><p>Exemplo resolvido do caso Fila Clara. Avance um passo de cada vez e acompanhe o diagrama acima.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-c4-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-c4-voltar">Voltar</button><button type="button" class="btn" id="b-c4-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-c4-cont"></small><strong id="b-c4-tit"></strong></div><div class="explica" id="b-c4-explica" aria-live="polite"></div><div id="b-c4-corpo"></div><p class="aviso-vivo">Exemplo construído para ensinar o mecanismo; não é uma execução de modelo.</p></div></div>
+<div class="nota regra"><b>Na prática</b><span>Conferir as duas unidades recebidas e depois verificar se a saída da primeira realmente serviu de entrada à segunda.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Cada arquivo passou na revisão; o conjunto necessariamente funciona.” As partes podem usar formatos, nomes ou versões diferentes. A integração verifica também as passagens e a coerência do conjunto.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: Uma unidade pode depender de U1 e ainda ser verificável separadamente?</summary><div><p>Sim. Depois de receber a saída confirmada de U1, pode ser conferida com essa entrada e seus próprios critérios.</p></div></details>
+</div></section><section class="secao" id="c5"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>5</i> Conceito 5 de 6 · Decisão humana, autoridade e lacuna de informação</p><h2>Uma dúvida de regra exige decisão responsável</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Um ponto de decisão humana aparece quando a tarefa exige uma escolha que não está autorizada ou definida pelas fontes. O documento deve indicar a dúvida, quem pode decidir e quais partes dependem dela.</p></div>
+<div class="prosa"><p>Eu consigo conferir regras já definidas. Mas algumas lacunas não são erros de redação: são decisões que ainda precisam de um responsável.</p><p>O papel humano não se resume a clicar em aprovar. A pessoa responsável conhece necessidades, limites e responsabilidades que podem não estar presentes no material. A IA pode ajudar a descrever alternativas e perguntas, mas não cria autoridade de decisão. Ao decompor, vale marcar o ponto em que a falta de uma decisão impede uma parte de avançar. Também é importante evitar encaminhamentos vagos como “validar com alguém”. Nomear o papel e o conteúdo da decisão facilita a continuidade. Na prática fictícia, o contrato já confirmado é a referência vigente.</p></div>
+<div class="fluxo" role="img" aria-label="Detectar lacuna: Identificar a regra que a tarefa ainda não possui. → Encaminhar decisão: Apresentar opções e consequências ao responsável. → Registrar: Atualizar o combinado e liberar as partes dependentes."><div class="no " id="c5-n1"><b>Detectar lacuna</b>Identificar a regra que a tarefa ainda não possui.</div><span class="seta" aria-hidden="true">→</span><div class="no humano" id="c5-n2"><b>Encaminhar decisão</b>Apresentar opções e consequências ao responsável.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c5-n3"><b>Registrar</b>Atualizar o combinado e liberar as partes dependentes.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c5"><div class="bancada-cab"><span class="selo">Bancada 5</span><h3>Pode começar já ou depende da decisão?</h3><p>A demanda D pede que a supervisão veja chamados de prioridade alta de todos os departamentos. Classifique cada unidade: ela tem entrada suficiente hoje ou espera quem responde pelo acesso?</p></div><div class="bancada-corpo"><div class="nota" style="max-width:none"><b>A chave</b><span><span class="tag s">Pode começar já</span> a unidade tem entrada vigente: uma regra atual, um arquivo que existe ou uma pergunta a preparar. <span class="tag i">Depende da decisão</span> a saída muda conforme o que o responsável decidir sobre o acesso da supervisão.</span></div><div class="quiz" id="b-c5-quiz"></div><p class="aviso-vivo">Unidades construídas para ensinar a partir da demanda D; não são saídas de modelo.</p></div></div>
+<div class="nota regra"><b>Na prática</b><span>Pedir que a IA marque decisões pendentes, sem suspender automaticamente unidades que já possuem entradas suficientes.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Se houver uma pessoa responsável, preciso pedir aprovação para cada frase do rascunho.” Revisão de qualidade é rotina. Decisão de regra, escopo ou ação com consequência exige a autoridade adequada; os dois papéis são diferentes.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: Qual informação ajuda a evitar uma dúvida que paralisa todo o trabalho?</summary><div><p>Indicar exatamente qual decisão falta, quem pode tomá-la e quais unidades dependem dela. As demais podem continuar dentro do combinado.</p></div></details>
+</div></section><section class="secao" id="c6"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha"><i>6</i> Conceito 6 de 6 · Granularidade, tamanho da mudança e coordenação</p><h2>Dividir demais também cria trabalho</h2></div>
+<div class="definicao"><span class="rot">Definição</span><p>Granularidade é o tamanho escolhido para as unidades. Um bom corte facilita revisão e localização de erros, mas evita criar mais passagens e arquivos do que a tarefa precisa.</p></div>
+<div class="prosa"><p>Eu defini contratos, dependências e decisões. Falta avaliar se o tamanho das partes realmente ajuda a trabalhar.</p><p>Uma mudança muito grande pode esconder vários problemas no mesmo diff. Mudanças pequenas e coerentes ajudam o revisor a entender intenção e efeito. Porém, dividir demais também cobra um preço: repetir contexto, manter dependências, organizar arquivos e integrar respostas. A comparação deve olhar o fluxo inteiro, incluindo retrabalho. No exercício, duas a quatro unidades são um limite didático para que a turma consiga testar as passagens no tempo disponível; não é uma regra universal de engenharia. A experiência do outro grupo fornece evidência para juntar, separar ou esclarecer uma unidade.</p></div>
+<div class="fluxo" role="img" aria-label="Comparar cortes: Examinar uma tarefa única e uma divisão proposta. → Pesar esforço: Considerar produção, revisão, passagens e retrabalho. → Escolher: Manter a divisão que simplifica a conferência do resultado."><div class="no " id="c6-n1"><b>Comparar cortes</b>Examinar uma tarefa única e uma divisão proposta.</div><span class="seta" aria-hidden="true">→</span><div class="no " id="c6-n2"><b>Pesar esforço</b>Considerar produção, revisão, passagens e retrabalho.</div><span class="seta" aria-hidden="true">→</span><div class="no foco" id="c6-n3"><b>Escolher</b>Manter a divisão que simplifica a conferência do resultado.</div></div>
+<p class="legenda-fluxo"><span><i></i>etapa</span><span><i class="ia"></i>produzido por IA</span><span><i class="humano"></i>julgamento humano</span><span><i class="foco"></i>ponto de chegada</span></p>
+<div class="bancada" id="b-c6"><div class="bancada-cab"><span class="selo">Bancada 6</span><h3>Cada unidade a mais cobra uma passagem</h3><p>Quatro cortes da demanda D, já com a decisão registrada. Use os números para escolher um corte e compare o que ele facilita com o que ele cobra.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-c6-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-c6-voltar">Voltar</button><button type="button" class="btn" id="b-c6-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-c6-cont"></small><strong id="b-c6-tit"></strong></div><div class="explica" id="b-c6-explica" aria-live="polite"></div><div id="b-c6-corpo"></div><p class="aviso-vivo">Valores ilustrativos: os cortes foram construídos para ensinar, e as contagens saem do desenho de cada um. Nada aqui é medição.</p></div></div>
+<div class="nota regra"><b>Na prática</b><span>Depois da troca, justificar uma unidade mantida e uma que poderia ser juntada ou dividida, usando a dificuldade observada.</span></div>
+<div class="nota armadilha"><b>Confusão frequente</b><span>“Sempre devo usar exatamente três etapas, independentemente do trabalho.” O número depende do objetivo, das dependências e do esforço de revisão. A quantidade de caixas não mede a qualidade da decomposição.</span></div>
+<details class="revelar"><summary>Pergunta para pensar: Dividir uma explicação de duas frases em cinco unidades tende a ajudar?</summary><div><p>Provavelmente aumenta coordenação sem ganho proporcional. A decisão deve considerar a dificuldade real de produzir e conferir essa explicação.</p></div></details>
+</div></section>
+<section class="secao" id="demo"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha">Demonstração · a mesma tarefa em dois atos</p><h2>Sem o departamento, a passagem deixou lacunas; com ele, três casos conferíveis</h2></div>
+<div class="prosa"><p><b>A tarefa:</b> gerar três casos de teste, T1, T3 e T4, para a unidade U2, a partir da passagem que U1 entregou. No <b>Ato 1</b>, a passagem não diz o departamento de quem consulta. No <b>Ato 2</b>, ela ganha uma seção com a decisão: a pessoa consultante é da Oficina. O pedido é o mesmo nos dois.</p><p>As saídas abaixo são <b>execuções reais</b>, registradas em 06/11/2026 com o claude-opus-5-5, duas por ato. O texto não foi editado.</p></div>
+<div class="bancada" id="b-ato1"><div class="bancada-cab"><span class="selo">Ato 1</span><h3>Passagem sem o departamento de quem consulta</h3><p>Avance um passo de cada vez. Conceitos à vista: unidade, dependência e decisão responsável.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-ato1-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-ato1-voltar">Voltar</button><button type="button" class="btn" id="b-ato1-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-ato1-cont"></small><strong id="b-ato1-tit"></strong></div><div class="explica" id="b-ato1-explica" aria-live="polite"></div><div id="b-ato1-corpo"></div><div class="controles" data-ao-vivo hidden><button type="button" class="btn vivo" id="b-ato1-rodar">Rodar o ato 1 agora</button><span class="aviso-vivo" id="b-ato1-aviso"></span></div><div class="saida" data-ao-vivo hidden><div class="saida-cab"><b>Ao vivo</b><span>o mesmo pedido, rodado agora</span></div><div class="saida-corpo" id="b-ato1-vivo"><p class="pensando">Clique no botão para uma nova execução.</p></div></div></div></div><div class="bancada" id="b-ato2"><div class="bancada-cab"><span class="selo">Ato 2</span><h3>Passagem com a decisão registrada</h3><p>Mesma unidade, nova conversa. Conceitos à vista: dependência explícita e verificação independente.</p></div><div class="bancada-corpo"><div class="passos-nav"><div class="pontos" id="b-ato2-pontos" role="group" aria-label="Passos"></div><button type="button" class="btn sec" id="b-ato2-voltar">Voltar</button><button type="button" class="btn" id="b-ato2-avancar">Próximo passo</button></div><div class="passo-tit"><small id="b-ato2-cont"></small><strong id="b-ato2-tit"></strong></div><div class="explica" id="b-ato2-explica" aria-live="polite"></div><div id="b-ato2-corpo"></div><div class="controles" data-ao-vivo hidden><button type="button" class="btn vivo" id="b-ato2-rodar">Rodar o ato 2 agora</button><span class="aviso-vivo" id="b-ato2-aviso"></span></div><div class="saida" data-ao-vivo hidden><div class="saida-cab"><b>Ao vivo</b><span>o mesmo pedido, rodado agora</span></div><div class="saida-corpo" id="b-ato2-vivo"><p class="pensando">Clique no botão para uma nova execução.</p></div></div></div></div>
+<p class="aviso-vivo" data-sem-ao-vivo>Os botões ao vivo aparecem quando esta página está aberta no Claude e você permite que ela use o Claude. As execuções registradas funcionam em qualquer lugar.</p>
+
+</div></section>
+<section class="secao" id="discussao"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha">Discussão</p><h2>Uma parte verificável ainda precisa se encaixar nas demais.</h2></div>
+<div class="argumentos"><div><b>Conferência da parte</b>No ato 2, cada caso traz a própria entrada: quem consulta, estado, impacto e urgência. Você confere T1, T3 e T4 contra R1 a R3 sem abrir outra conversa.</div><div><b>Conferência da passagem</b>No ato 1, a mesma U2 não tinha o que precisava. O contrato falava em “ativos visíveis a quem consulta”, mas U1 não passou quem consulta. As duas execuções apontaram a lacuna.</div><div class="q">Cada parte pode ser usada e conferida sem adivinhar?</div></div>
+<details class="revelar"><summary>Se o modelo registrou a lacuna sozinho, a passagem v1 estava boa?</summary><div><p>Não. Ela deixou U2 sem resultado em dois de três casos. O pedido mandava registrar lacunas, e as execuções obedeceram. Um pedido sem essa ordem pode ter outro efeito; isso não foi testado aqui. A correção vai para o documento, não para a conversa.</p></div></details><details class="revelar"><summary>Conferir U2 garante que o pacote da demanda D funciona?</summary><div><p>Não. U2 passou contra a própria entrada. A integração pergunta outra coisa: a regra, os casos e a documentação usam a mesma versão da visibilidade?</p></div></details><details class="revelar"><summary>Quais unidades da demanda D podem começar antes da decisão?</summary><div><p>As que têm entrada vigente: levantar o impacto em R3, preparar as perguntas ao responsável e revisar o trecho contra R2. Regra, casos e documentação da supervisão esperam a decisão.</p></div></details>
+</div></section>
+<section class="secao" id="cartao"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha">Cartão de consulta</p><h2>O que levar para o trabalho amanhã</h2></div>
+<div class="cartoes"><div><h4>As ideias</h4><p><b>1.</b> Resultado: Defino o conjunto esperado.<br><b>2.</b> Unidades: Combino entrada e saída.<br><b>3.</b> Dependências: Mostro o que passa entre partes.<br><b>4.</b> Verificação: Confiro cada parte e a integração.<br><b>5.</b> Decisão: Levo lacunas ao responsável.<br><b>6.</b> Tamanho: Peso ganho e coordenação.</p></div><div><h4>A chave</h4><p><span class="tag s">Pode começar já</span> a unidade tem entrada vigente.<br><span class="tag i">Depende da decisão</span> a saída muda conforme o responsável decidir.<br><span class="tag n">Lacuna</span> falta um dado na passagem; registre, não suponha.</p></div><div><h4>Antes de aceitar uma resposta</h4><ul class="checklist"><li>Escrevi o resultado final antes de cortar?</li><li>Cada unidade tem entrada, saída e critério?</li><li>A passagem leva o valor de cada dependência, não só o nome?</li><li>Marquei a decisão que falta, quem decide e quais unidades esperam?</li><li>Conferi cada parte e depois a junção?</li><li>Cada unidade a mais deixa algum erro mais fácil de achar?</li></ul></div></div>
+</div></section>
+<section class="secao" id="fechamento"><div class="wrap">
+<div class="secao-cab"><p class="sobrelinha">Fechamento</p><h2>A qualidade do corte aparece na hora de verificar, não na hora de desenhar.</h2></div>
+<div class="mapa-final"><div><small>1 · Resultado</small><strong>Defino o conjunto esperado.</strong><p>Sem resultado final, as partes não voltam a formar o pacote.</p></div><div><small>2 · Unidades</small><strong>Combino entrada e saída.</strong><p>Sem contrato, ninguém sabe quando a unidade terminou.</p></div><div><small>3 · Dependências</small><strong>Mostro o que passa entre partes.</strong><p>Sem o valor na passagem, U2 registrou lacuna em dois de três casos.</p></div><div><small>4 · Verificação</small><strong>Confiro cada parte e a integração.</strong><p>Com a entrada escrita, cada caso se confere sozinho; a junção, à parte.</p></div><div><small>5 · Decisão</small><strong>Levo lacunas ao responsável.</strong><p>A regra da supervisão espera quem responde pelo acesso; o levantamento de impacto, não.</p></div><div><small>6 · Tamanho</small><strong>Peso ganho e coordenação.</strong><p>Um arquivo por caso de teste só acrescenta passagens.</p></div><div><small>Resposta</small><strong>A qualidade do corte aparece na hora de verificar, não na hora de desenhar.</strong><p>Pode, quando o contrato diz o que entra e o que sai, a passagem leva o valor de cada dependência e a decisão que falta tem dono. Sem o departamento, U2 registrou lacunas; com ele, entregou três casos conferíveis.</p></div></div>
+<div class="nota projeto"><b>Antes do próximo encontro</b><span>O registro desta prática não tem nota nem prazo. Guarde a decomposição e as duas saídas: o <code>decomposicao.md</code> da Atividade 2 parte delas. Na aula 5 (14/11, 9h), a pergunta passa para o conteúdo de cada passagem: qual informação é suficiente, atual e útil.</span></div>
+</div></section>
+</main>
+<footer class="rodape"><div class="wrap">
+<p><b>Sobre as execuções.</b> As saídas marcadas como registradas foram geradas em 06/11/2026 pelo modelo claude-opus-5-5, por subagentes do Claude Code, cada uma numa conversa nova e sem ferramentas: o conteúdo dos arquivos foi colado no pedido. Todos os pedidos vieram precedidos da instrução de experimento: “Você está participando de um experimento de aula sobre como modelos de linguagem respondem. Regras do experimento: não use nenhuma ferramenta, não leia nem procure arquivos; responda diretamente ao pedido abaixo, em português, como responderia a um usuário que fez exatamente esse pedido. Depois da resposta, numa linha separada, escreva MODELO: seguido do identificador exato do seu modelo.” O texto das respostas não foi editado. No ato 1, o plano da aula tratava a suposição de “Oficina” como risco a observar; nas duas execuções registradas ela não apareceu, e o modelo registrou a lacuna. As bancadas dos conceitos 5 e 6 usam unidades e cortes construídos para ensinar; as contagens da bancada 6 saem do desenho de cada corte e são ilustrativas. As respostas ao vivo usam o Claude da conta de quem abre a página e podem vir de outro modelo. Os exemplos resolvidos das bancadas são construídos para ensinar e estão marcados como tal.</p>
+<p><b>Fontes citadas</b></p><ul><li>STOICA, Ion et al. <a href="https://arxiv.org/abs/2412.05299">Specifications: The missing link to making the development of LLM systems an engineering discipline</a>. arXiv, 2024.</li></ul>
+<p>D1.3 Prompting Técnico, Especificação e Contexto · CESAR School · Pós-graduação em Engenharia de Software e IA · Victor Hugo Wanderley Freire</p>
+</div></footer>
+<script type="text/plain" id="txt-a4-ato1-1">| Caso | Entrada | Incluir/excluir | Prioridade quando incluído |
+|---|---|---|---|
+| T1 | Oficina, `aberto`, impacto 3, urgência 2; departamento de quem consulta: não informado | **Lacuna.** O chamado está ativo (R2). A visibilidade (R3) depende do departamento de quem consulta. O resultado seria incluir se a pessoa for da Oficina e excluir se não for. | `alta` (3 + 2 = 5) |
+| T3 | Oficina, `fechado`, impacto 3, urgência 3; departamento de quem consulta: não informado | Excluir, porque `fechado` fica fora (R2), qualquer que seja o departamento de quem consulta. | Não se aplica: o chamado não é incluído. |
+| T4 | Oficina, `em_andamento`, impacto 1, urgência 1; departamento de quem consulta: não informado | **Lacuna.** O chamado está ativo (R2). A visibilidade (R3) depende do departamento de quem consulta. O resultado seria incluir se a pessoa for da Oficina e excluir se não for. | `baixa` (1 + 1 = 2) |
+
+**Lacuna registrada:** a passagem não diz o departamento da pessoa que consulta. Por isso, o resultado de T1 e T4 não pode ser fixado. Ele depende de U1 informar esse departamento. T3 não depende dele.</script>
+<script type="text/plain" id="txt-a4-ato2-1">| Caso | Entrada | Incluir/excluir | Prioridade quando incluído |
+|---|---|---|---|
+| T1 | Consultante da Oficina. Registro T1: Oficina, `aberto`, impacto 3, urgência 2 | incluir | `alta` |
+| T3 | Consultante da Oficina. Registro T3: Oficina, `fechado`, impacto 3, urgência 3 | excluir | não se aplica, porque o registro não é incluído |
+| T4 | Consultante da Oficina. Registro T4: Oficina, `em_andamento`, impacto 1, urgência 1 | incluir | `baixa` |
+
+Lacunas: nenhuma. As regras R1 a R3, os dados dos registros e o departamento da consultante bastam para definir o resultado esperado dos três casos.</script>
+<script type="text/plain" id="txt-a4-ato1-2">| Caso | Entrada | Incluir/excluir | Prioridade quando incluído |
+|---|---|---|---|
+| T1 | Oficina, `aberto`, impacto 3, urgência 2; departamento de quem consulta: não informado | Não definido: lacuna L1 | `alta` (3 + 2 = 5, R1) |
+| T3 | Oficina, `fechado`, impacto 3, urgência 3; departamento de quem consulta: não informado | Excluir (R2: `fechado` fica fora, seja qual for o departamento de quem consulta) | Não se aplica |
+| T4 | Oficina, `em_andamento`, impacto 1, urgência 1; departamento de quem consulta: não informado | Não definido: lacuna L1 | `baixa` (1 + 1 = 2, R1) |
+
+**Lacuna L1:** a passagem não diz de qual departamento é a pessoa que consulta. T1 e T4 estão ativos (R2), mas a R3 depende desse dado para decidir se eles aparecem para essa pessoa. Uma pessoa da Oficina veria os dois. Uma pessoa do Laboratório não veria nenhum. Os resultados de T1 e T4 só podem ser fechados quando U1 informar o departamento.</script>
+<script type="text/plain" id="txt-a4-ato2-2">| Caso | Entrada | Incluir/excluir | Prioridade quando incluído |
+|---|---|---|---|
+| T1 | Pessoa consultante: Oficina. Registro: Oficina, `aberto`, impacto 3, urgência 2 | Incluir | `alta` (3 + 2 = 5) |
+| T3 | Pessoa consultante: Oficina. Registro: Oficina, `fechado`, impacto 3, urgência 3 | Excluir (`fechado` não é ativo, R2) | Não se aplica |
+| T4 | Pessoa consultante: Oficina. Registro: Oficina, `em_andamento`, impacto 1, urgência 1 | Incluir | `baixa` (1 + 1 = 2) |
+
+Lacunas: nenhuma. A decisão confirmada informa que a pessoa consultante é da Oficina, e os três registros têm todos os dados de que R1, R2 e R3 precisam.</script>
+<script type="application/json" id="dados-guia">{"bancadas": {"b-ato1": {"tipo": "passos", "vivo": "a4-ato1", "vivo_rotulo": "Rodar o ato 1 agora", "passos": [{"t": "A condição", "e": "U2 recebe <code>passagem.md<\/code>: o contrato da unidade, as regras R1 a R4 e os chamados T1 a T6. Falta o departamento de quem consulta. A tarefa é gerar três casos de teste: T1, T3 e T4. Antes de avançar, faça a sua previsão: a resposta vai perguntar, registrar uma lacuna ou supor Oficina?"}, {"t": "O pedido", "e": "O texto exato enviado: a instrução de experimento, o conteúdo de <code>passagem.md<\/code> e o pedido no fim. Role a caixa para ler tudo.", "c": {"pedido": "a4-ato1"}}, {"t": "Execução 1", "e": "T1 e T4 viraram lacuna; T3 saiu por estar fechado. Repare que a prioridade de T1 e T4 foi calculada mesmo assim: ela depende só de R1.", "c": {"saida": "txt-a4-ato1-1", "rotulo": "Registrada · execução 1", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}}, {"t": "Execução 2", "e": "A mesma leitura com outra redação. A lacuna ganhou um nome, L1, e a resposta diz o que veria uma pessoa de cada departamento.", "c": {"saida": "txt-a4-ato1-2", "rotulo": "Registrada · execução 2", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}}, {"t": "Comparar com a fonte", "e": "A régua é <code>passagem.md<\/code>. Tudo o que a passagem define conferiu; o dado que ela não traz virou lacuna nas duas execuções. O plano da aula tratava a suposição de Oficina como risco a observar. Nas duas execuções registradas, ela não apareceu.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:560px\"><thead><tr><th>Tema<\/th><th>Fonte<\/th><th>Execuções<\/th><th>Leitura<\/th><\/tr><\/thead><tbody><tr><td><b>Quem consulta<\/b><\/td><td>A passagem não informa.<\/td><td>As duas registraram lacuna para T1 e T4. Nenhuma supôs Oficina.<\/td><td><span class=\"tag s\">confere<\/span> lacuna declarada<\/td><\/tr><tr><td><b>Estado de T3<\/b><\/td><td>R2: <code>fechado<\/code> fica fora.<\/td><td>Excluído nas duas, seja qual for o departamento.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>Prioridade<\/b><\/td><td>R1: 3 + 2 = 5 é <code>alta<\/code>; 1 + 1 = 2 é <code>baixa<\/code>.<\/td><td>T1 <code>alta<\/code> e T4 <code>baixa<\/code> nas duas, calculadas apesar da lacuna.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>Formato<\/b><\/td><td>Contrato de U2: T1, T3 e T4, nessa ordem; entrada, incluir/excluir e prioridade.<\/td><td>As duas trouxeram essa tabela, na ordem pedida.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><\/tbody><\/table><\/div>"}]}, "b-ato2": {"tipo": "passos", "vivo": "a4-ato2", "vivo_rotulo": "Rodar o ato 2 agora", "passos": [{"t": "O que mudou", "e": "Só a passagem. Ela ganhou uma seção no fim, com uma frase. O pedido e o restante do arquivo são os mesmos do ato 1.", "c": "<div class=\"pedido\"><small>passagem.md no ato 2, seção acrescentada no fim<\/small>## Decisão confirmada\nA pessoa consultante é da Oficina.<\/div>"}, {"t": "O pedido", "e": "Enviado com a mesma instrução de experimento. A seção nova está no fim do arquivo, logo antes do pedido.", "c": {"pedido": "a4-ato2"}}, {"t": "Execução 1", "e": "Os três casos têm resultado fechado. A coluna de entrada agora traz quem consulta, e a resposta termina com “Lacunas: nenhuma”.", "c": {"saida": "txt-a4-ato2-1", "rotulo": "Registrada · execução 1", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}}, {"t": "Execução 2", "e": "Os mesmos resultados. Esta execução mostra a soma de cada prioridade e cita a decisão confirmada como fonte do departamento.", "c": {"saida": "txt-a4-ato2-2", "rotulo": "Registrada · execução 2", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}}, {"t": "Comparar com a fonte", "e": "Com a dependência escrita, cada caso se confere pela entrada que ele mesmo mostra. Isso vale para U2. A junção com as outras unidades ainda precisa da sua conferência.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:560px\"><thead><tr><th>Caso<\/th><th>Fonte<\/th><th>Execuções<\/th><th>Leitura<\/th><\/tr><\/thead><tbody><tr><td><b>T1<\/b><\/td><td>Oficina, <code>aberto<\/code>, 3 + 2 = 5; quem consulta é da Oficina.<\/td><td>incluir, <code>alta<\/code> nas duas.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>T3<\/b><\/td><td>R2: <code>fechado<\/code> fica fora.<\/td><td>excluir nas duas.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>T4<\/b><\/td><td>Oficina, <code>em_andamento<\/code>, 1 + 1 = 2.<\/td><td>incluir, <code>baixa<\/code> nas duas.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>Lacunas<\/b><\/td><td>Com o departamento, R1 a R3 decidem os três casos.<\/td><td>“Lacunas: nenhuma” nas duas.<\/td><td><span class=\"tag s\">confere<\/span><\/td><\/tr><tr><td><b>Integração<\/b><\/td><td>Plano: um teste isolado não prova a integração inteira.<\/td><td>As execuções trataram só os três casos de U2, como o pedido mandava.<\/td><td><span class=\"tag n\">ausente<\/span> fica com você<\/td><\/tr><\/tbody><\/table><\/div>"}]}, "b-c1": {"tipo": "passos", "passos": [{"t": "Situação", "e": "Pedido amplo: “Entenda o sistema, faça a mudança, teste e documente”. Se a saída falhar, não está claro onde revisar.", "acende": ["c1-n1"]}, {"t": "Aplicação do conceito", "e": "Delimitar um pacote: especificação da lista, tabela de testes e explicação para o suporte. Definir a saída de cada parte.", "acende": ["c1-n2"]}, {"t": "Resultado", "e": "Uma falha na tabela de testes pode ser localizada e corrigida sem reescrever toda a documentação.", "acende": ["c1-n3"]}, {"t": "O que isso mostra", "e": "<b>A divisão ajuda quando as partes têm propósito e podem voltar a formar o conjunto.<\/b>", "acende": ["c1-n3"]}]}, "b-c2": {"tipo": "passos", "passos": [{"t": "Situação", "e": "Unidade vaga: “Fazer testes”. O executor não sabe qual regra, quais casos nem que arquivo entregar.", "acende": ["c2-n1"]}, {"t": "Aplicação do conceito", "e": "U2 recebe R1. Produz tabela com entrada, soma e prioridade esperada para somas 2, 4, 5 e 6, sem implementar uma aplicação.", "acende": ["c2-n2"]}, {"t": "Resultado", "e": "O colega confere cada soma e faixa. A saída é identificável e a tarefa termina quando os casos pedidos estão corretos.", "acende": ["c2-n3"]}, {"t": "O que isso mostra", "e": "<b>Uma unidade define tanto o trabalho quanto sua condição de conclusão.<\/b>", "acende": ["c2-n3"]}]}, "b-c3": {"tipo": "passos", "passos": [{"t": "O contrato de U2", "e": "A passagem já diz que U2 depende de quem consulta: o caso considera “a lista de ativos visíveis a quem consulta”. O nome da dependência está escrito; o valor dela, não. Antes de avançar, preveja: quais dos casos T1, T3 e T4 dependem desse valor?", "c": "<div class=\"pedido\"><small>passagem.md, contrato de U2, igual nos dois atos<\/small># Passagem de U1 para U2\nU1 entrega a regra confirmada e os dados abaixo.\nU2 deve produzir uma tabela com três casos: T1, T3 e T4, nessa ordem.\nPara cada caso: entrada, incluir/excluir e prioridade quando incluído.\nO caso considera um registro por vez e a lista de ativos visíveis a quem consulta.\nSe faltar informação, registrar a lacuna, sem inventar o resultado.<\/div>", "acende": ["c3-n2"]}, {"t": "Sem o dado: ato 1", "e": "T1 e T4 viraram lacuna: estão ativos, mas a visibilidade depende do departamento de quem consulta. T3 saiu por estar fechado, qualquer que seja o departamento. A execução não supôs Oficina.", "c": {"saida": "txt-a4-ato1-1", "rotulo": "Registrada · execução 1", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}, "acende": ["c3-n3"]}, {"t": "Com o dado: ato 2", "e": "A passagem ganhou só a seção abaixo. Agora T1 e T4 têm resultado fechado, e a execução termina com “Lacunas: nenhuma”.", "c": {"lista": ["<div class=\"pedido\"><small>passagem.md no ato 2, seção acrescentada no fim<\/small>## Decisão confirmada\nA pessoa consultante é da Oficina.<\/div>", {"saida": "txt-a4-ato2-1", "rotulo": "Registrada · execução 1", "detalhe": "claude-opus-5-5 · 06/11/2026 · texto sem edição"}]}, "acende": ["c3-n2", "c3-n3"]}, {"t": "Lado a lado", "e": "Só mudaram os casos que dependiam do dado ausente. As duas execuções de cada ato deram os mesmos resultados. Assim o acoplamento fica visível: se a regra de visibilidade mudar, você já sabe por quais casos começar a revisão.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:560px\"><thead><tr><th>Caso<\/th><th>Depende de quem consulta?<\/th><th>Sem o dado (ato 1)<\/th><th>Com o dado (ato 2)<\/th><\/tr><\/thead><tbody><tr><td><b>T1<\/b><\/td><td>Sim, por R3.<\/td><td>lacuna; prioridade <code>alta<\/code> já calculada<\/td><td>incluir, <code>alta<\/code><\/td><\/tr><tr><td><b>T3<\/b><\/td><td>Não: R2 exclui <code>fechado<\/code> antes.<\/td><td>excluir<\/td><td>excluir<\/td><\/tr><tr><td><b>T4<\/b><\/td><td>Sim, por R3.<\/td><td>lacuna; prioridade <code>baixa<\/code> já calculada<\/td><td>incluir, <code>baixa<\/code><\/td><\/tr><\/tbody><\/table><\/div>", "acende": ["c3-n1", "c3-n2", "c3-n3"]}, {"t": "O que isso mostra", "e": "<b>A passagem explícita torna a dependência conferível.<\/b> No ato 1, o contrato dizia do que U2 dependia, e as execuções localizaram a lacuna em vez de adivinhar. No ato 2, uma seção de duas linhas fechou os dois casos. A correção ficou no documento, não numa explicação oral.", "acende": ["c3-n1", "c3-n2", "c3-n3"]}]}, "b-c4": {"tipo": "passos", "passos": [{"t": "Situação", "e": "U2 entrega: impacto 2, urgência 3, esperado media. R1 está disponível, mas a implementação ainda não existe.", "acende": ["c4-n1"]}, {"t": "Aplicação do conceito", "e": "Somar 2 + 3 = 5 e confrontar a faixa definida por R1. Não usar a implementação futura como única referência.", "acende": ["c4-n2"]}, {"t": "Resultado", "e": "O esperado está errado: deve ser alta. A tabela pode ser corrigida antes de qualquer código ser produzido.", "acende": ["c4-n3"]}, {"t": "O que isso mostra", "e": "<b>A referência permite verificar a parte no momento em que ela fica pronta.<\/b>", "acende": ["c4-n3"]}]}, "b-c5": {"tipo": "quiz", "opcoes": [["ja", "Pode começar já"], ["dep", "Depende da decisão"]], "itens": [{"origem": "Unidade da demanda D", "t": "Levantar o impacto em R3: quais regras, testes e textos citam a visibilidade por departamento.", "r": "ja", "fb": "<b>Pode começar já.<\/b> O levantamento usa só o que existe hoje: R3 e os artefatos que a citam. O resultado ainda ajuda o responsável a decidir."}, {"origem": "Unidade da demanda D", "t": "Escrever a regra de visibilidade da supervisão.", "r": "dep", "fb": "<b>Depende da decisão.<\/b> A demanda D conflita com R3. Quem pode ver o quê é escolha de quem responde pelo acesso, não de quem escreve a regra."}, {"origem": "Unidade da demanda D", "t": "Propor os casos de teste da supervisão.", "r": "dep", "fb": "<b>Depende da decisão.<\/b> O resultado esperado de cada caso vem da regra. A demanda D não diz se a supervisão vê chamados fechados; só a decisão registrada fixou “ativos”."}, {"origem": "Unidade da demanda D", "t": "Atualizar a documentação da visibilidade.", "r": "dep", "fb": "<b>Depende da decisão.<\/b> Documentar antes seria registrar como fato uma regra que ninguém aprovou."}, {"origem": "Unidade da demanda D", "t": "Revisar o trecho <code>listar_ativos<\/code> contra R2.", "r": "ja", "fb": "<b>Pode começar já.<\/b> R2 é regra vigente, e a demanda D pede visibilidade, sem falar em estado. A decisão registrada depois confirmou: R1 e R2 não mudam."}, {"origem": "Unidade da demanda D", "t": "Preparar, para quem responde pelo acesso, as perguntas e as opções da demanda D.", "r": "ja", "fb": "<b>Pode começar já.<\/b> A IA pode ajudar a descrever opções e consequências, como “a supervisão vê chamados fechados?”. Ela prepara a decisão; não a toma."}]}, "b-c6": {"tipo": "passos", "passos": [{"t": "Corte 1: uma unidade", "e": "Nenhuma passagem para coordenar. Mas, se um caso esperado vier errado, você não sabe se o erro está na regra escrita ou no caso, e revisa a resposta inteira.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:620px\"><thead><tr><th>Unidade<\/th><th>Entrada<\/th><th>Saída<\/th><th>Depende de<\/th><\/tr><\/thead><tbody><tr><td><b>Pacote inteiro<\/b><\/td><td>decisão D e <code>regras.md<\/code><\/td><td>regra, casos de teste e documentação numa resposta<\/td><td>decisão D<\/td><\/tr><\/tbody><\/table><\/div><p class=\"total-janela\" style=\"margin-top:10px\">Unidades: <span class=\"valor\">1<\/span> · Passagens: <span class=\"valor\">0<\/span> · Conferências: <span class=\"valor\">1<\/span> (o pacote de uma vez)<\/p>", "acende": ["c6-n1"]}, {"t": "Corte 2: duas unidades", "e": "É o corte do apoio da prática. Um caso errado aparece contra a regra que a primeira unidade escreveu. Se a documentação faz parte do resultado final, falta uma unidade.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:620px\"><thead><tr><th>Unidade<\/th><th>Entrada<\/th><th>Saída<\/th><th>Depende de<\/th><\/tr><\/thead><tbody><tr><td><b>Regra<\/b><\/td><td>decisão D e R3<\/td><td>regra da supervisão<\/td><td>decisão D<\/td><\/tr><tr><td><b>Casos de teste<\/b><\/td><td>saída da unidade Regra<\/td><td>tabela de casos com resultado esperado<\/td><td>Regra<\/td><\/tr><\/tbody><\/table><\/div><p class=\"total-janela\" style=\"margin-top:10px\">Unidades: <span class=\"valor\">2<\/span> · Passagens: <span class=\"valor\">1<\/span> · Conferências: <span class=\"valor\">3<\/span> (duas partes e a junção)<\/p>", "acende": ["c6-n1"]}, {"t": "Corte 3: quatro unidades", "e": "Cada artefato tem saída e critério próprios. Casos e documentação recebem a mesma regra: se ela mudar, os dois são revistos juntos. O levantamento de impacto adianta trabalho enquanto a decisão não chega. Quatro é o limite da prática.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:620px\"><thead><tr><th>Unidade<\/th><th>Entrada<\/th><th>Saída<\/th><th>Depende de<\/th><\/tr><\/thead><tbody><tr><td><b>Impacto em R3<\/b><\/td><td><code>regras.md<\/code> e artefatos que citam R3<\/td><td>lista do que muda<\/td><td>nada; começa antes da decisão<\/td><\/tr><tr><td><b>Regra<\/b><\/td><td>decisão D e a lista de impacto<\/td><td>regra da supervisão<\/td><td>decisão D e a unidade de impacto<\/td><\/tr><tr><td><b>Casos de teste<\/b><\/td><td>saída da unidade Regra<\/td><td>tabela de casos<\/td><td>Regra<\/td><\/tr><tr><td><b>Documentação<\/b><\/td><td>saída da unidade Regra<\/td><td>explicação da visibilidade<\/td><td>Regra<\/td><\/tr><\/tbody><\/table><\/div><p class=\"total-janela\" style=\"margin-top:10px\">Unidades: <span class=\"valor\">4<\/span> · Passagens: <span class=\"valor\">3<\/span> · Conferências: <span class=\"valor\">5<\/span> (quatro partes e a junção)<\/p>", "acende": ["c6-n1"]}, {"t": "Corte 4: sete unidades", "e": "Cada caso de teste virou uma unidade. As quatro recebem a mesma regra e têm o mesmo critério. São três passagens a mais sem ganho de localização: no corte 3, um caso errado já aparecia numa linha da tabela.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:620px\"><thead><tr><th>Unidade<\/th><th>Entrada<\/th><th>Saída<\/th><th>Depende de<\/th><\/tr><\/thead><tbody><tr><td><b>Impacto em R3<\/b><\/td><td><code>regras.md<\/code> e artefatos que citam R3<\/td><td>lista do que muda<\/td><td>nada; começa antes da decisão<\/td><\/tr><tr><td><b>Regra<\/b><\/td><td>decisão D e a lista de impacto<\/td><td>regra da supervisão<\/td><td>decisão D e a unidade de impacto<\/td><\/tr><tr><td><b>Caso:<\/b> supervisão vê alta ativa de outro departamento<\/td><td>saída da unidade Regra<\/td><td>um caso<\/td><td>Regra<\/td><\/tr><tr><td><b>Caso:<\/b> supervisão não vê media de outro departamento<\/td><td>saída da unidade Regra<\/td><td>um caso<\/td><td>Regra<\/td><\/tr><tr><td><b>Caso:<\/b> ninguém vê fechado como ativo<\/td><td>saída da unidade Regra<\/td><td>um caso<\/td><td>Regra<\/td><\/tr><tr><td><b>Caso:<\/b> quem não é supervisão segue R3<\/td><td>saída da unidade Regra<\/td><td>um caso<\/td><td>Regra<\/td><\/tr><tr><td><b>Documentação<\/b><\/td><td>saída da unidade Regra<\/td><td>explicação da visibilidade<\/td><td>Regra<\/td><\/tr><\/tbody><\/table><\/div><p class=\"total-janela\" style=\"margin-top:10px\">Unidades: <span class=\"valor\">7<\/span> · Passagens: <span class=\"valor\">6<\/span> · Conferências: <span class=\"valor\">8<\/span> (sete partes e a junção)<\/p>", "acende": ["c6-n1"]}, {"t": "Pesar os quatro cortes", "e": "Do corte 1 para o 2, a passagem a mais dá endereço ao erro. Do 2 para o 3, as passagens a mais trazem a documentação para o pacote e deixam o levantamento de impacto começar antes da decisão. Do 3 para o 4, as passagens dobram e o endereço do erro continua o mesmo.", "c": "<div class=\"rolagem\"><table class=\"tabela\" style=\"min-width:560px\"><thead><tr><th>Corte<\/th><th>Unidades<\/th><th>Passagens<\/th><th>Conferências<\/th><th>Um caso errado aparece em<\/th><\/tr><\/thead><tbody><tr><td>1<\/td><td>1<\/td><td>0<\/td><td>1<\/td><td>na resposta inteira<\/td><\/tr><tr><td>2<\/td><td>2<\/td><td>1<\/td><td>3<\/td><td>na tabela de casos; a documentação ficou de fora<\/td><\/tr><tr><td>3<\/td><td>4<\/td><td>3<\/td><td>5<\/td><td>na tabela de casos<\/td><\/tr><tr><td>4<\/td><td>7<\/td><td>6<\/td><td>8<\/td><td>na unidade daquele caso: o mesmo endereço que a linha da tabela já dava<\/td><\/tr><\/tbody><\/table><\/div>", "acende": ["c6-n2"]}, {"t": "O que isso mostra", "e": "<b>O corte é escolhido pelo ganho de conferência e pelo custo das passagens.<\/b> Não existe número certo de caixas. Pergunte de cada unidade: separá-la deixa algum erro mais fácil de achar? Se não deixa, junte.", "acende": ["c6-n3"]}]}}, "pedidos": {"a4-ato1": "Você está participando de um experimento de aula sobre como modelos de linguagem respondem. Regras do experimento: não use nenhuma ferramenta, não leia nem procure arquivos; responda diretamente ao pedido abaixo, em português, como responderia a um usuário que fez exatamente esse pedido. Depois da resposta, numa linha separada, escreva MODELO: seguido do identificador exato do seu modelo.\n\nConteúdo do arquivo passagem.md:\n\n# Passagem de U1 para U2\nU1 entrega a regra confirmada e os dados abaixo.\nU2 deve produzir uma tabela com três casos: T1, T3 e T4, nessa ordem.\nPara cada caso: entrada, incluir/excluir e prioridade quando incluído.\nO caso considera um registro por vez e a lista de ativos visíveis a quem consulta.\nSe faltar informação, registrar a lacuna, sem inventar o resultado.\n\n# Fila Clara — recorte da D1.3\n\nOrganização fictícia que recebe chamados das áreas Oficina e Laboratório. Vamos escrever pedidos, requisitos, testes e documentação para esse serviço. O contrato retoma as regras didáticas da D1.1; não é preciso lembrar aquela aula para começar.\n\n| ID | Regra vigente |\n|---|---|\n| R1 | Impacto e urgência são inteiros de 1 a 3. Somar os dois. Soma maior ou igual a 5: `alta`; soma 3 ou 4: `media`; soma 2: `baixa`. |\n| R2 | Chamados ativos têm estado `aberto` ou `em_andamento`. `fechado` fica fora. Manter a ordem da lista recebida. |\n| R3 | Uma pessoa só pode visualizar chamados do próprio departamento. Estado e prioridade não mudam essa regra. |\n| R4 | Testes e documentação precisam respeitar R1, R2 e R3. |\n\nAs entradas são válidas. `media` é escrito sem acento na saída. Não há regra de prazo de atendimento, envio de e-mail, administrador com acesso geral, banco de dados ou autenticação a implementar. Se isso aparecer numa resposta, é uma sugestão nova e depende de decisão; não é requisito deste caso.\n\n## Pequenos exemplos resolvidos\n\n- Impacto 2 e urgência 3: soma 5, prioridade `alta`.\n- A lista X1 aberto, X2 fechado, X3 em_andamento tem dois ativos: X1 e X3, nessa ordem.\n- Uma pessoa da Oficina não vê um chamado do Laboratório, mesmo com prioridade alta.\n\n## Os registros das práticas\n\n| ID | Departamento | Estado | Impacto | Urgência |\n|---|---|---|---:|---:|\n| T1 | Oficina | aberto | 3 | 2 |\n| T2 | Laboratório | em_andamento | 1 | 2 |\n| T3 | Oficina | fechado | 3 | 3 |\n| T4 | Oficina | em_andamento | 1 | 1 |\n| T5 | Laboratório | aberto | 2 | 2 |\n| T6 | Oficina | aberto | 2 | 3 |\n\nOs mesmos dados estão em `chamados.json`. As tarefas definem quais regras usar; não se deve acrescentar filtro por departamento se a tarefa pedir somente classificação de prioridade.\n\nPEDIDO: Leia passagem.md. Produza somente os três casos de teste solicitados para U2. Use as regras e os dados fornecidos. Registre uma lacuna se faltar informação para definir o resultado esperado. Não consulte outros arquivos e não altere arquivos.", "a4-ato2": "Você está participando de um experimento de aula sobre como modelos de linguagem respondem. Regras do experimento: não use nenhuma ferramenta, não leia nem procure arquivos; responda diretamente ao pedido abaixo, em português, como responderia a um usuário que fez exatamente esse pedido. Depois da resposta, numa linha separada, escreva MODELO: seguido do identificador exato do seu modelo.\n\nConteúdo do arquivo passagem.md:\n\n# Passagem de U1 para U2\nU1 entrega a regra confirmada e os dados abaixo.\nU2 deve produzir uma tabela com três casos: T1, T3 e T4, nessa ordem.\nPara cada caso: entrada, incluir/excluir e prioridade quando incluído.\nO caso considera um registro por vez e a lista de ativos visíveis a quem consulta.\nSe faltar informação, registrar a lacuna, sem inventar o resultado.\n\n# Fila Clara — recorte da D1.3\n\nOrganização fictícia que recebe chamados das áreas Oficina e Laboratório. Vamos escrever pedidos, requisitos, testes e documentação para esse serviço. O contrato retoma as regras didáticas da D1.1; não é preciso lembrar aquela aula para começar.\n\n| ID | Regra vigente |\n|---|---|\n| R1 | Impacto e urgência são inteiros de 1 a 3. Somar os dois. Soma maior ou igual a 5: `alta`; soma 3 ou 4: `media`; soma 2: `baixa`. |\n| R2 | Chamados ativos têm estado `aberto` ou `em_andamento`. `fechado` fica fora. Manter a ordem da lista recebida. |\n| R3 | Uma pessoa só pode visualizar chamados do próprio departamento. Estado e prioridade não mudam essa regra. |\n| R4 | Testes e documentação precisam respeitar R1, R2 e R3. |\n\nAs entradas são válidas. `media` é escrito sem acento na saída. Não há regra de prazo de atendimento, envio de e-mail, administrador com acesso geral, banco de dados ou autenticação a implementar. Se isso aparecer numa resposta, é uma sugestão nova e depende de decisão; não é requisito deste caso.\n\n## Pequenos exemplos resolvidos\n\n- Impacto 2 e urgência 3: soma 5, prioridade `alta`.\n- A lista X1 aberto, X2 fechado, X3 em_andamento tem dois ativos: X1 e X3, nessa ordem.\n- Uma pessoa da Oficina não vê um chamado do Laboratório, mesmo com prioridade alta.\n\n## Os registros das práticas\n\n| ID | Departamento | Estado | Impacto | Urgência |\n|---|---|---|---:|---:|\n| T1 | Oficina | aberto | 3 | 2 |\n| T2 | Laboratório | em_andamento | 1 | 2 |\n| T3 | Oficina | fechado | 3 | 3 |\n| T4 | Oficina | em_andamento | 1 | 1 |\n| T5 | Laboratório | aberto | 2 | 2 |\n| T6 | Oficina | aberto | 2 | 3 |\n\nOs mesmos dados estão em `chamados.json`. As tarefas definem quais regras usar; não se deve acrescentar filtro por departamento se a tarefa pedir somente classificação de prioridade.\n\n## Decisão confirmada\nA pessoa consultante é da Oficina.\n\nPEDIDO: Leia passagem.md. Produza somente os três casos de teste solicitados para U2. Use as regras e os dados fornecidos. Registre uma lacuna se faltar informação para definir o resultado esperado. Não consulte outros arquivos e não altere arquivos."}}</script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var DADOS = JSON.parse($("dados-guia").textContent);
+  var texto = function (id) { var el = $(id); return el ? el.textContent.replace(/^\s+|\s+$/g, "") : ""; };
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function inline(s) {
+    s = esc(s);
+    s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+    s = s.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<i>$2</i>");
+    return s;
+  }
+  function md(src) {
+    var L = src.replace(/\r/g, "").split("\n"), out = [], i = 0;
+    var celulas = function (r) { return r.trim().replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }); };
+    while (i < L.length) {
+      var l = L[i];
+      if (/^\s*\|/.test(l)) {
+        var rows = [];
+        while (i < L.length && /^\s*\|/.test(L[i])) { rows.push(L[i]); i++; }
+        var cab = celulas(rows[0]);
+        var corpo = rows.slice(1).filter(function (r) { return !/^\s*\|?\s*:?-{2,}/.test(r); });
+        out.push('<div class="rolagem"><table class="tabela"><thead><tr>' + cab.map(function (h) { return "<th>" + inline(h) + "</th>"; }).join("") +
+          "</tr></thead><tbody>" + corpo.map(function (r) { return "<tr>" + celulas(r).map(function (c) { return "<td>" + inline(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>");
+        continue;
+      }
+      if (/^#{1,4}\s/.test(l)) { out.push('<p class="md-h">' + inline(l.replace(/^#+\s*/, "")) + "</p>"); i++; continue; }
+      if (/^\s*[-*]\s+/.test(l)) {
+        var it = [];
+        while (i < L.length && /^\s*[-*]\s+/.test(L[i])) { it.push(L[i].replace(/^\s*[-*]\s+/, "")); i++; }
+        out.push("<ul>" + it.map(function (x) { return "<li>" + inline(x) + "</li>"; }).join("") + "</ul>");
+        continue;
+      }
+      if (/^\s*\d+\.\s+/.test(l)) {
+        var ol = [];
+        while (i < L.length && /^\s*\d+\.\s+/.test(L[i])) { ol.push(L[i].replace(/^\s*\d+\.\s+/, "")); i++; }
+        out.push("<ol>" + ol.map(function (x) { return "<li>" + inline(x) + "</li>"; }).join("") + "</ol>");
+        continue;
+      }
+      if (!l.trim()) { i++; continue; }
+      var par = [];
+      while (i < L.length && L[i].trim() && !/^\s*(\||#{1,4}\s|[-*]\s|\d+\.\s)/.test(L[i])) { par.push(L[i]); i++; }
+      out.push("<p>" + inline(par.join(" ")) + "</p>");
+    }
+    return out.join("");
+  }
+  function caixaSaida(rotulo, detalhe, conteudo) {
+    return '<div class="saida"><div class="saida-cab"><b>' + esc(rotulo) + "</b><span>" + esc(detalhe) + '</span></div><div class="saida-corpo">' + conteudo + "</div></div>";
+  }
+  function caixaPedido(rotulo, txt) { return '<div class="pedido"><small>' + esc(rotulo) + "</small>" + esc(txt) + "</div>"; }
+
+  /* Claude ao vivo: controles [data-ao-vivo] só aparecem quando o sample está disponível. */
+  var SAMPLE = null;
+  function mostrarAoVivo(sim) {
+    document.querySelectorAll("[data-ao-vivo]").forEach(function (el) { el.hidden = !sim; });
+    document.querySelectorAll("[data-sem-ao-vivo]").forEach(function (el) { el.hidden = sim; });
+  }
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("sample").then(function (f) { if (f) { SAMPLE = f; mostrarAoVivo(true); } }).catch(function () {});
+  }
+  function mensagemErro(codigo) {
+    if (codigo === "not_granted" || codigo === "sampling_disabled") return "O uso do Claude não foi liberado para esta página. As execuções registradas continuam disponíveis.";
+    if (codigo === "rate_limited") return "Muitas chamadas seguidas. Espere um pouco e tente de novo.";
+    if (codigo === "session_expired") return "Sua sessão expirou. Entre de novo no Claude e recarregue a página.";
+    if (codigo === "refused") return "O Claude não respondeu a este pedido.";
+    return "A chamada não terminou. Tente de novo em alguns instantes.";
+  }
+  /* Resolve com o texto da resposta, ou null se a chamada falhou. */
+  function rodar(entrada, alvo, aviso, botao) {
+    if (!SAMPLE) return Promise.resolve(null);
+    botao.disabled = true;
+    aviso.textContent = "";
+    alvo.innerHTML = '<p class="pensando">Pensando… a primeira parte da resposta costuma levar alguns segundos.</p>';
+    return SAMPLE(entrada, { cache: false, onText: function (u) { alvo.innerHTML = md(u.text); } })
+      .then(function (r) {
+        aviso.textContent = r.truncated ? "Resposta ao vivo, cortada pelo limite de tamanho." : "Resposta ao vivo, gerada agora.";
+        return r.text;
+      })
+      .catch(function (e) {
+        alvo.innerHTML = e && e.text ? md(e.text) : "";
+        if (!(e && e.code === "cancelled")) aviso.textContent = mensagemErro(e && e.code);
+        if (e && (e.code === "not_granted" || e.code === "sampling_disabled")) mostrarAoVivo(false);
+        return null;
+      })
+      .then(function (t) { botao.disabled = false; return t; });
+  }
+  function ligarVivo(pref, obterPrompt) {
+    var b = $(pref + "-rodar");
+    if (b) b.addEventListener("click", function () { rodar(obterPrompt(), $(pref + "-vivo"), $(pref + "-aviso"), b); });
+  }
+  function ligarRevisao(pref, chave1, chave2) {
+    var b = $(pref + "-rodar"), aviso = $(pref + "-aviso"), final = $(pref + "-vivo2");
+    if (!b) return;
+    b.addEventListener("click", function () {
+      var p1 = DADOS.pedidos[chave1], p2 = DADOS.pedidos[chave2];
+      final.innerHTML = '<p class="pensando">A revisão começa quando o rascunho terminar.</p>';
+      rodar(p1, $(pref + "-vivo"), aviso, b).then(function (rascunho) {
+        if (rascunho === null) return;
+        return rodar([{ role: "user", content: p1 }, { role: "assistant", content: rascunho }, { role: "user", content: p2 }], final, aviso, b);
+      });
+    });
+  }
+
+  /* trilha: marca a seção visível */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".trilha a"));
+  if ("IntersectionObserver" in window) {
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle("ativo", a.getAttribute("href") === "#" + e.target.id); });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    document.querySelectorAll("main section[id]").forEach(function (s) { obs.observe(s); });
+  }
+
+  /* conteúdo de um passo: html pronto, um pedido registrado ou uma saída registrada */
+  function conteudo(c) {
+    if (!c) return "";
+    if (typeof c === "string") return c;
+    if (c.pedido) return caixaPedido(c.rotulo || "Pedido enviado, texto exato", DADOS.pedidos[c.pedido]);
+    if (c.saida) return caixaSaida(c.rotulo, c.detalhe, md(texto(c.saida)));
+    if (c.lista) return c.lista.map(conteudo).join("");
+    return "";
+  }
+
+  function stepper(pref, passos) {
+    var atual = 0, pontos = $(pref + "-pontos"), acesos = [];
+    pontos.innerHTML = passos.map(function (p, i) { return '<button type="button" data-i="' + i + '" aria-label="Passo ' + (i + 1) + '">' + (i + 1) + "</button>"; }).join("");
+    function ir(i) {
+      atual = Math.max(0, Math.min(passos.length - 1, i));
+      var p = passos[atual];
+      pontos.querySelectorAll("button").forEach(function (b, k) { b.className = k === atual ? "atual" : (k < atual ? "feito" : ""); });
+      $(pref + "-cont").textContent = "Passo " + (atual + 1) + " de " + passos.length;
+      $(pref + "-tit").textContent = p.t;
+      $(pref + "-explica").innerHTML = p.e;
+      $(pref + "-corpo").innerHTML = conteudo(p.c);
+      acesos.forEach(function (n) { n.classList.remove("aceso"); });
+      acesos = (p.acende || []).map(function (id) { return $(id); }).filter(Boolean);
+      acesos.forEach(function (n) { n.classList.add("aceso"); });
+      $(pref + "-voltar").disabled = atual === 0;
+      $(pref + "-avancar").disabled = atual === passos.length - 1;
+    }
+    pontos.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) ir(Number(b.getAttribute("data-i"))); });
+    $(pref + "-voltar").addEventListener("click", function () { ir(atual - 1); });
+    $(pref + "-avancar").addEventListener("click", function () { ir(atual + 1); });
+    ir(0);
+  }
+
+  function quiz(pref, cfg) {
+    var box = $(pref + "-quiz");
+    box.innerHTML = cfg.itens.map(function (q, i) {
+      return '<div class="quiz-q" data-i="' + i + '"><span class="origem">' + q.origem + '</span><span class="enun">' + q.t + '</span><div class="opts">' +
+        cfg.opcoes.map(function (o) { return '<button type="button" class="op" data-r="' + o[0] + '">' + esc(o[1]) + "</button>"; }).join("") +
+        '</div><p class="fb" aria-live="polite"></p></div>';
+    }).join("");
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest(".op"); if (!b) return;
+      var q = b.closest(".quiz-q"), item = cfg.itens[Number(q.getAttribute("data-i"))];
+      q.querySelectorAll(".op").forEach(function (o) { o.classList.remove("certo", "errado"); });
+      var certo = b.getAttribute("data-r") === item.r;
+      b.classList.add(certo ? "certo" : "errado");
+      if (!certo) q.querySelector('.op[data-r="' + item.r + '"]').classList.add("certo");
+      q.querySelector(".fb").innerHTML = (certo ? "Isso. " : "Não exatamente. ") + item.fb;
+    });
+  }
+
+  function seletor(pref, cfg) {
+    var lista = $(pref + "-itens");
+    lista.innerHTML = cfg.itens.map(function (it) {
+      return '<label class="item-j' + (it.fixo ? " fixo" : "") + '"><input type="checkbox" id="' + pref + "-" + it.id + '" data-id="' + it.id + '"' +
+        (it.padrao || it.fixo ? " checked" : "") + (it.fixo ? " disabled" : "") + '><span><b>' + esc(it.rot) + "</b>" + esc(it.desc) + "</span></label>";
+    }).join("");
+    function escolhidos() {
+      return cfg.itens.filter(function (it) { return $(pref + "-" + it.id).checked; });
+    }
+    function montar() {
+      var sel = escolhidos(), ids = sel.map(function (it) { return it.id; });
+      var pedido = sel.map(function (it) { return it.texto; }).filter(Boolean).join(cfg.juntar || " ");
+      var regra = null;
+      for (var k = 0; k < cfg.regras.length; k++) {
+        var r = cfg.regras[k];
+        var falta = (r.se_falta || []).some(function (id) { return ids.indexOf(id) < 0; });
+        var tem = (r.se_tem || []).some(function (id) { return ids.indexOf(id) >= 0; });
+        if ((r.se_falta && falta) || (r.se_tem && tem)) { regra = r; break; }
+      }
+      $(pref + "-explica").innerHTML = regra ? regra.msg : cfg.ok;
+      var montado = $(pref + "-montado");
+      if (montado) montado.innerHTML = caixaPedido(cfg.rotulo_montado || "Pedido montado", pedido || "(nada selecionado)");
+      var barra = $(pref + "-barra");
+      if (barra) {
+        var total = sel.reduce(function (s, it) { return s + (it.chars || 0); }, 0) || 1;
+        barra.innerHTML = sel.filter(function (it) { return it.chars; }).map(function (it) {
+          return '<span style="width:' + (100 * it.chars / total).toFixed(1) + "%;background:" + it.cor + '" title="' + esc(it.rot) + '">' + (it.chars / total > 0.12 ? esc(it.rot) : "") + "</span>";
+        }).join("");
+        $(pref + "-total").textContent = sel.reduce(function (s, it) { return s + (it.chars || 0); }, 0).toLocaleString("pt-BR") + " caracteres no material escolhido";
+      }
+      return pedido;
+    }
+    lista.addEventListener("change", montar);
+    montar();
+    if (cfg.vivo) ligarVivo(pref, function () { return (cfg.vivo_prefixo || "") + montar(); });
+  }
+
+  function calc(pref, cfg) {
+    var imp = $(pref + "-imp"), urg = $(pref + "-urg"), bug = $(pref + "-bug");
+    function faixa(s, comBug) { return (comBug ? s > 5 : s >= 5) ? "alta" : s >= 3 ? "media" : "baixa"; }
+    function atualizar() {
+      var i = Number(imp.value), u = Number(urg.value), s = i + u;
+      $(pref + "-vi").textContent = i; $(pref + "-vu").textContent = u;
+      var certa = faixa(s, false), errada = faixa(s, true);
+      var linhas = [2, 3, 4, 5, 6].map(function (x) {
+        var c = faixa(x, false), b = faixa(x, true);
+        return "<tr" + (x === s ? ' class="dest"' : "") + "><td>" + x + "</td><td>" + c + "</td>" + (bug.checked ? "<td>" + b + (b !== c ? ' <span class="tag x">diverge</span>' : "") + "</td>" : "") + "</tr>";
+      }).join("");
+      $(pref + "-tab").innerHTML = '<div class="rolagem"><table class="tabela"><thead><tr><th>Soma</th><th>R1</th>' + (bug.checked ? "<th>Código com “maior que 5”</th>" : "") + "</tr></thead><tbody>" + linhas + "</tbody></table></div>";
+      var msg = "Impacto " + i + " + urgência " + u + " = <b>soma " + s + "</b>, prioridade <b>" + certa + "</b> pela R1.";
+      if (bug.checked) msg += certa === errada ? " O código com “maior que 5” também dá " + errada + " aqui: este caso não revela o defeito." : " O código com “maior que 5” dá <b>" + errada + "</b>: só a soma 5 revela o defeito. É por isso que o caso de fronteira entra no critério.";
+      else if (s === 4 || s === 5) msg += " Você está na fronteira entre media e alta.";
+      $(pref + "-explica").innerHTML = msg;
+    }
+    [imp, urg, bug].forEach(function (el) { el.addEventListener("input", atualizar); });
+    atualizar();
+  }
+
+  Object.keys(DADOS.bancadas).forEach(function (pref) {
+    var cfg = DADOS.bancadas[pref];
+    if (cfg.tipo === "passos") {
+      stepper(pref, cfg.passos);
+      if (cfg.vivo) ligarVivo(pref, function () { return DADOS.pedidos[cfg.vivo]; });
+      (cfg.vivos || []).forEach(function (v, k) {
+        var p = pref + "-v" + k;
+        if (v.segundo) ligarRevisao(p, v.chave, v.segundo);
+        else ligarVivo(p, function () { return DADOS.pedidos[v.chave]; });
+      });
+    } else if (cfg.tipo === "quiz") quiz(pref, cfg);
+    else if (cfg.tipo === "seletor") seletor(pref, cfg);
+    else if (cfg.tipo === "calc") calc(pref, cfg);
+  });
+})();
+</script>
+<!-- publicar:fim -->
+</body></html>
